@@ -13,12 +13,14 @@
 #ifndef FT_LIB_H
 #define FT_LIB_H
 
+#include <stdlib.h>
+
 // Part 1: libc functions
 
 
 int		ft_isdigit(int c);
 int		ft_isascii(int c);
-int		ft_ft_isprint(int c);
+int		ft_isprint(int c);
 
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);

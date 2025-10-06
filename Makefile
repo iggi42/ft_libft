@@ -1,4 +1,4 @@
-# **************************************************************************** #
+# *************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -11,18 +11,26 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS +=-Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror
 NAME = libft
-SRC = *.c lib_ft.h
+C_FILES = ft_lib_ctype.c ft_lib_mem.c ft_lib_str.c
 
-OBJ = $(SRC:.c=.o)
+HEADER = $(NAME).h
+LIB = $(NAME).a
+SRC = $(HEADER) $(C_FILES)
+OBJ = $(C_FILES:.c=.o)
 
-libft.a: $(SRC)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIB): $(OBJ)
+	ar -src $@ $^
+
 $(NAME): libft.a
 all: $(NAME)
 
-clean:
-	rm -f $(OBJ)
+fclean: clean
+clean: 
+	rm -f $(OBJ) $(LIB)
 
-fclean:
-
+re: clean all
