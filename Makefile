@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS += -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror -g
 NAME = libft
 C_FILES = ft_lib_ctype.c ft_lib_mem.c ft_lib_str.c
 
@@ -26,7 +26,7 @@ OBJ = $(C_FILES:.c=.o)
 $(LIB): $(OBJ)
 	ar -src $@ $^
 
-$(NAME): libft.a
+$(NAME): $(LIB)
 all: $(NAME)
 
 fclean: clean
@@ -34,3 +34,5 @@ clean:
 	rm -f $(OBJ) $(LIB)
 
 re: clean all
+
+.PHONY: fclean clean re all
