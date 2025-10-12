@@ -10,44 +10,63 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
-#include <stdbool.h>
-#include "./ft_lib.h"
+#include "./libft.h"
+#include <stdint.h>
 
-void	*memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	i;
-	int		*ptr;
+	t_byte	*ptr;
 
 	i = 0;
-	ptr = (int *) s;
-	while (i <= n)
+	ptr = (t_byte *) s;
+	while (i < n)
 	{
-		*(ptr + i) = c;
+		ptr[i] = (t_byte) c;
 		i++;
 	}
 	return (s);
 }
 
-void	bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	memset(s, 0, n);
+	ft_memset(s, 0, n);
 }
 
-
-//TODO 
-void	*memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	while (i <= n)
+	while (i < n)
 	{
-		*(dest + i) = *(src + i);
+		*(((t_byte *) dest) + i) = *(((t_byte *) src) + i);
 		i++;
 	}
 	return (dest);
 }
 
-void	*memmove(void *dest, const void *src, size_t n)
+void	*ft_calloc(size_t n_el, size_t el_size)
 {
+	void	*result;
+
+	if (n_el == 0 || el_size == 0 || (SIZE_MAX / n_el) < el_size)
+		return (NULL);
+	el_size *= n_el;
+	result = malloc(el_size);
+	ft_bzero(result, el_size);
+	return (result);
+}
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	t_byte buffer;
+	
+   if (n == 0)
+		return 0;
+
+	buffer = *(t_byte *) s1;
+	if (buffer == 0)
+		return (ft_memcmp(s1 + 1 , s2 + 2, n - 1));
+	return (buffer);
 }
