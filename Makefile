@@ -13,7 +13,7 @@
 CC = cc
 CFLAGS += -Wall -Wextra -Werror -g
 NAME = libft
-C_FILES = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_lib_mem.c ft_lib_str.c ft_tolower.c ft_toupper.c
+C_FILES = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_lib_str.c ft_memcpy.c ft_memset.c ft_tolower.c ft_toupper.c
 
 HEADER = $(NAME).h
 LIB = $(NAME).a
