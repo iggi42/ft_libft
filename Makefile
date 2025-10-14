@@ -14,8 +14,10 @@ CC = cc
 CFLAGS += -Wall -Wextra -Werror -g
 NAME = libft
 C_FILES = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
-			ft_isprint.c ft_lib_str.c ft_memcpy.c ft_memset.c ft_strchr.c ft_strlcat.c \
-			ft_strlcpy.c ft_strlen.c ft_strrchr.c ft_tolower.c ft_toupper.c
+			 ft_isprint.c ft_lib_str.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_strchr.c \
+			 ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strrchr.c \
+			 ft_tolower.c ft_toupper.c
+
 HEADER = $(NAME).h
 LIB = $(NAME).a
 SRC = $(HEADER) $(C_FILES)
