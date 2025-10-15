@@ -1,0 +1,27 @@
+#include "libft.h"
+
+static const char *ft_strnstr_s(const char *big,  size_t blen, const char *little, const size_t llen)
+{
+  const char *begin = ft_strchr(big, *little);
+  if (begin == NULL)
+    return (NULL);
+
+  size_t dis = begin - big;
+  if (dis > blen)
+    return (NULL);
+  blen -= dis;
+  if (llen > blen)
+    return (NULL);
+  if (ft_strncmp(begin, little, llen) == 0)
+    return (begin);
+  else
+    return (ft_strnstr_s(begin + 1, blen - 1, little, llen));
+}
+
+char *ft_strnstr(const char *big, const char *little, size_t len)
+{
+  size_t llen = ft_strlen(little);
+  if (llen == 0)
+    return ((char *) big);
+  return ((char *) ft_strnstr_s(big, len, little, llen));
+}
