@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/09/30 20:38:57 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/17 08:09:02 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 
-typedef unsigned char t_byte;
+typedef unsigned char	t_byte;
 
 // Part 1: libc functions
 /// check if a char is a class
@@ -71,8 +71,8 @@ void	ft_putnbr_fd(int n, int fd);
 // Part 3: Bonus (with lists)
 typedef struct s_list
 {
-	void *content;
-	struct s_list *next;
+	void			*content;
+	struct s_list	*next;
 }	t_list;
 
 t_list	*ft_lstnew(void *content);

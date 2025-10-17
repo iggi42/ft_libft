@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                          :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:30:47 by fkruger           #+#    #+#             */
-/*   Updated: 2025/09/30 19:45:33 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/17 08:11:28 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "./libft.h"
 
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
 	return (ft_isalpha(c) || ft_isdigit(c));
 }

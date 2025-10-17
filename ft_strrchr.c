@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lib_str.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:30:47 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/08 14:12:07 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/17 11:38:52 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <limits.h>
-#include "./libft.h"
-
+#include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char *found;
-	char *runner;
+	char	*found;
+	char	*runner;
 
 	found = NULL;
 	runner = (char *) s;
@@ -31,5 +30,3 @@ char	*ft_strrchr(const char *s, int c)
 	else
 		return (found);
 }
-
-// int		ft_strncmp(const char *s1, const char *s2, size_t n);
