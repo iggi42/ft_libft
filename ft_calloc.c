@@ -1,4 +1,4 @@
-#include "./libft.h"
+#include "libft.h"
 #include <stdint.h>
 
 void	*ft_calloc(size_t n_el, size_t el_size)
@@ -9,7 +9,8 @@ void	*ft_calloc(size_t n_el, size_t el_size)
 		return (NULL);
 	el_size *= n_el;
 	result = malloc(el_size);
-	ft_bzero(result, el_size);
+	if (result != NULL)
+		ft_bzero(result, el_size);
 	return (result);
 }
 

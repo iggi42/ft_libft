@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_byte buffer;
-	
-   if (n == 0)
-		return 0;
+	size_t i;
 
-	buffer = *(t_byte *) s1;
-	if (buffer == 0)
-		return (ft_memcmp(s1 + 1 , s2 + 2, n - 1));
-	return (buffer);
+	i = 0;
+	while (i < n)
+	{
+		*((t_byte *) dest + i) = *((t_byte *) src + i);
+		i++;
+	}
+	return (dest);
 }
