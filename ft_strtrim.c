@@ -20,7 +20,7 @@ char	*ft_strtrim(char const *src, char const *set)
 
 	src_i = 0;
 	res_i = 0;
-	result = ft_calloc(ft_strlen(src), sizeof(char));
+	result = ft_calloc(ft_strlen(src) + 1, sizeof(char));
 	while (result != NULL && *(src + src_i) != '\0')
 	{
 		if (ft_strchr(set, *(src + src_i)) == NULL)
