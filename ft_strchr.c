@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 08:15:23 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/17 11:22:40 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/25 14:02:20 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strchr(const char *s, int c)
 		else
 			return (NULL);
 	}
-	if (*s == c)
+	if (*s == ((char) c))
 		return ((char *) s);
 	else
 		return (ft_strchr(s + 1, c));

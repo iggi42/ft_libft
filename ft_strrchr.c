@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:30:47 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/17 11:38:52 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/25 14:03:33 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <limits.h>
@@ -21,7 +21,7 @@ char	*ft_strrchr(const char *s, int c)
 	runner = (char *) s;
 	while (*runner != '\0')
 	{
-		if (*runner == c)
+		if (*runner == ((char) c))
 			found = runner;
 		runner++;
 	}
