@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 08:10:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/17 11:40:28 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/26 10:25:50 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	ft_atoi(const char *nptr)
 	{
 		sign *= -1;
 		runner++;
-	}
+	} else if (*runner == '+')
+		runner++;
 	result = 0;
 	while (ft_isdigit(*runner))
 	{
