@@ -6,75 +6,116 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 08:15:06 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/26 22:40:08 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/27 20:30:29 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdbool.h>
 
-static size_t	count_words(char const *s, char c)
+static char	**build_array(char const *s, char c)
+{
+	size_t	count;
+	char	*runner;
+	bool	prev_c;
+
+	count = 0;
+	runner = (char *) s;
+	prev_c = true;
+	while (*runner != '\0')
+	{
+		if (*runner == c && prev_c == false)
+			count++;
+		prev_c = (*runner == c);
+		runner++;
+	}
+	if (prev_c == false)
+		count++;
+	return (ft_calloc(count + 1, sizeof(char *)));
+}
+
+// count the amount chars until a c in s appears
+static size_t	word_len(char const *s, char c)
 {
 	size_t	result;
-	char	*runner;
-	char	*old_run;
 
-	result = 1;
-	runner = ft_strchr(s + 1, c);
-	old_run = (char *) s;
-	while (runner != NULL && *runner != '\0')
-	{
-		if (old_run + 1 < runner)
-			result++;
-		old_run = runner;
-		runner = ft_strchr(runner + 1, c);
-	}
+	result = 0;
+	while (*(s + result) != c && *(s + result) != '\0')
+		result++;
 	return (result);
+}
+
+static char	**clean_up(char **arr)
+{
+	while (arr != NULL && *arr != NULL)
+	{
+		free(*arr);
+		arr++;
+	}
+	free(arr);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
-	size_t	cw;
 	size_t	i;
-	char	*next_c;
-	char	*curr_c;
+	size_t	word_l;
+	size_t	word_i;
 
 	i = 0;
-	if (c == '\0')
+	word_i = 0;
+	result = build_array(s, c);
+	while (result != NULL && *(s + i) != '\0')
 	{
-		result = ft_calloc(2, sizeof(char *));
-		result[0] = ft_strdup(s);
-		return (result);
-	}
-	cw = count_words(s, c);
-	result = ft_calloc(cw + 1, sizeof(char *));
-	curr_c = ft_strchr(s, c);
-	if (*s == '\0')
-		return (result);
-	next_c = ft_strchr(s + 1, c);
-	while (i < cw)
-	{
-		if (curr_c + 1 < next_c)
+		word_l = word_len(s + i, c);
+		if (word_l > 0 && *(s + i) != '\0')
 		{
-			result[i] = ft_substr(curr_c + 1, 0, (next_c - curr_c - 1));
-			i++;
+			result[word_i] = ft_substr(s, i, word_l);
+			if (result[word_i] == NULL)
+				return (clean_up(result));
+			word_i++;
+			i += word_l;
 		}
-		curr_c = next_c;
-		if (next_c != NULL)
-			next_c = ft_strchr(next_c + 1, c);
+		else
+			i++;
 	}
 	return (result);
 }
+
+/*
+{
+	char	**result;
+	char	*runner;
+	size_t	word_count;
+	size_t	word_i;
+	int		word_start;
+
+	runner = (char *) s;
+	word_i = 0;
+	word_count = count_words(s, c);
+	result = ft_calloc(word_count + 1, sizeof(char *));
+	while (result != NULL && *runner != '\0')
+	{
+		if (*runner == c)
+			word_start = -1;
+		else if (word_start == -1)
+			word_start = i;
+		runner++;
+	}
+	return (result);
+}
+*/
+
 /*
 #include <stdio.h>
 int main(void)
 {
 	char **out;
 	int i;
-    char *input = "1238jdjk";
-	char c = 'x';
+	char *input = "test";
+	char c = '\0';
 
-	printf("words: %d\n", (int) count_words(input, c));
 	out = ft_split(input, c);
 	i = 0;
 	while (out[i])
@@ -82,6 +123,7 @@ int main(void)
 		printf("%d : \"%s\"\n", i, out[i]);
 		i++;
 	}
+	printf("%d : %d\n", i, out[i]);
 	return (0);
 }
 */
