@@ -1,0 +1,6 @@
+- copy, adjust and test:
+-- putnbr,
+-- split,
+-- itoa
+- let steffi look over it :)
+- delete .gitignore and this file [LAST]
