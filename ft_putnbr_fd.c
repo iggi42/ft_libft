@@ -6,13 +6,13 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:38:05 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/27 21:39:40 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/27 22:43:53 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include <stdbool.h>
-#include <unistd.h>
 #include <limits.h>
+#include <unistd.h>
 
 static void	ft_print_number(int nb, int fd)
 {
