@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 08:10:50 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/17 08:10:53 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/27 16:22:35 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@ void	*ft_calloc(size_t n_el, size_t el_size)
 {
 	void	*result;
 
-	if (n_el == 0 || el_size == 0 || (SIZE_MAX / n_el) < el_size)
-		return (NULL);
-	el_size *= n_el;
-	result = malloc(el_size);
-	if (result != NULL)
-		ft_bzero(result, el_size);
+	if (n_el == 0 || el_size == 0)
+		result = malloc(0);
+	else if ((SIZE_MAX / n_el) < el_size)
+		result = NULL;
+	else
+	{
+		el_size *= n_el;
+		result = malloc(el_size);
+		if (result != NULL)
+			ft_bzero(result, el_size);
+	}
 	return (result);
 }
