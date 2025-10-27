@@ -65,7 +65,7 @@ char	**ft_split(char const *s, char c)
 	}
 	return (result);
 }
-
+/*
 #include <stdio.h>
 int main(void)
 {
@@ -74,7 +74,7 @@ int main(void)
     char *input = "1238jdjk";
 	char c = 'x';
 
-	printf("words: %d\n", count_words(input, c));
+	printf("words: %d\n", (int) count_words(input, c));
 	out = ft_split(input, c);
 	i = 0;
 	while (out[i])
@@ -84,3 +84,4 @@ int main(void)
 	}
 	return (0);
 }
+*/
