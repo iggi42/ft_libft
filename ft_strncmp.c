@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:24:46 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/17 11:24:55 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/28 15:50:36 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	buffer;
+	int	buffer;
 
 	if (n == 0 || (*s1 == '\0' && *s2 == '\0'))
 		return (0);
