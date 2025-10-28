@@ -1,4 +1,0 @@
-- copy, adjust and test:
--- itoa
-- let steffi look over it :)
-- delete .gitignore and this file [LAST]
