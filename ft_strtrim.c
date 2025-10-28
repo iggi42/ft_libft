@@ -6,47 +6,28 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 08:28:48 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/27 21:09:33 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/28 17:17:56 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count(char const *s, char const *set)
-{
-	size_t	i;
-	size_t	result;
-
-	i = 0;
-	result = 0;
-	while (*(s + i) != '\0')
-	{
-		if (ft_strchr(set, *(s + i)) != NULL)
-			result++;
-		i++;
-	}
-	return (result);
-}
+#include <stdio.h>
 
 char	*ft_strtrim(char const *src, char const *set)
 {
-	char	*result;
-	size_t	result_size;
-	size_t	src_i;
-	size_t	res_i;
+	size_t	i;
+	size_t	start;
+	size_t	length;
 
-	src_i = 0;
-	res_i = 0;
-	result_size = ft_strlen(src) + 1 - count(src, set);
-	result = ft_calloc(result_size, sizeof(char));
-	while (result != NULL && *(src + src_i) != '\0')
-	{
-		if (ft_strchr(set, *(src + src_i)) == NULL)
-		{
-			*(result + res_i) = *(src + src_i);
-			res_i++;
-		}
-		src_i++;
-	}
-	return (result);
+	i = 0;
+	while (*(src + i) != '\0' && ft_strchr(set, *(src + i)) != NULL)
+		i++;
+	start = i;
+	i = 0;
+	length = ft_strlen(src) - start;
+	while (i < length && ft_strchr(set, *(src + start + length - i)) != NULL)
+		i++;
+	length -= i;
+	return (ft_substr(src, start, length + 1));
 }
