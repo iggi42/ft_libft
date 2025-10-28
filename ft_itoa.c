@@ -12,13 +12,33 @@
 #include "libft.h"
 #include <limits.h>
 
-static size_t i2a(long n, char* dst)
+#include <stdio.h>
+
+static char *base_str(long nb)
 {
 	size_t	size;
 
-	if (n == 0)
-		return 0;
-	size = i2a(nb / 10, dst);
+	size = 2;
+	if (nb < 0)
+	{
+		nb *= -1;
+		size++;
+	}
+	while (nb / 10 > 0)
+	{
+		nb /= 10;
+		size++;
+	}
+	return (ft_calloc(size, sizeof(char)));
+}
+
+static size_t write2str(long nb, char* dst)
+{
+	size_t	size;
+
+	if (nb == 0)
+		return (0);
+	size = write2str(nb / 10, dst);
 	dst[size] = (nb % 10) + '0';
 	return (size + 1);
 }
@@ -26,15 +46,17 @@ static size_t i2a(long n, char* dst)
 char	*ft_itoa(int nb)
 {
 	char	*result;
-	size_t	size;
 
+	if(nb == 0)
+		return (ft_strdup("0"));
+
+	result = base_str(nb);
 	if (nb < 0)
 	{
-		*dst = '-';
-		nb *= -1;
-		dst++;
+		result[0] = '-';
+		write2str(((long) nb) * -1, result + 1);
 	}
-	digit = (nb % 10) + '0';
-	size = n2a(nb / 10, dst);
-	*dst = digit;
+	else
+		write2str(nb, result);
+	return (result);
 }
