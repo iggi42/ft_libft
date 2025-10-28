@@ -51,6 +51,8 @@ char	*ft_itoa(int nb)
 		return (ft_strdup("0"));
 
 	result = base_str(nb);
+	if (result == NULL)
+		return (NULL);
 	if (nb < 0)
 	{
 		result[0] = '-';
