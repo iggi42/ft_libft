@@ -6,13 +6,13 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:35:38 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/28 15:07:40 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include <limits.h>
 
-static char *base_str(long nb)
+static char	*base_str(long nb)
 {
 	size_t	size;
 
@@ -30,7 +30,7 @@ static char *base_str(long nb)
 	return (ft_calloc(size, sizeof(char)));
 }
 
-static size_t write2str(long nb, char* dst)
+static size_t	write2str(long nb, char *dst)
 {
 	size_t	size;
 
@@ -45,9 +45,8 @@ char	*ft_itoa(int nb)
 {
 	char	*result;
 
-	if(nb == 0)
+	if (nb == 0)
 		return (ft_strdup("0"));
-
 	result = base_str(nb);
 	if (result == NULL)
 		return (NULL);
