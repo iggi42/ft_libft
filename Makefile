@@ -6,12 +6,12 @@
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2025/10/27 20:38:50 by fkruger          ###   ########.fr        #
+#    Updated: 2025/10/28 15:14:07 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -g
+CFLAGS += -Wall -Wextra -Werror
 NAME = libft
 C_FILES = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 			 ft_isprint.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_memchr.c ft_strchr.c \
@@ -25,7 +25,7 @@ LIB = $(NAME).a
 SRC = $(HEADER) $(C_FILES)
 OBJ = $(C_FILES:.c=.o)
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIB): $(OBJ)
