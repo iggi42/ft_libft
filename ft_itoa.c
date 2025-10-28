@@ -6,13 +6,11 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:35:38 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/27 23:24:41 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/10/28 15:07:40 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include <limits.h>
-
-#include <stdio.h>
 
 static char *base_str(long nb)
 {
