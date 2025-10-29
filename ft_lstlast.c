@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 03:13:20 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/29 03:13:25 by fkruger          ###   ########.fr       */
+/*   Created: 2025/10/29 04:21:23 by fkruger           #+#    #+#             */
+/*   Updated: 2025/10/29 04:21:32 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+t_list	*ft_lstlast(t_list *lst)
 {
-  t_list *result;
-
-  result = (t_list *) malloc(sizeof(t_list));
-  if(result != NULL)
-  {
-    result->content = content;
-    result->next = NULL;
-  }
-  return (result);
+  if (lst->next == NULL)
+    return (lst);
+  return ft_lstlast(lst->next);
 }
