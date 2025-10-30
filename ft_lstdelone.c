@@ -15,14 +15,14 @@
 // this one will need actual testing :')
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-  t_list *nxt;
+  t_list *el;
 
-  del(lst->content);
-  nxt = lst->next;
-  if(nxt != NULL)
+  el = lst;
+  if(el != NULL)
   {
-    lst->next = nxt->next;
-    lst->content = nxt->content;
+    del(el->content);
+    lst->next = el->next;
+    lst->content = el->content;
   }
-  free(nxt);
+  free(el);
 }
