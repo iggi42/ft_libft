@@ -50,16 +50,18 @@ dev_clean:
 .PHONY: fclean clean re all dev
 
 # development helper files
-compile_flags.txt:
+compile_flags.txt: $(firstword $(MAKEFILE_LIST))
 	@echo setup $@
 	@echo -n > $@
 	@for flag in $(CFLAGS); do \
 	 	echo $$flag >> $@ ; \
 	done
 
-.gitignore:
+.gitignore: $(firstword $(MAKEFILE_LIST))
 	@echo setup $@
 	@echo $@ > $@
 	@echo compile_flags.txt >> $@
+	@echo $(LIB) >> $@
+	@echo test >> $@
 	@echo '*.o' >> $@
 	
