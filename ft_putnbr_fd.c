@@ -22,20 +22,20 @@ static void	ft_print_number(int nb, int fd)
 		return ;
 	if (nb < 0)
 	{
-		write(fd, "-", 1);
+		(void) write(fd, "-", 1);
 		nb *= -1;
 	}
 	digit = (nb % 10) + '0';
 	ft_print_number(nb / 10, fd);
-	write(fd, &digit, 1);
+	(void) write(fd, &digit, 1);
 }
 
 void	ft_putnbr_fd(int nb, int fd)
 {
 	if (nb == 0)
-		write(fd, "0", 1);
+		(void) write(fd, "0", 1);
 	else if (nb == INT_MIN)
-		write(fd, "-2147483648", 11);
+		(void) write(fd, "-2147483648", 11);
 	else
 		ft_print_number(nb, fd);
 }
