@@ -62,6 +62,5 @@ compile_flags.txt: $(firstword $(MAKEFILE_LIST))
 	@echo $@ > $@
 	@echo compile_flags.txt >> $@
 	@echo $(LIB) >> $@
-	@echo test >> $@
 	@echo '*.o' >> $@
 	
