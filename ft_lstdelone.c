@@ -6,23 +6,22 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 04:33:11 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/29 04:33:12 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/11/09 16:50:39 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// this one will need actual testing :')
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-  t_list *el;
+	t_list	*nxt;
 
-  el = lst;
-  if(el != NULL)
-  {
-    del(el->content);
-    lst->next = el->next;
-    lst->content = el->content;
-  }
-  free(el);
+	del(lst->content);
+	nxt = lst->next;
+	if (nxt != NULL)
+	{
+		lst->next = nxt->next;
+		lst->content = nxt->content;
+	}
+	free(nxt);
 }
