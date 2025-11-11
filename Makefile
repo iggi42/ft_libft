@@ -31,6 +31,9 @@ DEV_FILES = .gitignore compile_flags.txt
 
 
 # core build rules
+ifeq ($(IGGY_GOAT), "yes")
+%_fd.o: CFLAGS += -Wno-unused-result
+endif
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
