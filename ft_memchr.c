@@ -16,7 +16,7 @@ void	*ft_memchr(const char *s, int c, size_t n)
 {
 	if (n == 0)
 		return (NULL);
-	if (*s == (t_byte) c)
-		return ((void *) s);
+	if (*s == (t_byte)c)
+		return ((void *)s);
 	return (ft_memchr(s + 1, c, n - 1));
 }

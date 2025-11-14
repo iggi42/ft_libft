@@ -20,7 +20,7 @@ static char	**build_array(char const *s, char c)
 	bool	prev_c;
 
 	count = 0;
-	runner = (char *) s;
+	runner = (char *)s;
 	prev_c = true;
 	while (*runner != '\0')
 	{
@@ -109,13 +109,16 @@ char	**ft_split(char const *s, char c)
 
 /*
 #include <stdio.h>
-int main(void)
-{
-	char **out;
-	int i;
-	char *input = "test";
-	char c = '\0';
 
+int	main(void)
+{
+	char	**out;
+	int		i;
+	char	*input;
+	char	c;
+
+	input = "test";
+	c = '\0';
 	out = ft_split(input, c);
 	i = 0;
 	while (out[i])

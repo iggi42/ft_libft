@@ -20,8 +20,8 @@ int	ft_memcmp(const void *m1, const void *m2, size_t n)
 
 	if (n == 0)
 		return (0);
-	b1 = (t_byte *) m1;
-	b2 = (t_byte *) m2;
+	b1 = (t_byte *)m1;
+	b2 = (t_byte *)m2;
 	buffer = *b1 - *b2;
 	if (buffer == 0)
 		return (ft_memcmp(b1 + 1, b2 + 1, n - 1));

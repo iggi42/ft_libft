@@ -13,7 +13,7 @@
 #include "libft.h"
 
 static const char	*ft_strnstr_s(const char *big, size_t blen,
-									const char *little, const size_t llen)
+		const char *little, const size_t llen)
 {
 	char	*begin;
 	size_t	dis;
@@ -39,6 +39,6 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 
 	llen = ft_strlen(little);
 	if (llen == 0)
-		return ((char *) big);
-	return ((char *) ft_strnstr_s(big, len, little, llen));
+		return ((char *)big);
+	return ((char *)ft_strnstr_s(big, len, little, llen));
 }

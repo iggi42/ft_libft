@@ -53,7 +53,7 @@ char	*ft_itoa(int nb)
 	if (nb < 0)
 	{
 		result[0] = '-';
-		write2str(((long) nb) * -1, result + 1);
+		write2str(((long)nb) * -1, result + 1);
 	}
 	else
 		write2str(nb, result);

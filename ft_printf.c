@@ -46,9 +46,8 @@ static t_iol_el	*ft_iol_new(t_byte *buffer, size_t size)
 
 static t_list	*fold_template(char *template)
 {
-	if(template == NULL || *template == '\0')
+	if (template == NULL || *template == '\0')
 		return (NULL);
-
 	return (io_list);
 }
 
@@ -57,7 +56,7 @@ int	ft_printf(const char *template, ...)
 	va_list	args;
 	t_list	**io_list;
 
-	io_list = fold_template((char *) template);
+	io_list = fold_template((char *)template);
 	va_start(args, template);
 	while (found != NULL)
 	{

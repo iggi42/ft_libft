@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void	ft_lstcut(t_list *lst, void (*del)(void*))
+static void	ft_lstcut(t_list *lst, void (*del)(void *))
 {
 	t_list	*nxt;
 
@@ -24,7 +24,7 @@ static void	ft_lstcut(t_list *lst, void (*del)(void*))
 	ft_lstcut(nxt, del);
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*start;
 

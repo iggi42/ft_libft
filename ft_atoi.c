@@ -24,7 +24,7 @@ int	ft_atoi(const char *nptr)
 	int		sign;
 	long	result;
 
-	runner = (char *) nptr;
+	runner = (char *)nptr;
 	while (ft_isspace(*runner))
 		runner++;
 	sign = 1;
@@ -41,5 +41,5 @@ int	ft_atoi(const char *nptr)
 		result = result * 10 + (*runner - 48);
 		runner++;
 	}
-	return ((int) sign * result);
+	return ((int)sign * result);
 }
