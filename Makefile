@@ -21,14 +21,16 @@ C_FILES = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdig
 			 ft_strtrim.c ft_memmove.c ft_split.c ft_strmapi.c ft_striteri.c ft_putstr_fd.c \
 			 ft_putendl_fd.c ft_putchar_fd.c ft_itoa.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c \
 			 ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-			 ft_lstmap.c
+			 ft_lstmap.c ft_lstfold.c
 
 HEADER = $(NAME).h
 LIB = $(NAME).a
 SRC = $(HEADER) $(C_FILES)
 OBJ = $(C_FILES:.c=.o)
 DEV_FILES = .gitignore compile_flags.txt
+DOC_FOLDER = doc
 
+SELF=$(firstword $(MAKEFILE_LIST))
 
 # core build rules
 ifeq ($(IGGY_GOAT), "yes")
@@ -44,26 +46,46 @@ $(LIB): $(OBJ)
 $(NAME): $(LIB)
 all: $(NAME)
 re: clean all
-fclean: clean dev_clean
+fclean: clean dev_clean doc_clean
 clean:
 	rm -f $(OBJ) $(LIB)
 dev: $(DEV_FILES)
 dev_clean:
 	rm -vf $(DEV_FILES)
-.PHONY: fclean clean re all dev
+.PHONY: fclean clean re all dev doc dh doc_clean
+
+# rules to generate documentation
+doc: $(C_FILES) $(HEADER) Doxyfile
+	doxygen
+
+dh: doc_clean doc
+	(cd "./$(DOC_FOLDER)/html" && python3 -m http.server)
+
+doc_clean:
+	rm -r "./$(DOC_FOLDER)"
+
+Doxyfile: $(SELF)
+	@echo -n > $@
+	@echo 'PROJECT_NAME = "Iggys Libft"' >> $@
+	@echo 'INPUT = ./'$(HEADER) >> $@
+	@echo 'EXTRACT_ALL = YES' >> $@
+	@echo 'QUIET = YES' >> $@
+	@echo "OUTPUT_DIRECTORY  = ./$(DOC_FOLDER)" >> $@
 
 # development helper files
-compile_flags.txt: $(firstword $(MAKEFILE_LIST))
+compile_flags.txt: $(SELF)
 	@echo setup $@
 	@echo -n > $@
 	@for flag in $(CFLAGS); do \
 	 	echo $$flag >> $@ ; \
 	done
 
-.gitignore: $(firstword $(MAKEFILE_LIST))
+.gitignore: $(SELF)
 	@echo setup $@
 	@echo $@ > $@
 	@echo compile_flags.txt >> $@
 	@echo $(LIB) >> $@
+	@echo "/$(DOC_FOLDER)" >> $@
+	@echo "Doxyfile" >> $@
 	@echo '*.o' >> $@
 	
