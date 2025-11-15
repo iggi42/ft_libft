@@ -152,5 +152,29 @@ void *ft_lstfold(t_list *lst, void *acc, void *(*f)(void *, void *));
 
 //!@}
 
+//! @name io list
+//!@{
 
+/**
+ * @brief represent one part of an io list, these are chained together to in a linked list.
+ */
+typedef struct s_iol_el
+{
+	char *buffer;
+	size_t		size;
+}				t_iol_el;
+
+//! @brief pretty prints out an io list to stdout
+void ft_iol_pp(t_list *l);
+
+//! @brief pretty prints out one element of an io list to stdout
+void ft_iol_pp_el(t_iol_el *el);
+
+/**
+ * @brief write one io list to a fd
+ */
+int ft_iol_write(t_list *l, int fd);
+
+
+//!@}
 #endif

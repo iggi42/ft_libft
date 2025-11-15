@@ -21,7 +21,7 @@ C_FILES = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdig
 			ft_strtrim.c ft_memmove.c ft_split.c ft_strmapi.c ft_striteri.c ft_putstr_fd.c \
 			ft_putendl_fd.c ft_putchar_fd.c ft_itoa.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c \
 			ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-			ft_lstmap.c ft_lstfold.c ft_printf.c
+			ft_lstmap.c ft_lstfold.c ft_printf.c  ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c
 
 HEADER = $(NAME).h
 LIB = $(NAME).a
@@ -62,7 +62,7 @@ dh: doc_clean doc
 	(cd "./$(DOC_FOLDER)/html" && python3 -m http.server)
 
 doc_clean:
-	rm -r "./$(DOC_FOLDER)"
+	rm -rf "./$(DOC_FOLDER)"
 
 Doxyfile: $(SELF)
 	@echo -n > $@
