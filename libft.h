@@ -162,6 +162,7 @@ typedef struct s_iol_el
 {
 	char *buffer;
 	size_t		size;
+	void (*free)(struct s_iol_el*);
 }				t_iol_el;
 
 //! @brief pretty prints out an io list to stdout
@@ -174,6 +175,9 @@ void ft_iol_pp_el(t_iol_el *el);
  * @brief write one io list to a fd
  */
 int ft_iol_write(t_list *l, int fd);
+
+
+int ft_iol_del(t_list *l, void (*del)(void *));
 
 
 //!@}
