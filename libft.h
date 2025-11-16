@@ -59,7 +59,18 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
+
+/**
+ * @brief convert an int to a decimal ascii string 
+ */
 char	*ft_itoa(int n);
+char	*ft_ltoa(long n);
+
+/**
+ * @brief convert a ptr to a hex ascii string
+ */
+char *ft_ptoa(void *ptr);
+
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
@@ -149,7 +160,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
  */
 void *ft_lstfold(t_list *lst, void *acc, void *(*f)(void *, void *));
 
-
 //!@}
 
 //! @name io list
@@ -157,6 +167,7 @@ void *ft_lstfold(t_list *lst, void *acc, void *(*f)(void *, void *));
 
 /**
  * @brief represent one part of an io list, these are chained together to in a linked list.
+ * @field free should _only_ decide if the *buffer* needs freeing.
  */
 typedef struct s_iol_el
 {
@@ -177,7 +188,10 @@ void ft_iol_pp_el(t_iol_el *el);
 int ft_iol_write(t_list *l, int fd);
 
 
-int ft_iol_del(t_list *l, void (*del)(void *));
+/**
+ * @brief free an io list, calls ´iel->free´ to free the buffer to see if 
+ */
+void ft_iol_del(t_list **l);
 
 
 //!@}

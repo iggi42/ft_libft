@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <limits.h>
+
+#include <stdint.h>
 
 static char	*base_str(long nb)
 {
@@ -40,10 +43,11 @@ static size_t	write2str(long nb, char *dst)
 	return (size + 1);
 }
 
-char	*ft_itoa(int nb)
+char	*ft_ptoa(void *ptr)
 {
 	char	*result;
 
+  int nb = (uintptr_t) ptr;
 	if (nb == 0)
 		return (ft_strdup("0"));
 	result = base_str(nb);
