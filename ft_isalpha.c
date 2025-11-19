@@ -6,10 +6,10 @@
 /*   By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:30:47 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/17 08:11:39 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/11/19 22:10:08 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+// #include "libft.h"
 
 int	ft_isalpha(int c)
 {

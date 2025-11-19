@@ -6,15 +6,19 @@
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2025/10/29 04:58:53 by fkruger          ###   ########.fr        #
+#    Updated: 2025/11/19 22:57:50 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # configuration variables
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -g
+CFLAGS += -MD -Wall -Wextra -Werror
+# -MD to generate the .d files in $(DEPS)
+
 NAME = libft
-C_FILES = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
+HEADER = $(NAME).h
+LIB = $(NAME).a
+SRCS = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 			ft_isprint.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_memchr.c ft_strchr.c \
 			ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strrchr.c \
 			ft_tolower.c ft_toupper.c ft_atoi.c ft_strnstr.c ft_substr.c ft_strjoin.c \
@@ -23,23 +27,14 @@ C_FILES = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdig
 			ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
 			ft_lstmap.c ft_lstfold.c ft_printf.c  ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c
 
-HEADER = $(NAME).h
-LIB = $(NAME).a
-SRC = $(HEADER) $(C_FILES)
-OBJ = $(C_FILES:.c=.o)
+OBJS = $(SRCS:.c=.o)
+DEPS = $(OBJS:.o=.d)
 DEV_FILES = .gitignore compile_flags.txt
 DOC_FOLDER = doc
 
 SELF=$(firstword $(MAKEFILE_LIST))
 
-# core build rules
-ifeq ($(shell hostname), goat)
-%_fd.o: CFLAGS += -Wno-unused-result
-endif
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(LIB): $(OBJ)
+$(LIB): $(OBJS)
 	ar -src $@ $^
 
 # phony targets
@@ -48,11 +43,14 @@ all: $(NAME)
 re: clean all
 fclean: clean dev_clean doc_clean
 clean:
-	rm -f $(OBJ) $(LIB)
+	rm -f $(OBJS) $(LIB)
 dev: $(DEV_FILES)
 dev_clean:
 	rm -vf $(DEV_FILES)
 .PHONY: fclean clean re all dev doc dh doc_clean
+
+# %.o: %.c $(HEADER)
+#	$(CC) $(CFLAGS) -c $< -o $@
 
 # rules to generate documentation
 doc: $(C_FILES) $(HEADER) Doxyfile
@@ -88,4 +86,12 @@ compile_flags.txt: $(SELF)
 	@echo "/$(DOC_FOLDER)" >> $@
 	@echo "Doxyfile" >> $@
 	@echo '*.o' >> $@
-	
+	@echo '*.d' >> $@
+	@echo '.depend' >> $@
+
+# core build rules
+ifeq ($(shell hostname), goat)
+%_fd.o: CFLAGS += -Wno-unused-result
+endif
+-include $(DEPS)
+
