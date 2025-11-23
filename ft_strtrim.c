@@ -9,7 +9,6 @@
 /*   Updated: 2025/10/28 22:24:21 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strtrim(char const *src, char const *set)

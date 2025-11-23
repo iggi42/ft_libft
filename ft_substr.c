@@ -9,7 +9,6 @@
 /*   Updated: 2025/10/27 20:15:58 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 // returns the size of the substring

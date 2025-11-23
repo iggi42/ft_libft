@@ -15,6 +15,10 @@
 
 # include <stdlib.h>
 
+#define HEX_ALPHABET "0123456789ABCDEF"
+#define HEX_ALPHABET_LOW "0123456789abcdef"
+#define DEC_ALPHABET "0123456789"
+
 /// a single byte for bytewise operations
 typedef unsigned char	t_byte;
 
@@ -64,13 +68,23 @@ int		ft_atoi(const char *nptr);
  * @brief convert an int to a decimal ascii string 
  */
 char	*ft_itoa(int n);
+
+/**
+ * @brief convert a long to a decimal ascii string 
+ */
 char	*ft_ltoa(long n);
+
+/**
+ * @brief unsigned convert a long to a decimal ascii string 
+ */
+char	*ft_ultoa(unsigned long n);
+
+void ft_btoa(t_byte byte, char *target);
 
 /**
  * @brief convert a ptr to a hex ascii string
  */
 char *ft_ptoa(void *ptr);
-
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

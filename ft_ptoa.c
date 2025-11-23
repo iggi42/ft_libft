@@ -11,54 +11,35 @@
 /* ************************************************************************** */
 #include "libft.h"
 #include <limits.h>
-
+#include <stddef.h>
 #include <stdint.h>
 
-static char	*base_str(long nb)
+void	ft_btoa(t_byte b, char *target)
 {
-	size_t	size;
-
-	size = 2;
-	if (nb < 0)
-	{
-		nb *= -1;
-		size++;
-	}
-	while (nb / 10 > 0)
-	{
-		nb /= 10;
-		size++;
-	}
-	return (ft_calloc(size, sizeof(char)));
-}
-
-static size_t	write2str(long nb, char *dst)
-{
-	size_t	size;
-
-	if (nb == 0)
-		return (0);
-	size = write2str(nb / 10, dst);
-	dst[size] = (nb % 10) + '0';
-	return (size + 1);
+	target[0] = HEX_ALPHABET[b / 16];
+	target[1] = HEX_ALPHABET[b % 16];
 }
 
 char	*ft_ptoa(void *ptr)
 {
+	size_t	val;
 	char	*result;
+	char *target;
+	t_byte	i;
 
-  int nb = (uintptr_t) ptr;
-	if (nb == 0)
-		return (ft_strdup("0"));
-	result = base_str(nb);
+	i = 0;
+	val = (uintptr_t)ptr;
+	result = (char *)ft_calloc(sizeof(void *) + 3, sizeof(t_byte));
 	if (result == NULL)
 		return (NULL);
-	if (nb < 0)
+	result[0] = '0';
+	result[1] = 'x';
+	while (i < sizeof(uintptr_t))
 	{
-		result[0] = '-';
-		write2str(((long)nb) * -1, result + 1);
+		target = result + (sizeof(uintptr_t) - i) * 2;
+		ft_btoa(val, target);
+		val = val >> 8;
+		i++;
 	}
-	else
-		write2str(nb, result);
 	return (result);
 }
