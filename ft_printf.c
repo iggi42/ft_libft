@@ -25,7 +25,7 @@ static void always_free(t_iol_el *el)
 static t_list	*parse_template(char *template)
 {
 	t_list *result;
-  t_iol_el *seg;
+	t_iol_el *seg;
   
 	if (template == NULL || *template == '\0')
 		return (NULL);
@@ -101,8 +101,8 @@ int	ft_printf(const char *template, ...)
 	int result;
 
 	seg_list = parse_template((char *)template);
-  va_start(args, template);
-  replace_ops(args, seg_list);
+	va_start(args, template);
+	replace_ops(args, seg_list);
 	va_end(args);
 	result = ft_iol_write(seg_list, 1);
 	ft_iol_del(&seg_list);
