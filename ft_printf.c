@@ -19,7 +19,7 @@ static size_t get_seg_size(char *template)
 static t_list	*parse_template(char *template)
 {
 	t_list *result;
-  t_iol_el *seg;
+	t_iol_el *seg;
   
 	if (template == NULL || *template == '\0')
 		return (NULL);
@@ -67,8 +67,8 @@ int	ft_printf(const char *template, ...)
 	int result;
 
 	seg_list = parse_template((char *)template);
-  va_start(args, template);
-  replace_ops(args, seg_list);
+	va_start(args, template);
+	replace_ops(args, seg_list);
 	va_end(args);
 	result = ft_iol_write(seg_list, 1);
 	ft_lstclear(&seg_list, free);
