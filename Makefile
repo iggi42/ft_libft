@@ -32,9 +32,11 @@ OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)
 DEV_FILES = .gitignore compile_flags.txt
 DOC_FOLDER = doc
+GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
 
 SELF=$(firstword $(MAKEFILE_LIST))
 
+GIT_IGNORE += $(LIB)
 $(LIB): $(OBJS)
 	ar -src $@ $^
 
@@ -54,6 +56,7 @@ dev_clean:
 #	$(CC) $(CFLAGS) -c $< -o $@
 
 # rules to generate documentation
+GIT_IGNORE += /doc
 doc: $(C_FILES) $(HEADER) Doxyfile
 	doxygen
 
@@ -63,6 +66,7 @@ dh: doc_clean doc
 doc_clean:
 	rm -rf "./$(DOC_FOLDER)"
 
+GIT_IGNORE += Doxyfile
 Doxyfile: $(SELF)
 	@echo -n > $@
 	@echo 'PROJECT_NAME = "Iggys Libft"' >> $@
@@ -81,14 +85,9 @@ compile_flags.txt: $(SELF)
 
 .gitignore: $(SELF)
 	@echo setup $@
-	@echo $@ > $@
-	@echo compile_flags.txt >> $@
-	@echo $(LIB) >> $@
-	@echo "/$(DOC_FOLDER)" >> $@
-	@echo "Doxyfile" >> $@
-	@echo '*.o' >> $@
-	@echo '*.d' >> $@
-	@echo '.depend' >> $@
+	@for ig in $(GIT_IGNORE); do \
+		echo $$ig >> $@ ; \
+	done
 
 # core build rules
 ifeq ($(shell hostname), goat)
