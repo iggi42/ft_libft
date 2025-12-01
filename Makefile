@@ -46,7 +46,7 @@ all: $(NAME)
 re: clean all
 fclean: clean dev_clean doc_clean
 clean:
-	rm -f $(OBJS) $(LIB)
+	rm -f $(OBJS) $(LIB) $(DEPS)
 dev: $(DEV_FILES)
 dev_clean:
 	rm -vf $(DEV_FILES)
