@@ -15,34 +15,58 @@
 
 # include <stdlib.h>
 
-#define HEX_ALPHABET "0123456789ABCDEF"
-#define HEX_ALPHABET_LOW "0123456789abcdef"
-#define DEC_ALPHABET "0123456789"
+# define HEX_ALPHABET "0123456789ABCDEF"
+# define HEX_ALPHABET_LOW "0123456789abcdef"
+# define DEC_ALPHABET "0123456789"
 
 /// a single byte for bytewise operations
 typedef unsigned char	t_byte;
 
 //! @name Character Classes
 //!@{
+/** @brief return 0 if c is not a alphanumerical character. */
 int		ft_isalnum(int c);
+
+/**  @brief return 0 if c is not a alphabetical character. */
 int		ft_isalpha(int c);
+
+/**  @brief return 0 if c is not an ascii character. */
 int		ft_isascii(int c);
+
+/**  @brief return 0 if c is not a printable character. */
 int		ft_isprint(int c);
+
+/**  @brief return 0 if c is not a digit character. */
 int		ft_isdigit(int c);
 
+/**  @brief return uppercase version of c, if c is a lowercase character. */
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 //!@}
 
 //! @name memory
 //!@{
+
+/**  @brief set n bytes starting from s with c as character */
 void	*ft_memset(void *s, int c, size_t n);
+
+/**  @brief set n bytes starting from s with 0 */
 void	ft_bzero(void *s, size_t n);
+
+/**  @brief copy n bytes from src to dest, undefined behaviour with overlapping pointers. */
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+
+/**  @brief move n bytes from src to dest, handles overlapping pointers. */
 void	*ft_memmove(void *dest, const void *src, size_t n);
+
+/**  @brief find pointer with value of c within n bytes starting from s. */
 void	*ft_memchr(const char *s, int c, size_t n);
+
+/**  @brief compare s1 and s2 with in n bytes. */
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
+
+/**  @brief alloc a zeroed out memory for an array of n elements with a size of `size` */
+void	*ft_calloc(size_t n, size_t size);
 //!@}
 
 //! @name string
