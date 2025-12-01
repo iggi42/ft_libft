@@ -181,12 +181,12 @@ void *ft_lstfold(t_list *lst, void *acc, void *(*f)(void *, void *));
 
 /**
  * @brief represent one part of an io list, these are chained together to in a linked list.
- * @field free should _only_ decide if the *buffer* needs freeing.
  */
 typedef struct s_iol_el
 {
 	char *buffer;
 	size_t		size;
+ /** `free` is optional callback, that triggers when freeing the struct via ft_io_del(). */
 	void (*free)(struct s_iol_el*);
 }				t_iol_el;
 
