@@ -24,17 +24,16 @@ BASE = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.
 			ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strrchr.c \
 			ft_tolower.c ft_toupper.c ft_atoi.c ft_strnstr.c ft_substr.c ft_strjoin.c \
 			ft_strtrim.c ft_memmove.c ft_split.c ft_strmapi.c ft_striteri.c
-SRCS += $(BASE)
 
 BASE_IO = ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c ft_itoa.c ft_putnbr_fd.c
-SRCS += $(BASE_IO)
-
 BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 			ft_lstiter.c ft_lstmap.c ft_lstfold.c
-SRCS += $(BASE_LL)
+SRCS += $(BASE) $(BASE_IO) $(BASE_LL)
 
-BASE_FORMAT = ft_printf.c ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_ptoa.c
-SRCS += $(BASE_FORMAT)
+EXTRA_IOL = ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_ptoa.c
+EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
+EXTRA_FORMAT = ft_printf.c
+SRCS += $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT)
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)

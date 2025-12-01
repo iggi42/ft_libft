@@ -237,7 +237,7 @@ void ft_iol_del(t_list **l);
 //!@{
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1024
 # endif
 
 /** @brief wrapper of a buffer, together with its size; */
@@ -255,10 +255,10 @@ t_buf					*ft_buf_new(size_t size);
 t_buf					*ft_buf_read(int fd);
 
 /**
- @brief to split buffer at a given pointer in it into 2 buffers.
- the return value is the part to the left,
- and the given pointer will be the last position of the it.
- and the buffer 'b' will the one on the left of the index.
+ * @brief to split buffer at a given pointer in it into 2 buffers.
+ * the return value is the part to the left,
+ * and the given pointer will be the last position of the it.
+ * and the buffer 'b' will the one on the left of the index.
  */
 t_buf					*ft_buf_split(t_buf **b, size_t left_len);
 
