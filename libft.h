@@ -60,13 +60,20 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 
 /**  @brief find pointer with value of c within n bytes starting from s. */
-void	*ft_memchr(const char *s, int c, size_t n);
+void *ft_memchr(const void *s, const t_byte c, size_t n);
 
 /**  @brief compare s1 and s2 with in n bytes. */
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /**  @brief alloc a zeroed out memory for an array of n elements with a size of `size` */
 void	*ft_calloc(size_t n, size_t size);
+//!@}
+
+//! @name Math
+//!@{
+
+unsigned long long ft_pow(unsigned long base, unsigned int n);
+
 //!@}
 
 //! @name string
@@ -88,6 +95,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
 
+
+//! @name itoa and friends
+//!@{
 /**
  * @brief convert an int to a decimal ascii string 
  */
@@ -98,17 +108,32 @@ char	*ft_itoa(int n);
  */
 char	*ft_ltoa(long n);
 
-/**
- * @brief unsigned convert a long to a decimal ascii string 
- */
-char	*ft_ultoa(unsigned long n);
-
 void ft_btoa(t_byte byte, char *target);
 
 /**
  * @brief convert a ptr to a hex ascii string
  */
 char *ft_ptoa(void *ptr);
+
+
+
+/**
+ * @brief unsigned convert a long to a decimal ascii string 
+ */
+char	*ft_ultoa(unsigned long n);
+
+char	*ft_ultoa_b(unsigned long n, const char *alphabet);
+
+/**
+ * @brief write n to target in using the digits from alphabet.
+ * returns the necessary string length, only wrote if space >= space
+ *
+ * we use this really as central work horse for the the other integer to ascii functions.
+ * so keep the interface steady and optimise performance maybe
+ */
+size_t	ft_ulto_bl(unsigned long nb, char *target, size_t length,	const char *alphabet);
+
+//!@}
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
