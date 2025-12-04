@@ -9,7 +9,7 @@ size_t	ft_ulto_bl(unsigned long nb, char *target, size_t length,
 	size_t				result_size;
 
 	alphabet_size = ft_strlen(alphabet);
-	largest_base = 1;
+	largest_base = alphabet_size;
 	digit_i = 1;
 	while (nb > largest_base)
 	{
@@ -21,8 +21,8 @@ size_t	ft_ulto_bl(unsigned long nb, char *target, size_t length,
 	{
 		while (digit_i-- > 0)
 		{
-			*(target++) = alphabet[nb / largest_base];
 			largest_base /= alphabet_size;
+			*(target++) = alphabet[nb / largest_base];
 		}
 	}
 	return (result_size);
