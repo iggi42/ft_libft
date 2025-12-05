@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ptoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,12 +13,6 @@
 #include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
-
-void	ft_btoa(t_byte b, char *target)
-{
-	target[0] = HEX_ALPHABET[b / 16];
-	target[1] = HEX_ALPHABET[b % 16];
-}
 
 char	*ft_ptoa(void *ptr)
 {

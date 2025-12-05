@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/17 08:09:02 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/12/05 16:51:43 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 
-# define HEX_ALPHABET "0123456789ABCDEF"
-# define HEX_ALPHABET_LOW "0123456789abcdef"
-# define DEC_ALPHABET "0123456789"
+# ifndef FT_ALPHABET_DEC 
+#  define FT_ALPHABET_DEC "0123456789"
+# endif
+
+# ifndef FT_ALPHABET_HEX 
+#  define FT_ALPHABET_HEX "0123456789ABCDEF"
+# endif
+
+# ifndef FT_ALPHABET_HEX_LOW 
+#  define FT_ALPHABET_HEX_LOW "0123456789abcdef"
+# endif
 
 /// a single byte for bytewise operations
 typedef unsigned char	t_byte;
@@ -53,6 +62,9 @@ void	*ft_memset(void *s, int c, size_t n);
 /**  @brief set n bytes starting from s with 0 */
 void	ft_bzero(void *s, size_t n);
 
+/** @brief checks if memory area is zero for n bytes */
+bool ft_iszero(const void *s, size_t n);
+
 /**  @brief copy n bytes from src to dest, undefined behaviour with overlapping pointers. */
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 
@@ -86,6 +98,8 @@ size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size);
 size_t	ft_strlcat(char *dst, const char *src, size_t dst_size);
 
+/** @brief allocates a memory for a string with length len. */
+char	*ft_str_alloc(size_t len);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -105,19 +119,33 @@ int		ft_atoi(const char *nptr);
 /**
  * @brief convert an int to a decimal ascii string 
  */
-char	*ft_itoa(int n);
+char	*ft_itoa(int i);
+char *ft_itoa_b(int i, const char *alphabet);
+size_t	ft_itoa_bl(int i, char *target, size_t length,	const char *alphabet);
+
+char	*ft_btoa(t_byte byte);
+char	*ft_btoa_b(t_byte byte, const char *alphabet);
+size_t	ft_btoa_bl(t_byte byte, char *target, size_t length,	const char *alphabet);
+
+/**
+ * @brief convert a ptr to a hex ascii string
+ */
+char *ft_ptoa(void *ptr);
 
 /**
  * @brief convert a long to a decimal ascii string 
  */
 char	*ft_ltoa(long n);
 
-void ft_btoa_l(t_byte byte, size_t length, char *target);
+/**
+ * @brief convert a long with the given alphabet.
+ */
+char	*ft_ltoa_b(long n, const char *alphabet);
 
 /**
- * @brief convert a ptr to a hex ascii string
+ * @brief convert a long with the given alphabet, if length is sufficent
  */
-char *ft_ptoa(void *ptr);
+size_t	ft_ltoa_bl(long nb, char *target, size_t length,	const char *alphabet);
 
 /**
  * @brief unsigned convert a long to a decimal ascii string 
@@ -136,7 +164,7 @@ char	*ft_ultoa_b(unsigned long n, const char *alphabet);
  * we use this really as central work horse for the the other integer to ascii functions.
  * so keep the interface steady and optimise performance maybe
  */
-size_t	ft_ulto_bl(unsigned long nb, char *target, size_t length,	const char *alphabet);
+size_t	ft_ultoa_bl(unsigned long nb, char *target, size_t length,	const char *alphabet);
 
 //!@}
 

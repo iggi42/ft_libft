@@ -6,7 +6,7 @@
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2025/11/19 22:57:50 by fkruger          ###   ########.fr        #
+#    Updated: 2025/12/05 22:55:50 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,18 +19,30 @@ NAME = libft
 HEADER = $(NAME).h
 LIB = $(NAME).a
 
-BASE = ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
-		ft_isprint.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_memchr.c ft_strchr.c \
+BASE_CC = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
+		ft_tolower.c ft_toupper.c
+
+BASE_MEM = ft_bzero.c ft_calloc.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_memchr.c \
+ ft_memmove.c ft_iszero.c
+
+BASE_STR = ft_str_alloc.c ft_strtrim.c ft_split.c ft_strmapi.c ft_striteri.c ft_itoa.c \
 		ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strrchr.c \
-		ft_tolower.c ft_toupper.c ft_atoi.c ft_strnstr.c ft_substr.c ft_strjoin.c \
-		ft_strtrim.c ft_memmove.c ft_split.c ft_strmapi.c ft_striteri.c ft_itoa.c
+		ft_atoi.c ft_strnstr.c ft_substr.c ft_strjoin.c ft_strchr.c
 
 BASE_IO = ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c  ft_putnbr_fd.c
-BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
+BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 			ft_lstiter.c ft_lstmap.c ft_lstfold.c
-SRCS += $(BASE) $(BASE_IO) $(BASE_LL)
 
-EXTRA_TOA = ft_ultoa.c ft_ultoa_b.c ft_ultoa_bl.c ft_ptoa.c
+SRCS += $(BASE_CC) $(BASE_MEM) $(BASE_STR) $(BASE_IO) $(BASE_LL)
+
+EXTRA_TOA_B = ft_btoa.c ft_btoa_b.c ft_btoa_bl.c
+EXTRA_TOA_I = ft_itoa.c ft_itoa_b.c ft_itoa_bl.c 
+EXTRA_TOA_L = ft_ltoa.c ft_ltoa_b.c ft_ltoa_bl.c
+EXTRA_TOA_UL = ft_ultoa.c ft_ultoa_b.c ft_ultoa_bl.c
+EXTRA_TOA_P = ft_ptoa.c
+EXTRA_TOA = $(EXTRA_TOA_B) $(EXTRA_TOA_L) $(EXTRA_TOA_UL)
+
 EXTRA_IOL = ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_iol_el_alloc.c ft_iol_free_always.c
 EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
 EXTRA_FORMAT = ft_printf.c ft_fmt_parse.c ft_fmt_apply.c
@@ -87,6 +99,8 @@ compile_flags.txt: $(SELF)
 	@for flag in $(CFLAGS); do \
 	 	echo $$flag >> $@ ; \
 	done
+
+GIT_IGNORE += .depend
 
 .gitignore: $(SELF)
 	@echo setup $@

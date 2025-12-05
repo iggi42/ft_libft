@@ -1,6 +1,6 @@
 #include "libft.h"
 
-size_t	ft_ulto_bl(unsigned long nb, char *target, size_t length,
+size_t	ft_ultoa_bl(unsigned long nb, char *target, size_t length,
 		const char *alphabet)
 {
 	size_t				alphabet_size;
@@ -22,7 +22,7 @@ size_t	ft_ulto_bl(unsigned long nb, char *target, size_t length,
 		while (digit_i-- > 0)
 		{
 			largest_base /= alphabet_size;
-			*(target++) = alphabet[nb / largest_base];
+			*(target++) = alphabet[(nb / largest_base) % alphabet_size];
 		}
 	}
 	return (result_size);
