@@ -67,6 +67,10 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /**  @brief alloc a zeroed out memory for an array of n elements with a size of `size` */
 void	*ft_calloc(size_t n, size_t size);
+
+/** @brief free and zero all variables pointed arguments, always returns NULL. */
+void  *ft_free(void* first, ...);
+
 //!@}
 
 //! @name Math
@@ -108,20 +112,21 @@ char	*ft_itoa(int n);
  */
 char	*ft_ltoa(long n);
 
-void ft_btoa(t_byte byte, char *target);
+void ft_btoa_l(t_byte byte, size_t length, char *target);
 
 /**
  * @brief convert a ptr to a hex ascii string
  */
 char *ft_ptoa(void *ptr);
 
-
-
 /**
  * @brief unsigned convert a long to a decimal ascii string 
  */
 char	*ft_ultoa(unsigned long n);
 
+/**
+ * @brief unsigned convert a long with the given alphabet.
+ */
 char	*ft_ultoa_b(unsigned long n, const char *alphabet);
 
 /**
@@ -137,16 +142,6 @@ size_t	ft_ulto_bl(unsigned long nb, char *target, size_t length,	const char *alp
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-//!@}
-
-//! @name string format
-//!@{
-
-// worst doc ever
-/**
- * @brief you know what a printf does, come on
- */
-int ft_printf(const char *, ...);
 //!@}
 
 //! @name IO
@@ -228,6 +223,8 @@ void *ft_lstfold(t_list *lst, void *acc, void *(*f)(void *, void *));
 //! @name io list
 //!@{
 
+typedef t_list* t_iol;
+
 /**
  * @brief represent one part of an io list, these are chained together to in a linked list.
  */
@@ -238,6 +235,9 @@ typedef struct s_iol_el
  /** `free` is optional callback, that triggers when freeing the struct via ft_io_del(). */
 	void (*free)(struct s_iol_el*);
 }				t_iol_el;
+
+//! @brief create news iol element
+t_iol_el	*ft_iol_el_alloc(size_t size);
 
 //! @brief pretty prints out an io list to stdout
 void ft_iol_pp(t_list *l);
@@ -250,6 +250,8 @@ void ft_iol_pp_el(t_iol_el *el);
  */
 int ft_iol_write(t_list *l, int fd);
 
+/** @brief always free the buffer too, if ft_iol_del is called on the iol. */
+void	ft_iol_free_always(t_iol_el *el);
 
 /**
  * @brief free an io list, calls ´iel->free´ to free the buffer to see if 
@@ -302,5 +304,18 @@ void					ft_buf_cp(t_buf *src, t_buf *dest);
 /** @brief find the first occurence of any bytes in args (null terminated string) */
 t_byte					*ft_buf_chr(t_buf *b, t_byte *args);
 //!@}
+
+//! @name string format
+//!@{
+//! @brief format a string template into a io list for 
+t_list *ft_fmt_parse(char *template);
+
+// worst doc ever
+/**
+ * @brief you know what a printf does, come on
+ */
+int ft_printf(const char *, ...);
+//!@}
+
 
 #endif

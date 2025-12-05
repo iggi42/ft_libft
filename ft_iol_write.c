@@ -8,7 +8,7 @@ int ft_iol_write(t_list *l, int fd)
 	int rr;
 
 	if(l == NULL)
-		return -1;
+		return 0;
 	el = (t_iol_el *) l->content;
 	r = write(fd, el->buffer, el->size);
 	if (r == -1)

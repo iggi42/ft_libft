@@ -26,9 +26,6 @@ static void	ft_lstcut(t_list *lst, void (*del)(void *))
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*start;
-
-	start = *lst;
+	ft_lstcut(*lst, del);
 	*lst = NULL;
-	ft_lstcut(start, del);
 }
