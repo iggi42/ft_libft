@@ -11,7 +11,7 @@ size_t	ft_ultoa_bl(unsigned long nb, char *target, size_t length,
 	alphabet_size = ft_strlen(alphabet);
 	largest_base = alphabet_size;
 	digit_i = 1;
-	while (nb > largest_base)
+	while (nb >= largest_base)
 	{
 		largest_base *= alphabet_size;
 		digit_i++;
