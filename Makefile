@@ -12,7 +12,7 @@
 
 # configuration variables
 CC = cc
-CFLAGS += -MD -Wall -Wextra -Werror
+CFLAGS += -MD -Wall -Wextra -Werror -g
 # -MD to generate the .d files in $(DEPS)
 
 NAME = libft
@@ -41,7 +41,7 @@ EXTRA_TOA_I = ft_itoa.c ft_itoa_b.c ft_itoa_bl.c
 EXTRA_TOA_L = ft_ltoa.c ft_ltoa_b.c ft_ltoa_bl.c
 EXTRA_TOA_UL = ft_ultoa.c ft_ultoa_b.c ft_ultoa_bl.c
 EXTRA_TOA_P = ft_ptoa.c
-EXTRA_TOA = $(EXTRA_TOA_B) $(EXTRA_TOA_L) $(EXTRA_TOA_UL)
+EXTRA_TOA = $(EXTRA_TOA_B) $(EXTRA_TOA_I) $(EXTRA_TOA_L) $(EXTRA_TOA_UL)
 
 EXTRA_IOL = ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_iol_el_alloc.c ft_iol_free_always.c
 EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
