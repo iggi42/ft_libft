@@ -1,12 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_iszero.c                                         :+:      :+:    :+:  */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include <stdbool.h>
 
-bool ft_iszero(const void *start, const size_t size)
+bool	ft_iszero(const void *start, const size_t size)
 {
+	t_byte	rele;
+
 	if (size == 0)
-		return true;
-	t_byte rele = * (t_byte *) start;
+		return (true);
+	rele = *(t_byte *)start;
 	if (rele != 0)
-		return false;
-	return ft_iszero(start + 1, size - 1);
+		return (false);
+	return (ft_iszero(start + 1, size - 1));
 }

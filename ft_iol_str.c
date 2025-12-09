@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_pp_el.c                                      :+:      :+:    :+:  */
+/*   ft_iol_str.c                                      :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,19 +9,17 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	ft_iol_pp_el(t_iol_el *el)
+char	*ft_iol_str(t_list *iol_l)
 {
+	size_t	len;
 	char	*s;
 
-	if (el == NULL)
-	{
-		ft_printf("[NULL] io element\n");
-		return ;
-	}
-	s = ft_substr(el->buffer, 0, el->size);
-	ft_printf("%d : [%s]\n", el->size, s);
+	len = ft_iol_size(iol_l);
+	s = ft_str_alloc(len);
+	if (len <= ft_iol_str_l(iol_l, s, len))
+		return (s);
 	free(s);
+	return (NULL);
 }

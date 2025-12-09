@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_iol_write.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/02 19:29:16 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 #include <unistd.h>
 
-int ft_iol_write(t_list *l, int fd)
+// TODO change return type to a much larger number
+int	ft_iol_write(t_list *l, int fd)
 {
-	t_iol_el *el;
-	int r;
-	int rr;
+	t_iol_el	*el;
+	int			result;
+	int			write_code;
 
-	if(l == NULL)
-		return 0;
-	el = (t_iol_el *) l->content;
-	r = write(fd, el->buffer, el->size);
-	if (r == -1)
-		return -1;
-	rr = ft_iol_write(l->next, fd);
-	if (rr == -1)
-		return -1;
-	return (r + rr);
+	result = 0;
+	while (l != NULL)
+	{
+		el = (t_iol_el *)l->content;
+		write_code = write(fd, el->buffer, el->size);
+		if (write_code < 0)
+			return (write_code);
+		result += write_code;
+		l = l->next;
+	}
+	return (result);
 }

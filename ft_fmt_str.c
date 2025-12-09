@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_pp_el.c                                      :+:      :+:    :+:  */
+/*   ft_fmt_str.c                                         :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2025/10/27 20:35:38 by fkruger           #+#    #+#             */
+/*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_iol_pp_el(t_iol_el *el)
+char	*ft_fmt_str(const char *template, ...)
 {
-	char	*s;
+	t_list	*seg_list;
+	char	*result;
+	va_list	args;
 
-	if (el == NULL)
-	{
-		ft_printf("[NULL] io element\n");
-		return ;
-	}
-	s = ft_substr(el->buffer, 0, el->size);
-	ft_printf("%d : [%s]\n", el->size, s);
-	free(s);
+	seg_list = ft_fmt_parse((char *)template);
+	va_start(args, template);
+	ft_fmt_apply(seg_list, args);
+	result = ft_iol_str(seg_list);
+	ft_iol_del(&seg_list);
+	va_end(args);
+	return (result);
 }

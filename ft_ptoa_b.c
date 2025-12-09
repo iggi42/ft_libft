@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_pp_el.c                                      :+:      :+:    :+:  */
+/*   ft_ptoa_b.c                                          :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2025/10/27 20:35:38 by fkruger           #+#    #+#             */
+/*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	ft_iol_pp_el(t_iol_el *el)
+char	*ft_ptoa_b(void *ptr, const char *alphabet)
 {
-	char	*s;
+	size_t	size;
+	char	*result;
 
-	if (el == NULL)
-	{
-		ft_printf("[NULL] io element\n");
-		return ;
-	}
-	s = ft_substr(el->buffer, 0, el->size);
-	ft_printf("%d : [%s]\n", el->size, s);
-	free(s);
+	size = ft_ptoa_bl(ptr, NULL, 0, alphabet);
+	result = ft_str_alloc(size);
+	if (size == ft_ptoa_bl(ptr, result, size, alphabet))
+		return (result);
+	free(result);
+	return (NULL);
 }

@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
+# include <stdarg.h>
 
 # ifndef FT_ALPHABET_DEC 
 #  define FT_ALPHABET_DEC "0123456789"
@@ -131,6 +132,8 @@ size_t	ft_btoa_bl(t_byte byte, char *target, size_t length,	const char *alphabet
  * @brief convert a ptr to a hex ascii string
  */
 char *ft_ptoa(void *ptr);
+char *ft_ptoa_b(void *ptr, const char *alphabet);
+size_t	ft_ptoa_bl(void *ptr, char *target, size_t max_len, const char *alphabet);
 
 /**
  * @brief convert a long to a decimal ascii string 
@@ -270,6 +273,9 @@ t_iol_el	*ft_iol_el_alloc(size_t size);
 //! @brief pretty prints out an io list to stdout
 void ft_iol_pp(t_list *l);
 
+//! @append a buffer pointer with a size to an iol */
+void	ft_iol_append(t_list **io_l, char *start, size_t size);
+
 //! @brief pretty prints out one element of an io list to stdout
 void ft_iol_pp_el(t_iol_el *el);
 
@@ -278,7 +284,15 @@ void ft_iol_pp_el(t_iol_el *el);
  */
 int ft_iol_write(t_list *l, int fd);
 
-/** @brief always free the buffer too, if ft_iol_del is called on the iol. */
+//! @brief get the total size of all elements summed up
+size_t ft_iol_size(t_list *iol_l);
+
+//! @brief copy an the buffers of an io list into a single string.
+char *ft_iol_str(t_list *iol_l);
+
+size_t ft_iol_str_l(t_list *iol_l, char *target, size_t length);
+
+//! @brief always free the buffer too, if ft_iol_del is called on the iol.
 void	ft_iol_free_always(t_iol_el *el);
 
 /**
@@ -336,7 +350,14 @@ t_byte					*ft_buf_chr(t_buf *b, t_byte *args);
 //! @name string format
 //!@{
 //! @brief format a string template into a io list for 
-t_list *ft_fmt_parse(char *template);
+t_list *ft_fmt_parse(const char *tmpl);
+
+//! @brief apply printf style operators to the parsed template
+void ft_fmt_apply(t_list *io_list, va_list args);
+
+
+char *ft_fmt_str(const char *tmpl, ...);
+
 
 // worst doc ever
 /**

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_pp_el.c                                      :+:      :+:    :+:  */
+/*   ft_iol_append.c                                      :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2025/10/27 20:35:38 by fkruger           #+#    #+#             */
+/*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	ft_iol_pp_el(t_iol_el *el)
+void	ft_iol_append(t_list **io_l, char *start, size_t size)
 {
-	char	*s;
+	t_iol_el	*new_seg;
+	t_list		*ll_node;
 
-	if (el == NULL)
-	{
-		ft_printf("[NULL] io element\n");
+	new_seg = (t_iol_el *)malloc(sizeof(t_iol_el));
+	if (new_seg == NULL)
 		return ;
-	}
-	s = ft_substr(el->buffer, 0, el->size);
-	ft_printf("%d : [%s]\n", el->size, s);
-	free(s);
+	new_seg->buffer = start;
+	new_seg->size = size;
+	new_seg->free = NULL;
+	ll_node = ft_lstnew(new_seg);
+	if (ll_node)
+		ft_lstadd_back(io_l, ll_node);
+	else
+		free(new_seg);
 }

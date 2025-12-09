@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_del.c                                         :+:      :+:    :+: */
+/*   ft_ptoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,22 +9,26 @@
 /*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
+#include <limits.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <unistd.h>
 
-static void	cleanup_iol_el(void *ptr)
+size_t	ft_ptoa_bl(void *ptr, char *target, size_t max_len,
+		const char *alphabet)
 {
-	t_iol_el	*el;
+	size_t	addr;
+	size_t	len;
 
-	el = ptr;
-	if (el != NULL && el->free != NULL)
+	addr = (uintptr_t)ptr;
+	len = ft_ultoa_bl(addr, NULL, 0, alphabet);
+	if (len + 2 > max_len || target == NULL)
+		return (len + 2);
+	if (target != NULL)
 	{
-		el->free(el);
+		ft_memcpy(target, "0x", 2);
+		ft_ultoa_bl(addr, target + 2, len, alphabet);
 	}
-	free(el);
-}
-
-void	ft_iol_del(t_list **l)
-{
-	ft_lstclear(l, cleanup_iol_el);
+	return (len + 2);
 }

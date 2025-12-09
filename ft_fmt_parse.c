@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_fmt_parse.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static size_t	get_seg_size(char *template)
+static size_t	get_seg_size(const char *template)
 {
 	char	*seeker;
 
@@ -15,20 +27,21 @@ static size_t	get_seg_size(char *template)
 		return (seeker - template);
 }
 
-t_list	*ft_fmt_parse(char *template)
+t_list	*ft_fmt_parse(const char *template)
 {
 	t_list		*result;
 	t_iol_el	*seg;
 
 	if (template == NULL || *template == '\0')
 		return (NULL);
-	seg = (t_iol_el *) malloc(sizeof(t_iol_el));
+	seg = (t_iol_el *)malloc(sizeof(t_iol_el));
 	if (seg == NULL)
-		return NULL;
-	seg->buffer = template;
+		return (ft_fmt_parse(template));
+	seg->buffer = (char *)template;
 	seg->size = get_seg_size(template);
+	seg->free = NULL;
 	result = ft_lstnew(seg);
-	if (result)
+	if (result != NULL)
 		result->next = ft_fmt_parse(template + seg->size);
 	else
 		free(seg);

@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ltoa_bl.c                                        :+:      :+:    :+:  */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 #include <limits.h>
 #include <unistd.h>
 
-size_t	ft_ltoa_bl(long nb, char *target, size_t length,	const char *alphabet)
+size_t	ft_ltoa_bl(long nb, char *target, size_t length, const char *alphabet)
 {
 	size_t			len;
-	size_t pre_len;
+	size_t			pre_len;
 	unsigned long	n;
+	char			pre[3];
 
-	char pre[3] = {0, 0, 0};
-
+	ft_bzero(&pre, 3);
 	if (nb < 0)
 	{
 		n = nb * -1;
@@ -23,7 +34,7 @@ size_t	ft_ltoa_bl(long nb, char *target, size_t length,	const char *alphabet)
 	{
 		ft_memcpy(target, pre, pre_len * sizeof(char));
 		if (len != ft_ultoa_bl(n, target + pre_len, len, alphabet))
-			return -1;
+			return (-1);
 	}
 	return (pre_len + len);
 }

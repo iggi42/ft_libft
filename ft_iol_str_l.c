@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_pp_el.c                                      :+:      :+:    :+:  */
+/*   ft_iol_str_l.c                                      :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,16 +12,22 @@
 
 #include "libft.h"
 
-void	ft_iol_pp_el(t_iol_el *el)
+size_t	ft_iol_str_l(t_list *list, char *target, size_t length)
 {
-	char	*s;
+	size_t		len;
+	size_t		target_i;
+	t_iol_el	*el;
 
-	if (el == NULL)
+	len = ft_iol_size(list);
+	target_i = 0;
+	if (len > length)
+		return (len);
+	while (list != NULL && target != NULL)
 	{
-		ft_printf("[NULL] io element\n");
-		return ;
+		el = (t_iol_el *)list->content;
+		ft_memcpy(target + target_i, el->buffer, el->size);
+		target_i += el->size;
+		list = list->next;
 	}
-	s = ft_substr(el->buffer, 0, el->size);
-	ft_printf("%d : [%s]\n", el->size, s);
-	free(s);
+	return (target_i);
 }

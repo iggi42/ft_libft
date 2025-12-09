@@ -1,13 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
-#include <stdarg.h>
+#include <unistd.h>
 
 int	ft_printf(const char *template, ...)
 {
 	t_list	*seg_list;
 	int		result;
+	va_list	args;
 
-	seg_list = ft_fmt_parse((char *) template);
-	result = ft_iol_write(seg_list, 1);
+	seg_list = ft_fmt_parse((char *)template);
+	va_start(args, template);
+	ft_fmt_apply(seg_list, args);
+	va_end(args);
+	result = ft_iol_write(seg_list, STDOUT_FILENO);
 	ft_iol_del(&seg_list);
 	return (result);
 }
