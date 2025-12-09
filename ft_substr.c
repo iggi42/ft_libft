@@ -12,7 +12,7 @@
 #include "libft.h"
 
 // returns the size of the substring
-static size_t	ft_substr_len(const char *s, unsigned int start, size_t len)
+static size_t	ft_substr_len(const char *s, size_t start, size_t len)
 {
 	size_t	s_len;
 
@@ -24,7 +24,7 @@ static size_t	ft_substr_len(const char *s, unsigned int start, size_t len)
 	return (len);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, size_t start, size_t len)
 {
 	char	*result;
 	size_t	i;
