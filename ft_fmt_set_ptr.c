@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_fmt_set_ptr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2025/12/10 23:53:20 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/10 23:53:38 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-#include <stdarg.h>
 
-void	*ft_free(size_t n, ...)
+void	ft_fmt_set_ptr(t_iol_el *el, void *ptr)
 {
-	va_list	args;
-	void	**target;
+	char	*s;
 
-	va_start(args, n);
-	while (n--)
+	if (ptr == NULL)
+		s = "(nil)";
+	else
 	{
-		target = va_arg(args, void *);
-		free(*target);
-		*target = NULL;
+		s = ft_ptoa_b(ptr, FT_ALPHABET_HEX_LOW);
+		el->free = ft_iol_free_always;
 	}
-	va_end(args);
-	return (NULL);
+	ft_fmt_set_str(el, s);
 }

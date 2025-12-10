@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/05 16:51:43 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/12/10 23:50:08 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void					*ft_calloc(size_t n, size_t size);
 /** @brief free and zero all variables pointed arguments,
  * always returns NULL.
  **/
-void					*ft_free(void *first, ...);
+void					*ft_free(size_t n, ...);
 
 //!@}
 
@@ -373,6 +373,13 @@ t_list					*ft_fmt_parse(const char *tmpl);
 void					ft_fmt_apply(t_list *io_list, va_list args);
 
 char					*ft_fmt_str(const char *tmpl, ...);
+
+void					ft_fmt_set_str(t_iol_el *el, char *s);
+void					ft_fmt_set_c(t_iol_el *el, char c);
+void					ft_fmt_set_ptr(t_iol_el *el, void *ptr);
+void					ft_fmt_set_i(t_iol_el *el, int i);
+void					ft_fmt_set_ui(t_iol_el *el, unsigned int i);
+void					ft_fmt_set_hex(t_iol_el *el, unsigned int x);
 
 // worst doc ever
 /**

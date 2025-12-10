@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_fmt_set_hex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2025/12/10 23:52:32 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/10 23:55:03 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-#include <stdarg.h>
 
-void	*ft_free(size_t n, ...)
+void	ft_fmt_set_hex(t_iol_el *el, unsigned int x)
 {
-	va_list	args;
-	void	**target;
+	char		*s;
+	const char	*alphabet;
 
-	va_start(args, n);
-	while (n--)
-	{
-		target = va_arg(args, void *);
-		free(*target);
-		*target = NULL;
-	}
-	va_end(args);
-	return (NULL);
+	if (*(el->buffer + 1) == 'x')
+		alphabet = FT_ALPHABET_HEX_LOW;
+	else
+		alphabet = FT_ALPHABET_HEX;
+	s = ft_ultoa_b(x, alphabet);
+	el->free = ft_iol_free_always;
+	ft_fmt_set_str(el, s);
 }

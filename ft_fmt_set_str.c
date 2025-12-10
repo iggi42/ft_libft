@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_fmt_set_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2025/12/10 21:52:26 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/10 23:51:31 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-#include <stdarg.h>
 
-void	*ft_free(size_t n, ...)
+void	ft_fmt_set_str(t_iol_el *el, char *s)
 {
-	va_list	args;
-	void	**target;
-
-	va_start(args, n);
-	while (n--)
-	{
-		target = va_arg(args, void *);
-		free(*target);
-		*target = NULL;
-	}
-	va_end(args);
-	return (NULL);
+	el->buffer = s;
+	if (s == NULL)
+		el->size = 0;
+	else
+		el->size = ft_strlen(s);
 }
