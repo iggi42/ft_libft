@@ -84,7 +84,8 @@ int						ft_memcmp(const void *s1, const void *s2, size_t n);
 void					*ft_calloc(size_t n, size_t size);
 
 /** @brief free and zero all variables pointed arguments,
-	always returns NULL. */
+ * always returns NULL.
+ **/
 void					*ft_free(void *first, ...);
 
 //!@}

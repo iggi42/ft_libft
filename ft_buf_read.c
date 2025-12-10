@@ -24,16 +24,10 @@ t_buf	*ft_buf_read(int fd)
 		return (NULL);
 	read_result = read(fd, p, BUFFER_SIZE);
 	if (read_result <= 0)
-	{
-		free(p);
-		return (NULL);
-	}
+		return (ft_free(&p));
 	result = (t_buf *)malloc(sizeof(t_buf));
 	if (result == NULL)
-	{
-		free(p);
-		return (NULL);
-	}
+		return (ft_free(&p));
 	result->size = read_result;
 	result->p = p;
 	return (result);

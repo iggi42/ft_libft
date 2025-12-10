@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_del.c                                         :+:      :+:    :+: */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 20:35:38 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
+#include <stdarg.h>
 
-static void	cleanup_iol_el(void *ptr)
+void	*ft_free(void *first, ...)
 {
-	t_iol_el	*el;
+	va_list	args;
+	void	**target;
 
-	el = ptr;
-	if (el != NULL && el->free != NULL)
-		el->free(el);
-	free(el);
-}
-
-void	ft_iol_del(t_list **l)
-{
-	ft_lstclear(l, cleanup_iol_el);
+	target = first;
+	va_start(args, first);
+	while (target)
+	{
+		free(*target);
+		*target = NULL;
+		target = (void **)va_arg(args, void **);
+	}
+	va_end(args);
+	return (NULL);
 }

@@ -18,7 +18,7 @@ int	ft_memcmp(const void *m1, const void *m2, size_t n)
 	t_byte	*b1;
 	t_byte	*b2;
 
-	if (n == 0)
+	if (n == 0 || m1 == m2)
 		return (0);
 	b1 = (t_byte *)m1;
 	b2 = (t_byte *)m2;
