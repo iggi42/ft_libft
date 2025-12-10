@@ -13,15 +13,16 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	if (*s == '\0')
+	char	*runner;
+
+	runner = (char *) s;
+	while (s != NULL)
 	{
-		if (c == '\0')
-			return ((char *)s);
-		else
+		if (*runner == (char) c)
+			return ((char *)runner);
+		if (*runner == '\0')
 			return (NULL);
+		runner++;
 	}
-	if (*s == ((char)c))
-		return ((char *)s);
-	else
-		return (ft_strchr(s + 1, c));
+	return (NULL);
 }
