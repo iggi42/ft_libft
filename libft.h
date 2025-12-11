@@ -6,7 +6,7 @@
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/10 23:50:08 by fkruger          ###   ########.fr       */
+/*   Updated: 2025/12/11 01:02:46 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,15 +290,13 @@ t_iol_el				*ft_iol_el_alloc(size_t size);
 //! @brief pretty prints out an io list to stdout
 void					ft_iol_pp(t_list *l);
 
-//! @append a buffer pointer with a size to an iol */
+//! @brief append buffer pointer with a size to an iol
 void					ft_iol_append(t_list **io_l, char *start, size_t size);
 
 //! @brief pretty prints out one element of an io list to stdout
 void					ft_iol_pp_el(t_iol_el *el);
 
-/**
- * @brief write one io list to a fd
- */
+//! @brief write one io list to a fd
 int						ft_iol_write(t_list *l, int fd);
 
 //! @brief get the total size of all elements summed up

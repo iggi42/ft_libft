@@ -75,7 +75,7 @@ clean:
 	rm -f $(OBJS) $(LIB) $(DEPS)
 dev: $(DEV_FILES)
 dev_clean:
-	rm -vf $(DEV_FILES)
+	rm -f $(DEV_FILES)
 .PHONY: fclean clean re all dev doc dh doc_clean
 
 # rules to generate documentation
@@ -87,7 +87,7 @@ dh: doc_clean doc
 	(cd "./$(DOC_FOLDER)/html" && python3 -m http.server)
 
 doc_clean:
-	rm -rf "./$(DOC_FOLDER)"
+	rm -rf Doxyfile "./$(DOC_FOLDER)"
 
 GIT_IGNORE += Doxyfile
 Doxyfile: $(SELF)
