@@ -9,6 +9,9 @@
 /*   Updated: 2025/12/05 16:51:43 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef LIBFT_MEM_H
+# define LIBFT_MEM_H
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -47,6 +50,7 @@ void					*ft_calloc(size_t n, size_t size);
 /** @brief free and zero all variables pointed arguments,
  * always returns NULL.
  **/
-void					*ft_free(void *first, ...);
+void					*ft_free(size_t n, ...);
 
 //!@}
+#endif
