@@ -9,33 +9,14 @@
 /*   Updated: 2025/10/27 22:43:53 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
-#include <limits.h>
-#include <stdbool.h>
-#include <unistd.h>
+#include "libft_io.h"
+#include "libft_toa.h"
 
-static void	ft_print_number(int nb, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	digit;
+	char	*s;
 
-	if (nb == 0)
-		return ;
-	if (nb < 0)
-	{
-		(void)write(fd, "-", 1);
-		nb *= -1;
-	}
-	digit = (nb % 10) + '0';
-	ft_print_number(nb / 10, fd);
-	(void)write(fd, &digit, 1);
-}
-
-void	ft_putnbr_fd(int nb, int fd)
-{
-	if (nb == 0)
-		(void)write(fd, "0", 1);
-	else if (nb == INT_MIN)
-		(void)write(fd, "-2147483648", 11);
-	else
-		ft_print_number(nb, fd);
+	s = ft_itoa(n);
+	ft_putstr_fd(s, fd);
+	free(s);
 }

@@ -13,6 +13,10 @@
 #ifndef LIBFT_IO_H
 # define LIBFT_IO_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
 //! @name IO
 //!@{
 void	ft_putchar_fd(char c, int fd);
@@ -20,4 +24,8 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 //!@}
+
+//! a simple get next line (ft_buf -based for now)
+char	*ft_gnl(int fd);
+
 #endif
