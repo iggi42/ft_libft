@@ -9,8 +9,7 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_buf.h"
 
 t_buf	*ft_buf_cat(t_buf **left, t_buf **right)
 {

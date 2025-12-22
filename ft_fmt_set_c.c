@@ -9,8 +9,7 @@
 /*   Updated: 2025/12/10 23:50:52 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_iol.h"
 
 void	ft_fmt_set_c(t_iol_el *el, char c)
 {

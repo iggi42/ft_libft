@@ -9,8 +9,7 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_mem.h"
 #include <stdbool.h>
 
 bool	ft_iszero(const void *start, const size_t size)

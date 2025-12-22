@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include "libft_locale.h"
 
 char	*ft_ptoa(void *ptr)
 {

@@ -9,8 +9,10 @@
 /*   Updated: 2025/12/10 23:53:38 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_locale.h"
+#include "libft_iol.h"
+#include "libft_toa.h"
+#include "libft_fmt_ops.h"
 
 void	ft_fmt_set_ptr(t_iol_el *el, void *ptr)
 {

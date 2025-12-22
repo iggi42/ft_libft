@@ -9,8 +9,8 @@
 /*   Updated: 2025/11/09 16:47:37 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_ll.h"
+#include <stdlib.h>
 
 static void	ft_lstcut(t_list *lst, void (*del)(void *))
 {

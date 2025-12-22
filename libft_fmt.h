@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iol_el_alloc.c                                  :+:      :+:    :+:   */
+/*   libft_fmt.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/05 16:51:43 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft_iol.h"
-#include "libft_mem.h"
 
-t_iol_el	*ft_iol_el_alloc(size_t size)
-{
-	t_iol_el	*seg;
-	char		*start;
+#ifndef LIBFT_FMT_H
+# define LIBFT_FMT_H
 
-	seg = (t_iol_el *)malloc(sizeof(t_iol_el));
-	start = (char *)malloc(size);
-	if (seg == NULL || start == NULL)
-		return (ft_free(2, &seg, &start));
-	seg->buffer = start;
-	seg->size = size;
-	seg->free = ft_iol_free_always;
-	return (seg);
-}
+//! @name string format
+//!@{
+
+char	*ft_fmt_str(const char *tmpl, ...);
+
+// TODO: document what operators are implemented
+/**
+ * @brief you know what a printf does, come on
+ */
+int		ft_printf(const char *tmpl, ...);
+//!@}
+
+#endif

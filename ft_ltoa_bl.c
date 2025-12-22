@@ -9,9 +9,9 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
-#include <limits.h>
-#include <unistd.h>
+#include "libft_mem.h"
+#include "libft_str.h"
+#include "libft_toa.h"
 
 size_t	ft_ltoa_bl(long nb, char *target, size_t length, const char *alphabet)
 {

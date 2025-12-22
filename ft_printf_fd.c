@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_fd.c                                    :+:      :+:    :+:    */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,7 +9,8 @@
 /*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_fmt.h"
+#include "libft_iol.h"
 
 int	ft_printf_fd(int fd, const char *template, ...)
 {
@@ -20,8 +21,8 @@ int	ft_printf_fd(int fd, const char *template, ...)
 	seg_list = ft_fmt_parse((char *)template);
 	va_start(args, template);
 	ft_fmt_apply(seg_list, args);
+	va_end(args);
 	result = ft_iol_write(seg_list, fd);
 	ft_iol_del(&seg_list);
-	va_end(args);
 	return (result);
 }

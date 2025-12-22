@@ -9,7 +9,8 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_fmt_ops.h"
+#include <stdarg.h>
 
 static void	replace_op(t_iol_el *el, va_list args)
 {

@@ -9,8 +9,10 @@
 /*   Updated: 2025/12/10 23:55:03 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_iol.h"
+#include "libft_toa.h"
+#include "libft_fmt_ops.h"
+#include "libft_locale.h"
 
 void	ft_fmt_set_hex(t_iol_el *el, unsigned int x)
 {

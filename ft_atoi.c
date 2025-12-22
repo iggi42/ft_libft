@@ -9,7 +9,8 @@
 /*   Updated: 2025/10/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_str.h"
+#include "libft_char.h"
 #include <stdbool.h>
 
 static bool	ft_isspace(const char c)

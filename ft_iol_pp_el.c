@@ -9,8 +9,9 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_iol.h"
+#include "libft_fmt.h"
+#include "libft_str.h"
 
 void	ft_iol_pp_el(t_iol_el *el)
 {

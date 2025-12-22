@@ -9,7 +9,8 @@
 /*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_toa.h"
+#include "libft_locale.h"
 
 char	*ft_itoa(int i)
 {

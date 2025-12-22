@@ -9,8 +9,9 @@
 /*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_iol.h"
+#include "libft_fmt_ops.h"
+#include <stdarg.h>
 
 char	*ft_fmt_str(const char *template, ...)
 {

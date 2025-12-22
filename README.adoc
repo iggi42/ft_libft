@@ -1,0 +1,3 @@
+
+inspiration for the makefile:
+https://linuxvox.com/blog/makefiles-with-source-files-in-different-directories/

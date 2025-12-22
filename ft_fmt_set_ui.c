@@ -9,8 +9,9 @@
 /*   Updated: 2025/12/10 23:51:14 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_iol.h"
+#include "libft_toa.h"
+#include "libft_fmt_ops.h"
 
 void	ft_fmt_set_ui(t_iol_el *el, unsigned int i)
 {

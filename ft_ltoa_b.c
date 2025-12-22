@@ -9,8 +9,8 @@
 /*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_toa.h"
+#include "libft_str.h"
 #include <limits.h>
 
 char	*ft_ltoa_b(long nb, const char *alphabet)

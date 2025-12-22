@@ -9,7 +9,7 @@
 /*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_buf.h"
 
 void	ft_buf_cp(t_buf *from, t_buf *to)
 {

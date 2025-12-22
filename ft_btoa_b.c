@@ -9,7 +9,7 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_toa.h"
 
 char	*ft_btoa_b(t_byte b, const char *alphabet)
 {

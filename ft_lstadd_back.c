@@ -9,8 +9,8 @@
 /*   Updated: 2025/10/29 04:29:37 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_ll.h"
+#include <stdlib.h>
 
 void	ft_lstadd_back(t_list **lst, t_list *new_l)
 {

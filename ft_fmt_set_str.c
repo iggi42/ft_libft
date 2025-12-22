@@ -9,6 +9,7 @@
 /*   Updated: 2025/12/10 23:51:31 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+<<<<<<< HEAD
 
 #include "libft.h"
 
@@ -19,4 +20,15 @@ void	ft_fmt_set_str(t_iol_el *el, char *s)
 		el->size = 0;
 	else
 		el->size = ft_strlen(s);
+=======
+#include "libft_iol.h"
+#include "libft_str.h"
+
+void	ft_fmt_set_str(t_iol_el *el, char *s)
+{
+	if (s == NULL)
+		return (ft_fmt_set_str(el, "(null)"));
+	el->buffer = s;
+	el->size = ft_strlen(s);
+>>>>>>> d65d5fb (seperate into multiple headers)
 }

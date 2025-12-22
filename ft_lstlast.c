@@ -9,8 +9,8 @@
 /*   Updated: 2025/11/09 16:50:55 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_ll.h"
+#include <stdlib.h>
 
 t_list	*ft_lstlast(t_list *lst)
 {

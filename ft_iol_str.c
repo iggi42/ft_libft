@@ -9,7 +9,8 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_str.h"
+#include "libft_iol.h"
 
 char	*ft_iol_str(t_list *iol_l)
 {

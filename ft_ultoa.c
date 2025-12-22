@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libft_locale.h"
 
 char	*ft_ultoa(unsigned long nb)
 {

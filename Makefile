@@ -16,7 +16,8 @@ CFLAGS += -MD -Wall -Wextra -Werror -g
 # -MD to generate the .d files in $(DEPS)
 
 NAME = libft
-HEADER = $(NAME).h
+HEADER = libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h libft_locale.h \
+	libft_math.h libft_mem.h libft_str.h libft_toa.h
 LIB = $(NAME).a
 
 GIT_IGNORE += .depend
@@ -47,12 +48,13 @@ EXTRA_TOA_P = ft_ptoa.c ft_ptoa_b.c ft_ptoa_bl.c
 EXTRA_TOA = $(EXTRA_TOA_B) $(EXTRA_TOA_I) $(EXTRA_TOA_L) $(EXTRA_TOA_UL) $(EXTRA_TOA_P)
 
 EXTRA_IOL = ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_iol_el_alloc.c ft_iol_free_always.c \
-			ft_iol_size.c ft_iol_str.c  ft_iol_str_l.c ft_iol_append.c
-EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
+			ft_iol_size.c ft_iol_str.c  ft_iol_str_l.c ft_iol_append.c ft_iol_elcmp.c
 EXTRA_FORMAT = ft_printf.c ft_fmt_parse.c ft_fmt_apply.c ft_fmt_str.c
-EXTRA_FORMAT += ft_fmt_set_c.c ft_fmt_set_hex.c ft_fmt_set_i.c ft_fmt_set_ptr.c ft_fmt_set_str.c ft_fmt_set_ui.c
+EXTRA_FORMAT_OPS = ft_fmt_set_c.c ft_fmt_set_hex.c ft_fmt_set_i.c ft_fmt_set_ptr.c ft_fmt_set_str.c ft_fmt_set_ui.c
+SRCS += $(EXTRA_TOA) $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT) $(EXTRA_FORMAT_OPS)
 
-SRCS += $(EXTRA_TOA) $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT)
+EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
+SRCS += $(EXTRA_BUF)
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)

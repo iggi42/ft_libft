@@ -9,8 +9,14 @@
 /*   Updated: 2025/12/10 23:53:57 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+<<<<<<< HEAD
 
 #include "libft.h"
+=======
+#include "libft_iol.h"
+#include "libft_toa.h"
+#include "libft_fmt_ops.h"
+>>>>>>> d65d5fb (seperate into multiple headers)
 
 // alphabet padding and leading + options tbd
 void	ft_fmt_set_i(t_iol_el *el, int i)

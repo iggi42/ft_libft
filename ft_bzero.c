@@ -9,7 +9,7 @@
 /*   Updated: 2025/10/17 08:10:21 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_mem.h"
 
 // be there or
 void	ft_bzero(void *s, size_t n)

@@ -9,7 +9,7 @@
 /*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include <stdlib.h>
 #include <stdarg.h>
 
 void	*ft_free(size_t n, ...)

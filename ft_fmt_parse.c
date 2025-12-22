@@ -9,8 +9,9 @@
 /*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "libft_fmt_ops.h"
+#include "libft_str.h"
+#include "libft_iol.h"
 
 static size_t	get_seg_size(const char *template)
 {
