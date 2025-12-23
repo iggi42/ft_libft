@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fmt_str.c                                         :+:      :+:    :+: */
+/*   ft_strf.c                                            :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_iol.h"
-#include "libft_fmt_ops.h"
+#include "libft_fmt.h"
 #include <stdarg.h>
 
-char	*ft_fmt_str(const char *template, ...)
+char	*ft_strf(const char *template, ...)
 {
 	t_list	*seg_list;
 	char	*result;

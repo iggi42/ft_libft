@@ -12,13 +12,6 @@
 #ifndef LIBFT_FMT_OPS_H
 # define LIBFT_FMT_OPS_H
 # include "libft_iol.h"
-# include <stdarg.h>
-
-//! @brief format a string template into a io list for
-t_list	*ft_fmt_parse(const char *tmpl);
-
-//! @brief apply printf style operators to the parsed template
-void	ft_fmt_apply(t_list *io_list, va_list args);
 
 void	ft_fmt_set_str(t_iol_el *el, char *s);
 void	ft_fmt_set_c(t_iol_el *el, char c);

@@ -25,6 +25,9 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 //!@}
 
+//! @brief you know what a printf does, come on
+int		ft_printf(const char *tmpl, ...);
+
 //! a simple get next line (ft_buf -based for now)
 char	*ft_gnl(int fd);
 

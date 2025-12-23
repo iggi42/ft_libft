@@ -12,17 +12,13 @@
 
 #ifndef LIBFT_FMT_H
 # define LIBFT_FMT_H
+# include <stdarg.h>
+# include "libft_iol.h"
 
-//! @name string format
-//!@{
+//! @brief format a string template into a io list for
+t_list	*ft_fmt_parse(const char *tmpl);
 
-char	*ft_fmt_str(const char *tmpl, ...);
-
-// TODO: document what operators are implemented
-/**
- * @brief you know what a printf does, come on
- */
-int		ft_printf(const char *tmpl, ...);
-//!@}
+//! @brief apply printf style operators to the parsed template
+void	ft_fmt_apply(t_list *io_list, va_list args);
 
 #endif

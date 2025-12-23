@@ -38,6 +38,9 @@ int		ft_atoi(const char *nptr);
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+
+//! @brief allocates a string from a template string and var args.
+char	*ft_strf(const char *tmpl, ...);
 //!@}
 
 #endif
