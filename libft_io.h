@@ -25,8 +25,10 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 //!@}
 
+#define ft_printf(...) ft_printf_fd(1, __VA_ARGS__)
+
 //! @brief you know what a printf does, come on
-int		ft_printf(const char *tmpl, ...);
+int		ft_printf_fd(int fd, const char *tmpl, ...);
 
 //! a simple get next line (ft_buf -based for now)
 char	*ft_gnl(int fd);
