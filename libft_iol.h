@@ -46,10 +46,8 @@ void			ft_iol_append(t_list **io_l, char *start, size_t size);
 //! @brief pretty prints out one element of an io list to stdout
 void			ft_iol_pp_el(t_iol_el *el);
 
-/**
- * @brief write one io list to a fd
- */
-int				ft_iol_write(t_list *l, int fd);
+//! @brief write one io list to a fd
+ssize_t			ft_iol_write(t_list *l, int fd);
 
 //! @brief get the total size of all elements summed up
 size_t			ft_iol_size(t_list *iol_l);

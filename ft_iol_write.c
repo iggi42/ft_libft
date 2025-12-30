@@ -10,20 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_iol.h"
+#include "libft_io.h"
 #include <unistd.h>
 
 // TODO change return type to a much larger number
-int	ft_iol_write(t_list *l, int fd)
+ssize_t ft_iol_write(t_list *l, int fd)
 {
 	t_iol_el	*el;
-	int			result;
+	size_t		result;
 	int			write_code;
 
 	result = 0;
 	while (l != NULL)
 	{
 		el = (t_iol_el *)l->content;
-		write_code = write(fd, el->buffer, el->size);
+		write_code = ft_write(fd, el->buffer, el->size);
 		if (write_code < 0)
 			return (write_code);
 		result += write_code;

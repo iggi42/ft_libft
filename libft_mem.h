@@ -12,8 +12,8 @@
 
 #ifndef LIBFT_MEM_H
 # define LIBFT_MEM_H
-#include <stdbool.h>
-#include <stdlib.h>
+# include <stdbool.h>
+# include <stdlib.h>
 
 /// a single byte for bytewise operations
 typedef unsigned char	t_byte;
@@ -42,6 +42,9 @@ void					*ft_memchr(const void *s, const t_byte c, size_t n);
 
 /**  @brief compare s1 and s2 with in n bytes. */
 int						ft_memcmp(const void *s1, const void *s2, size_t n);
+
+/**  @brief wraps a malloc in common error handling (exit out on failure) */
+void					*ft_malloc(size_t size);
 
 /**  @brief alloc a zeroed out memory for an array of n elements
  * with a size of `size`. */

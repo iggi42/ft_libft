@@ -12,7 +12,7 @@
 
 # configuration variables
 CC = cc
-CFLAGS += -MD -Wall -Wextra -Werror -g
+CFLAGS += -MD -Wall -Wextra -Werror $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
 
 NAME = libft
@@ -27,13 +27,13 @@ BASE_CC = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_tolower.c ft_toupper.c
 
 BASE_MEM = ft_bzero.c ft_calloc.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_memchr.c \
- ft_memmove.c ft_iszero.c ft_free.c
+ ft_memmove.c ft_iszero.c ft_free.c ft_malloc.c
 
 BASE_STR = ft_str_alloc.c ft_strtrim.c ft_split.c ft_strmapi.c ft_striteri.c ft_itoa.c \
 		ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strrchr.c \
 		ft_atoi.c ft_strnstr.c ft_substr.c ft_strjoin.c ft_strchr.c ft_strf.c
 
-BASE_IO = ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c  ft_putnbr_fd.c ft_printf_fd.c
+BASE_IO = ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c  ft_putnbr_fd.c ft_printf_fd.c ft_write.c
 BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 			ft_lstiter.c ft_lstmap.c ft_lstfold.c
@@ -55,6 +55,9 @@ SRCS += $(EXTRA_TOA) $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT) $(EXTRA_FORMAT_OP
 
 EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
 SRCS += $(EXTRA_BUF)
+
+EXTRA_OS = ft_execve.c ft_spawn_cmd.c ft_fatal.c
+SRCS += $(EXTRA_OS)
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)
@@ -101,6 +104,7 @@ Doxyfile: $(SELF)
 	@echo "OUTPUT_DIRECTORY  = ./$(DOC_FOLDER)" >> $@
 
 # development helper files
+compile_flags.txt: CFLAGS += $(NIX_CFLAGS_COMPILE)
 compile_flags.txt: $(SELF)
 	@echo setup $@
 	@echo -n > $@
