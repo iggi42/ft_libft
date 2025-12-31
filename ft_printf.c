@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_fmt.h                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/05 16:51:43 by fkruger          ###   ########.fr       */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/11/27 16:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft_fmt.h"
+#include "libft_iol.h"
+#include <unistd.h>
 
-#ifndef LIBFT_FMT_H
-# define LIBFT_FMT_H
-# include "libft_iol.h"
-# include <stdarg.h>
+int	ft_printf(const char *template, ...)
+{
+	t_list	*seg_list;
+	int		result;
+	va_list	args;
 
-//! @brief format a string template into a io list for
-t_list	*ft_fmt_parse(const char *tmpl);
-
-//! @brief apply printf style operators to the parsed template
-void	ft_fmt_apply(t_list *io_list, va_list args);
-
-#endif
+	seg_list = ft_fmt_parse((char *)template);
+	va_start(args, template);
+	ft_fmt_apply(seg_list, args);
+	va_end(args);
+	result = ft_iol_write(seg_list, STDOUT_FILENO);
+	ft_iol_del(&seg_list);
+	return (result);
+}
