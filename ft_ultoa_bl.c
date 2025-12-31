@@ -9,7 +9,8 @@
 /*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_toa.h"
+#include "libft_str.h"
 
 size_t	ft_ultoa_bl(unsigned long nb, char *target, size_t length,
 		const char *alphabet)
