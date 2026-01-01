@@ -17,7 +17,7 @@
 
 typedef t_list	*t_kv_store;
 typedef void	*t_kv_value;
-typedef int		t_kv_key;
+typedef void	*t_kv_key;
 
 typedef struct s_kv_pair
 {
