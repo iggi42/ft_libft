@@ -12,8 +12,10 @@
 
 #ifndef LIBFT_ARR_H
 # define LIBFT_ARR_H
+# include <stddef.h>
 # include <stdlib.h>
 
-t_arr_list new(size_t size);
+void	**ft_arr_new(size_t size);
+size_t	ft_arr_len(void *arr);
 
 #endif

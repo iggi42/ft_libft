@@ -40,6 +40,9 @@ BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 
 SRCS += $(BASE_CC) $(BASE_MEM) $(BASE_STR) $(BASE_IO) $(BASE_LL)
 
+EXTRA_ARR = ft_arr.c
+SRCS += $(EXTRA_ARR)
+
 EXTRA_TOA_B = ft_btoa.c ft_btoa_b.c ft_btoa_bl.c
 EXTRA_TOA_I = ft_itoa.c ft_itoa_b.c ft_itoa_bl.c 
 EXTRA_TOA_L = ft_ltoa.c ft_ltoa_b.c ft_ltoa_bl.c
@@ -54,7 +57,8 @@ EXTRA_FORMAT_OPS = ft_fmt_set_c.c ft_fmt_set_hex.c ft_fmt_set_i.c ft_fmt_set_ptr
 SRCS += $(EXTRA_TOA) $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT) $(EXTRA_FORMAT_OPS)
 
 EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
-SRCS += $(EXTRA_BUF)
+EXTRA_KV = ft_lst_kv.c
+SRCS += $(EXTRA_BUF) $(EXTRA_KV)
 
 EXTRA_OS = ft_execve.c ft_spawn_cmd.c ft_fatal.c
 SRCS += $(EXTRA_OS)
