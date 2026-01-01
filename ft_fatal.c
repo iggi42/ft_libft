@@ -1,8 +1,8 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void ft_fatal(void)
+void	ft_fatal(void)
 {
-	perror("LIBFT: ");
+	perror("FATAL ERROR: ");
 	exit(EXIT_FAILURE);
 }
