@@ -22,6 +22,9 @@ void		ft_kv_free(t_kv_store *store);
 /** returns NULL if not found */
 t_kv_value	ft_kv_get(t_kv_store *store, t_kv_key key);
 
+// pop is same as get, but removes a found entry from store
+t_kv_value	ft_kv_pop(t_kv_store *store, t_kv_key key);
+
 void		ft_kv_put(t_kv_store *store, t_kv_key key, t_kv_value v);
 
 /** get all keys in a NULL terminated array */

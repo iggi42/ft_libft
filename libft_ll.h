@@ -82,5 +82,9 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 void				*ft_lstfold(t_list *lst, void *acc, void *(*f)(void *,
 							void *));
 
+//! @brief removes the first list element from the list and returns its content;
+// returns NULL if list is empty;
+void	*ft_lst_pop(t_list **lst);
+
 //!@}
 #endif

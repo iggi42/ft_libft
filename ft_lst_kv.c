@@ -44,6 +44,26 @@ t_kv_value	ft_kv_get(t_kv_store *store, t_kv_key key)
 	return (NULL);
 }
 
+t_kv_value	ft_kv_pop(t_kv_store *store, t_kv_key key)
+{
+	t_kv_pair	*kv;
+	t_kv_value  result;
+
+	while (*store != NULL)
+	{
+		kv = (*store)->content;
+		if (kv->key == key)
+		{
+			result = kv->val;
+			ft_lst_pop(store);
+			free(kv);
+			return (result);
+		}
+		store = &((*store)->next);
+	}
+	return (NULL);
+}
+
 void	ft_kv_put(t_kv_store *store, t_kv_key key, t_kv_value v)
 {
 	t_kv_pair	*kv;
