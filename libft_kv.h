@@ -16,7 +16,11 @@
 // default types for now
 # include "libft_lst_kv.h"
 
-t_kv_store	*ft_kv_init(void);
+typedef struct s_kv_conf {
+	int (*key_cmp)(t_kv_key, t_kv_key);
+} t_kv_conf;
+
+t_kv_store	*ft_kv_init(const t_kv_conf conf);
 void		ft_kv_free(t_kv_store *store);
 
 /** returns NULL if not found */
