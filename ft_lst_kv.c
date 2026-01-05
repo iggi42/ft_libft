@@ -16,76 +16,97 @@
 #include "libft_lst_kv.h"
 #include "libft_mem.h"
 #include <stdlib.h>
+#include <stdbool.h>
 
-t_kv_store	*ft_kv_init(void)
+t_kv	*ft_kv_init(t_kv_key_cmp key_cmp)
 {
-	return (ft_calloc(1, sizeof(void *)));
+	t_kv *result;
+	result = ft_malloc(sizeof(t_kv));
+    result->_store = NULL;
+    result->key_cmp = key_cmp;
+	return result;
 }
 
-void	ft_kv_free(t_kv_store *store)
+void	ft_kv_free(t_kv *kv)
 {
-	ft_lstclear(store, free);
+	ft_lstclear(&(kv->_store), free);
+}
+
+// returns NULL if keys don't match
+// else returns the address of value of kv pair
+static t_kv_value *kv_maybe_value(t_kv_pair *pair, t_kv_key key, t_kv_key_cmp key_cmp)
+{
+	if(key == pair->key)
+		return &(pair->val);
+	if(key_cmp(key, pair->key) == 0)
+		return &(pair->val);
+	return (NULL);
 }
 
 //! returns NULL if not found
-t_kv_value	ft_kv_get(t_kv_store *store, t_kv_key key)
+t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 {
 	t_list		*head;
-	t_kv_pair	*kv;
+	t_kv_value  *val;
 
-	head = *store;
+	head = root->_store;
 	while (head != NULL)
 	{
-		kv = head->content;
-		if (kv->key == key)
-			return (kv->val);
+		val = kv_maybe_value(head->content, key, root->key_cmp);
+		if (val != NULL)
+			return (*val);
 		head = head->next;
 	}
 	return (NULL);
 }
 
-t_kv_value	ft_kv_pop(t_kv_store *store, t_kv_key key)
+t_kv_value	ft_kv_pop(t_kv *root, t_kv_key key)
 {
-	t_kv_pair	*kv;
-	t_kv_value  result;
+	t_kv_value	*val;
+	t_kv_value result;
+	t_list **head;
 
-	while (*store != NULL)
+	head = &root->_store;
+	while (*head != NULL)
 	{
-		kv = (*store)->content;
-		if (kv->key == key)
+		val = kv_maybe_value((*head)->content, key, root->key_cmp);
+		if(val != NULL)
 		{
-			result = kv->val;
-			ft_lst_pop(store);
-			free(kv);
+			result = *val;
+			// free(((t_kv_pair *)(*head)->content)->key);
+			free(ft_lst_pop(head));
 			return (result);
 		}
-		store = &((*store)->next);
+		head = &((*head)->next);
 	}
 	return (NULL);
 }
 
-void	ft_kv_put(t_kv_store *store, t_kv_key key, t_kv_value v)
+void	ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v)
 {
 	t_kv_pair	*kv;
+	t_kv_value *val;
+	t_list **head;
 
-	while (*store != NULL)
+	head = &store->_store;
+	while (*head != NULL)
 	{
-		kv = (*store)->content;
-		if (kv->key == key)
+		val = kv_maybe_value((*head)->content, key, store->key_cmp);
+		if (val != NULL)
 		{
-			kv->val = v;
+			*val = v;
 			return ;
 		}
-		store = &((*store)->next);
+		head = &((*head)->next);
 	}
 	kv = ft_malloc(sizeof(t_kv_pair));
 	kv->key = key;
 	kv->val = v;
-	*store = ft_lstnew(kv);
+	*head = ft_lstnew(kv);
 }
 
 //! get all keys in a freeable, NULL terminated array
-t_kv_key	*ft_kv_keys(t_kv_store *store)
+t_kv_key	*ft_kv_keys(t_kv *store)
 {
 	size_t		s;
 	size_t		i;
@@ -93,8 +114,8 @@ t_kv_key	*ft_kv_keys(t_kv_store *store)
 	t_list		*head;
 
 	i = 0;
-	head = *store;
-	s = ft_lstsize(*store);
+	head = store->_store;
+	s = ft_lstsize(store->_store);
 	result = ft_arr_new(s);
 	while (i < s)
 	{

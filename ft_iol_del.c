@@ -11,17 +11,12 @@
 /* ************************************************************************** */
 #include "libft_iol.h"
 
-static void	cleanup_iol_el(void *ptr)
+static void my_el_free(void *ptr)
 {
-	t_iol_el	*el;
-
-	el = ptr;
-	if (el != NULL && el->free != NULL)
-		el->free(el);
-	free(el);
+	ft_iol_el_free(ptr);
 }
 
 void	ft_iol_del(t_list **l)
 {
-	ft_lstclear(l, cleanup_iol_el);
+	ft_lstclear(l, my_el_free);
 }

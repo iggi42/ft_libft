@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "libft_buf.h"
 #include "libft_mem.h"
+#include "libft_io_opts.h"
 #include <unistd.h>
 
 t_buf	*ft_buf_read(int fd)

@@ -16,22 +16,26 @@
 // default types for now
 # include "libft_lst_kv.h"
 
-typedef struct s_kv_conf {
-	int (*key_cmp)(t_kv_key, t_kv_key);
-} t_kv_conf;
+typedef int			(*t_kv_key_cmp)(t_kv_key, t_kv_key);
 
-t_kv_store	*ft_kv_init(const t_kv_conf conf);
-void		ft_kv_free(t_kv_store *store);
+typedef struct s_kv
+{
+	t_kv_key_cmp	key_cmp;
+	t_kv_store		_store;
+} t_kv;
+
+t_kv				*ft_kv_init(const t_kv_key_cmp key_cmp);
+void				ft_kv_free(t_kv *store);
 
 /** returns NULL if not found */
-t_kv_value	ft_kv_get(t_kv_store *store, t_kv_key key);
+t_kv_value			ft_kv_get(t_kv *store, t_kv_key key);
 
 // pop is same as get, but removes a found entry from store
-t_kv_value	ft_kv_pop(t_kv_store *store, t_kv_key key);
+t_kv_value			ft_kv_pop(t_kv *store, t_kv_key key);
 
-void		ft_kv_put(t_kv_store *store, t_kv_key key, t_kv_value v);
+void				ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v);
 
 /** get all keys in a NULL terminated array */
-t_kv_key	*ft_kv_keys(t_kv_store *store);
+t_kv_key			*ft_kv_keys(t_kv *store);
 
 #endif

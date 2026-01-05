@@ -51,7 +51,7 @@ EXTRA_TOA_P = ft_ptoa.c ft_ptoa_b.c ft_ptoa_bl.c
 EXTRA_TOA = $(EXTRA_TOA_B) $(EXTRA_TOA_I) $(EXTRA_TOA_L) $(EXTRA_TOA_UL) $(EXTRA_TOA_P)
 
 EXTRA_IOL = ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_iol_el_alloc.c ft_iol_free_always.c \
-			ft_iol_size.c ft_iol_str.c  ft_iol_str_l.c ft_iol_append.c ft_iol_elcmp.c
+			ft_iol_size.c ft_iol_str.c  ft_iol_str_l.c ft_iol_append.c ft_iol_elcmp.c ft_iol_el_free.c
 EXTRA_FORMAT = ft_fmt_parse.c ft_fmt_apply.c
 EXTRA_FORMAT_OPS = ft_fmt_set_c.c ft_fmt_set_hex.c ft_fmt_set_i.c ft_fmt_set_ptr.c ft_fmt_set_str.c ft_fmt_set_ui.c
 SRCS += $(EXTRA_TOA) $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT) $(EXTRA_FORMAT_OPS)

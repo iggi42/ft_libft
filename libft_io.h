@@ -15,10 +15,6 @@
 
 # include <stdlib.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
 //! @name IO
 //!@{
 void	ft_putchar_fd(char c, int fd);

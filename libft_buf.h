@@ -19,10 +19,6 @@
 //! @name buffer list, basic get_next_line is written on this
 //!@{
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
 /** @brief wrapper of a buffer, together with its size; */
 typedef struct s_buf
 {

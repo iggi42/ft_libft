@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_lst_kv.h                                     :+:      :+:    :+:   */
+/*   ft_iol_el_free.c                                     :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/05 16:51:43 by fkruger          ###   ########.fr       */
+/*   Created: 2025/10/27 20:35:38 by fkruger           #+#    #+#             */
+/*   Updated: 2025/10/28 15:11:25 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft_iol.h"
 
-#ifndef LIBFT_LST_KV_H
-# define LIBFT_LST_KV_H
-
-# include "libft_ll.h"
-
-typedef t_list	*t_kv_store;
-typedef void	*t_kv_value;
-typedef void	*t_kv_key;
-
-typedef struct s_kv_pair
+void	ft_iol_el_free(t_iol_el *el)
 {
-	t_kv_key	key;
-	t_kv_value	val;
-}				t_kv_pair;
-
-#endif
+	if (el != NULL && el->free != NULL)
+		el->free(el);
+	free(el);
+}

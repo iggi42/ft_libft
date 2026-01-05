@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_lst_kv.h                                     :+:      :+:    :+:   */
+/*   libft_io_opts.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/05 16:51:43 by fkruger          ###   ########.fr       */
+/*   Created: 2026/01/30 16:32:03 by fkruger           #+#    #+#             */
+/*   Updated: 2026/01/05 16:51:43 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_LST_KV_H
-# define LIBFT_LST_KV_H
+#ifndef LIBFT_IO_OPTS_H
+# define LIBFT_IO_OPTS_H
 
-# include "libft_ll.h"
-
-typedef t_list	*t_kv_store;
-typedef void	*t_kv_value;
-typedef void	*t_kv_key;
-
-typedef struct s_kv_pair
-{
-	t_kv_key	key;
-	t_kv_value	val;
-}				t_kv_pair;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 #endif

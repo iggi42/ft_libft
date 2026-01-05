@@ -10,55 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_buf.h"
-#include "libft_kv.h"
-#include <stdint.h>
-#include <stdlib.h>
+#include "libft_io_opts.h"
+#include "libft_mem.h"
+
+typedef struct s_gnl
+{
+	t_buf		buffer;
+	t_byte		cache[BUFFER_SIZE];
+}				t_gnl;
 
 static t_buf	*gnl_cache(int fd)
 {
-	static t_kv_store *store;
-	t_buf* result;
+	static t_gnl	cache[1024];
+	t_gnl			*my_static;
 
-	if (store == NULL)
-		store = ft_kv_init();
-	ft_kv_get(store, (uintptr_t) fd);
-
-	// my_static = (t_gnl *) &cache;
-	// my_static += (size_t) fd;
-	// my_static->buffer.p = (t_byte *) my_static->cache;
-	// return (&(my_static->buffer));
-	return (result);
+	my_static = (t_gnl *)&cache;
+	my_static += (size_t)fd;
+	my_static->buffer.p = (t_byte *)my_static->cache;
+	return (&(my_static->buffer));
 }
 
-
-char	*ft_buf_str(t_buf **b)
-{
-	char	*result;
-	size_t	i;
-
-	if (*b == NULL || (*b)->size == 0)
-	{
-		ft_buf_free(b);
-		return (NULL);
-	}
-	result = (char *)malloc((*b)->size + 1);
-	if (result == NULL)
-	{
-		ft_buf_free(b);
-		return (NULL);
-	}
-	i = 0;
-	while (i < (*b)->size)
-	{
-		*(result + i) = (char)*((*b)->p + i);
-		i++;
-	}
-	*(result + i) = '\0';
-	ft_buf_free(b);
-	return (result);
-}
-
-char	*ft_buf_eol(t_buf *b)
+static char	*ft_buf_eol(t_buf *b)
 {
 	size_t	i;
 	char	*current;
@@ -71,16 +43,6 @@ char	*ft_buf_eol(t_buf *b)
 			return (current);
 	}
 	return (NULL);
-}
-
-void	ft_buf_free(t_buf **b)
-{
-	if (*b == NULL)
-		return ;
-	if ((*b)->p)
-		free((*b)->p);
-	free(*b);
-	*b = NULL;
 }
 
 char	*get_next_line(int fd)
