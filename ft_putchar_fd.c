@@ -9,9 +9,9 @@
 /*   Updated: 2025/10/27 16:31:06 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+#include "libft_io.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
-	(void)write(fd, &c, 1);
+	ft_write(fd, &c, 1);
 }

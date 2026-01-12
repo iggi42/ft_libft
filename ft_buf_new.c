@@ -10,19 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_buf.h"
-#include <stdio.h>
+#include "libft_mem.h"
 
 t_buf	*ft_buf_new(size_t size)
 {
 	t_buf	*result;
 
-	result = (t_buf *)malloc(sizeof(t_buf));
-	if (result == NULL)
-		return (NULL);
+	result = (t_buf *) ft_malloc(sizeof(t_buf));
 	result->size = size;
-	result->p = (t_byte *)malloc(size * sizeof(t_byte));
-	if (result->p)
-		return (result);
-	free(result);
-	return (NULL);
+	result->p = (t_byte *) ft_malloc(size * sizeof(t_byte));
+	return (result);
 }

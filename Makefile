@@ -33,7 +33,8 @@ BASE_STR = ft_str_alloc.c ft_strtrim.c ft_split.c ft_strmapi.c ft_striteri.c ft_
 		ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strrchr.c \
 		ft_atoi.c ft_strnstr.c ft_substr.c ft_strjoin.c ft_strchr.c ft_strf.c
 
-BASE_IO = ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c  ft_putnbr_fd.c ft_printf.c ft_printf_fd.c ft_write.c
+BASE_IO = ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c  ft_putnbr_fd.c ft_printf.c ft_printf_fd.c ft_write.c \
+		ft_gnl.c
 BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 			ft_lstiter.c ft_lstmap.c ft_lstfold.c ft_lst_pop.c
@@ -53,10 +54,10 @@ EXTRA_TOA = $(EXTRA_TOA_B) $(EXTRA_TOA_I) $(EXTRA_TOA_L) $(EXTRA_TOA_UL) $(EXTRA
 EXTRA_IOL = ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_iol_el_alloc.c ft_iol_free_always.c \
 			ft_iol_size.c ft_iol_str.c  ft_iol_str_l.c ft_iol_append.c ft_iol_elcmp.c ft_iol_el_free.c
 EXTRA_FORMAT = ft_fmt_parse.c ft_fmt_apply.c
-EXTRA_FORMAT_OPS = ft_fmt_set_c.c ft_fmt_set_hex.c ft_fmt_set_i.c ft_fmt_set_ptr.c ft_fmt_set_str.c ft_fmt_set_ui.c
+EXTRA_FORMAT_OPS = ft_fmt_set_c.c ft_fmt_set_hex.c ft_fmt_set_i.c ft_fmt_set_l.c ft_fmt_set_ptr.c ft_fmt_set_str.c ft_fmt_set_ui.c
 SRCS += $(EXTRA_TOA) $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT) $(EXTRA_FORMAT_OPS)
 
-EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c
+EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c ft_buf_str.c
 EXTRA_KV = ft_lst_kv.c
 SRCS += $(EXTRA_BUF) $(EXTRA_KV)
 
@@ -116,7 +117,6 @@ compile_flags.txt: $(SELF)
 	 	echo $$flag >> $@ ; \
 	done
 
-
 .gitignore: $(SELF)
 	@echo setup $@
 	@for ig in $(GIT_IGNORE); do \
@@ -124,7 +124,4 @@ compile_flags.txt: $(SELF)
 	done
 
 # core build rules
-ifeq ($(shell hostname), personal-dev)
-%_fd.o: CFLAGS += -Wno-unused-result
-endif
 -include $(DEPS)

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_str.h"
-#include <unistd.h>
+#include "libft_io.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	len;
 
 	len = ft_strlen(s);
-	(void) write(fd, s, len);
+	ft_write(fd, s, len);
 }

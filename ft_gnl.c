@@ -30,6 +30,7 @@ static t_buf	*gnl_cache(int fd)
 	return (&(my_static->buffer));
 }
 
+
 static char	*ft_buf_eol(t_buf *b)
 {
 	size_t	i;
@@ -45,7 +46,7 @@ static char	*ft_buf_eol(t_buf *b)
 	return (NULL);
 }
 
-char	*get_next_line(int fd)
+char	*ft_gnl(int fd)
 {
 	t_buf	*line_buf;
 	t_buf	*block;
