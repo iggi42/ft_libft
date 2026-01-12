@@ -27,8 +27,10 @@ static void	replace_op(t_iol_el *el, va_list args)
 		ft_fmt_set_c(el, (char)va_arg(args, int));
 	else if (type == 'p')
 		ft_fmt_set_ptr(el, (void *)va_arg(args, void *));
-	else if (type == 'd' || type == 'i')
-		ft_fmt_set_i(el, (int)va_arg(args, int));
+	else if (type == 'i')
+		ft_fmt_set_i(el, (int) va_arg(args, int));
+	else if (type == 'l' || type == 'd')
+		ft_fmt_set_l(el, (long) va_arg(args, long));
 	else if (type == 'u')
 		ft_fmt_set_ui(el, (unsigned int)va_arg(args, unsigned int));
 	else if (type == 'x' || type == 'X')

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_fmt_ops.h                                    :+:      :+:    :+:   */
+/*   ft_fmt_set_l.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/11 01:02:46 by fkruger          ###   ########.fr       */
+/*   Created: 2025/12/10 23:53:50 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/10 23:53:57 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_FMT_OPS_H
-# define LIBFT_FMT_OPS_H
-# include "libft_iol.h"
+#include "libft_iol.h"
+#include "libft_toa.h"
+#include "libft_fmt_ops.h"
 
-void	ft_fmt_set_str(t_iol_el *el, char *s);
-void	ft_fmt_set_c(t_iol_el *el, char c);
-void	ft_fmt_set_ptr(t_iol_el *el, void *ptr);
-void	ft_fmt_set_i(t_iol_el *el, int i);
-void	ft_fmt_set_l(t_iol_el *el, long l);
-void	ft_fmt_set_ui(t_iol_el *el, unsigned int i);
-void	ft_fmt_set_hex(t_iol_el *el, unsigned int x);
+// alphabet padding and leading + options tbd
+void	ft_fmt_set_l(t_iol_el *el, long l)
+{
+	char	*s;
 
-#endif
+	s = ft_ltoa(l);
+	el->free = ft_iol_free_always;
+	ft_fmt_set_str(el, s);
+}
