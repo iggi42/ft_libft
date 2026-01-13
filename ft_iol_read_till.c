@@ -4,10 +4,20 @@
 #include "sys/types.h"
 #include <unistd.h>
 
-char *ft_iol_read_till(t_iol *iol_start, int fd, t_iol_breaker br)
+char	*ft_iol_read_till(t_iol *l, int fd, t_iol_breaker br)
 {
-	t_iol_el *new_el = ft_iol_el_read(fd, BUFFER_SIZE);
-	ft_lstadd_back(iol_start, ft_lstnew(new_el));
+	t_iol_el	*new_el;
+	ssize_t		break_i;
+
+	break_i = -1;
+	while (break_i < 0)
+	{
+		new_el = ft_iol_el_read(fd, BUFFER_SIZE);
+		if(new_el == NULL)
+			break;
+		break_i = br(new_el->buffer, new_el->size);
+	}
+	ft_lstadd_back(l, ft_lstnew(new_el));
 }
 
 // 	ft_iol_el *el

@@ -9,7 +9,7 @@
 /*   Updated: 2025/12/03 16:28:20 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft_buf.h"
+
 #include "libft_iol.h"
 #include "libft_kv.h"
 #include "libft_mem.h"
@@ -22,7 +22,7 @@ typedef ssize_t	(*t_breaker)(t_byte *, size_t);
 
 static int	fd_cmp(void *key1, void *key2)
 {
-	return (*(int *)key1 == *(int *)key2);
+	return (key1 == key2 || *(int *)key1 == *(int *)key2);
 }
 
 // return -1 on break not found

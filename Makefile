@@ -41,6 +41,8 @@ BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 
 SRCS += $(BASE_CC) $(BASE_MEM) $(BASE_STR) $(BASE_IO) $(BASE_LL)
 
+EXTRA_IO = ft_io_gnl.c ft_iol_read_till.c
+
 EXTRA_ARR = ft_arr.c
 SRCS += $(EXTRA_ARR)
 

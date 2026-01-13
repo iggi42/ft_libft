@@ -13,5 +13,6 @@ t_iol_el	*ft_iol_el_read(int fd, size_t s)
 		result->size = read_code;
 		return (result);
 	}
+	ft_iol_el_free(result);
 	return NULL;
 }
