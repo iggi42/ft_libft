@@ -12,6 +12,7 @@
 
 #include "libft_iol.h"
 #include "libft_kv.h"
+#include "libft_ll.h"
 #include "libft_mem.h"
 #include "sys/types.h"
 #include <stdlib.h>
@@ -55,7 +56,7 @@ char	*ft_io_gnl(int fd)
 		store = ft_kv_init(fd_cmp);
 	old_rest = ft_kv_get(store, &fd);
 	if (old_rest)
-		ft_iol_append(result, );
+		ft_lstadd_back(result, ft_lstnew(old_rest));
 	new_rest = ft_iol_read_till(result, fd, find_eol);
 	return (result_str);
 }

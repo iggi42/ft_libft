@@ -19,6 +19,6 @@
 t_iol	ft_fmt_parse(const char *tmpl);
 
 //! @brief apply printf style operators to the parsed template
-void	ft_fmt_apply(t_iol io_list, va_list args);
+void	ft_fmt_apply(t_iol io_list, va_list *args);
 
 #endif

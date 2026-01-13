@@ -20,7 +20,7 @@ int	ft_printf_fd(int fd, const char *template, ...)
 
 	seg_list = ft_fmt_parse((char *)template);
 	va_start(args, template);
-	ft_fmt_apply(seg_list, args);
+	ft_fmt_apply(seg_list, &args);
 	va_end(args);
 	result = ft_iol_write(seg_list, fd);
 	ft_iol_del(&seg_list);

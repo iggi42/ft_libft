@@ -21,7 +21,7 @@ char	*ft_strf(const char *template, ...)
 
 	seg_list = ft_fmt_parse((char *)template);
 	va_start(args, template);
-	ft_fmt_apply(seg_list, args);
+	ft_fmt_apply(seg_list, &args);
 	result = ft_iol_str(seg_list);
 	ft_iol_del(&seg_list);
 	va_end(args);

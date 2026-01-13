@@ -73,7 +73,7 @@ t_iol_el		*ft_iol_el_alloc(size_t size);
 // else returns the index of the break found
 typedef ssize_t	(*t_iol_breaker)(char *, size_t);
 
-char			*ft_iol_read_till(t_iol *iol_start, int fd, t_iol_breaker br);
+t_iol_el		*ft_iol_read_till(t_iol *iol_start, int fd, t_iol_breaker br);
 
 //!@}
 #endif
