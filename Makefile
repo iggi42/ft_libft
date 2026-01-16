@@ -14,6 +14,7 @@
 CC = cc
 CFLAGS += -MD -Wall -Wextra -Werror $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
+FT_EXTRA_CFLAGS += -D FTLIB_F_PERROR
 
 NAME = libft
 HEADER = libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h libft_locale.h \
@@ -63,7 +64,7 @@ EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft
 EXTRA_KV = ft_lst_kv.c
 SRCS += $(EXTRA_BUF) $(EXTRA_KV)
 
-EXTRA_OS = ft_execve.c ft_spawn_cmd.c ft_fatal.c
+EXTRA_OS = ft_execve.c ft_spawn_cmd.c ft_fatal.c ft_spawn_cmd.c ft_os_spawn.c
 SRCS += $(EXTRA_OS)
 
 OBJS = $(SRCS:.c=.o)

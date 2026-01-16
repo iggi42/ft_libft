@@ -42,17 +42,21 @@ static char	*find_in_path(char *cmd0, char *envp[])
 	return (NULL);
 }
 
-void mk_std(int *pipes[2])
+void mk_std(int *pipes)
 {
 	if (pipes == NULL)
 		return;
-	dup2(*pipes[1], STDOUT_FILENO);
-	dup2(*pipes[0], STDIN_FILENO);
+	dup2(pipes[0], STDOUT_FILENO);
+	dup2(pipes[1], STDIN_FILENO);
+	// dup2(*pipes[2], STDERR_FILENO);
 }
 
 // This doesn't handle envs in the beginning of the line yet
 // nor dies it escape space via \ ' or "
-pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int **pipes)
+// sets fds from io like this:
+// STDOUT_FILENO <= io[0]
+// STDIN_FILENO <= io[1]
+pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int *io)
 {
 	char	**cmd_ar;
 	char	*exec_file;
@@ -63,7 +67,7 @@ pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int **pipes)
 	result = fork();
 	if (result == 0)
 	{
-		mk_std(pipes);
+		mk_std(io);
 		ft_execve(exec_file, cmd_ar, envp);
 	}
 	return (result);
