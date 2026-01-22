@@ -1,5 +1,5 @@
-#include "libft_str.h"
 #include "libft_os.h"
+#include "libft_str.h"
 #include <unistd.h>
 
 static char	*get_env(char *envp[], char *s)
@@ -25,10 +25,9 @@ static char	*find_in_path(char *cmd0, char *envp[])
 	size_t	i;
 	char	*full_path;
 
-	//needs to check for relative path in cmd0 instead of this
+	// needs to check for relative path in cmd0 instead of this
 	if (access(cmd0, X_OK) == 0)
 		return (cmd0);
-
 	paths = ft_split(get_env(envp, "PATH"), ':');
 	i = 0;
 	while (*(paths + i))
@@ -42,10 +41,10 @@ static char	*find_in_path(char *cmd0, char *envp[])
 	return (NULL);
 }
 
-void mk_std(int *pipes)
+static void	mk_std(int *pipes)
 {
 	if (pipes == NULL)
-		return;
+		return ;
 	dup2(pipes[0], STDOUT_FILENO);
 	dup2(pipes[1], STDIN_FILENO);
 	// dup2(*pipes[2], STDERR_FILENO);
