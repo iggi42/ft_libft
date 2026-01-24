@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_spawn_cmd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft_os.h"
 #include "libft_str.h"
 #include <unistd.h>
@@ -25,7 +36,7 @@ static char	*find_in_path(char *cmd0, char *envp[])
 	size_t	i;
 	char	*full_path;
 
-	// needs to check for relative path in cmd0 instead of this
+	//TODO needs to check for relative path in cmd0 instead of this
 	if (access(cmd0, X_OK) == 0)
 		return (cmd0);
 	paths = ft_split(get_env(envp, "PATH"), ':');
@@ -47,8 +58,8 @@ static void	mk_std(int *pipes)
 		return ;
 	dup2(pipes[0], STDOUT_FILENO);
 	dup2(pipes[1], STDIN_FILENO);
-	// dup2(*pipes[2], STDERR_FILENO);
 }
+	// dup2(*pipes[2], STDERR_FILENO);
 
 // This doesn't handle envs in the beginning of the line yet
 // nor dies it escape space via \ ' or "

@@ -22,7 +22,7 @@ typedef struct s_kv
 {
 	t_kv_key_cmp	key_cmp;
 	t_kv_store		_store;
-} t_kv;
+}					t_kv;
 
 t_kv				*ft_kv_init(const t_kv_key_cmp key_cmp);
 void				ft_kv_free(t_kv *store);

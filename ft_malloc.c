@@ -1,9 +1,23 @@
-#include <stdlib.h>
-#include "libft_os.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_malloc.c                                          :+:      :+:    :+: */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/17 20:35:38 by fkruger           #+#    #+#             */
+/*   Updated: 2026/01/18 15:11:25 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void* ft_malloc(size_t size)
+#include "libft_os.h"
+#include <stdlib.h>
+
+void	*ft_malloc(size_t size)
 {
-	void *r = malloc(size);
+	void	*r;
+
+	r = malloc(size);
 	if (r == NULL)
 		ft_fatal();
 	return (r);

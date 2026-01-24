@@ -14,7 +14,7 @@
 
 void	*ft_lst_pop(t_list **lst)
 {
-	t_list el;
+	t_list	el;
 
 	if (*lst == NULL)
 		return (NULL);

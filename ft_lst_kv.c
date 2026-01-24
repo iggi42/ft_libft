@@ -15,16 +15,17 @@
 #include "libft_ll.h"
 #include "libft_lst_kv.h"
 #include "libft_mem.h"
-#include <stdlib.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 t_kv	*ft_kv_init(t_kv_key_cmp key_cmp)
 {
-	t_kv *result;
+	t_kv	*result;
+
 	result = ft_malloc(sizeof(t_kv));
-    result->_store = NULL;
-    result->key_cmp = key_cmp;
-	return result;
+	result->_store = NULL;
+	result->key_cmp = key_cmp;
+	return (result);
 }
 
 void	ft_kv_free(t_kv *kv)
@@ -34,12 +35,13 @@ void	ft_kv_free(t_kv *kv)
 
 // returns NULL if keys don't match
 // else returns the address of value of kv pair
-static t_kv_value *kv_maybe_value(t_kv_pair *pair, t_kv_key key, t_kv_key_cmp key_cmp)
+static t_kv_value	*kv_maybe_value(t_kv_pair *pair, t_kv_key key,
+		t_kv_key_cmp key_cmp)
 {
-	if(key == pair->key)
-		return &(pair->val);
-	if(key_cmp(key, pair->key) == 0)
-		return &(pair->val);
+	if (key == pair->key)
+		return (&(pair->val));
+	if (key_cmp(key, pair->key) == 0)
+		return (&(pair->val));
 	return (NULL);
 }
 
@@ -47,7 +49,7 @@ static t_kv_value *kv_maybe_value(t_kv_pair *pair, t_kv_key key, t_kv_key_cmp ke
 t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 {
 	t_list		*head;
-	t_kv_value  *val;
+	t_kv_value	*val;
 
 	head = root->_store;
 	while (head != NULL)
@@ -63,14 +65,14 @@ t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 t_kv_value	ft_kv_pop(t_kv *root, t_kv_key key)
 {
 	t_kv_value	*val;
-	t_kv_value result;
-	t_list **head;
+	t_kv_value	result;
+	t_list		**head;
 
 	head = &root->_store;
 	while (*head != NULL)
 	{
 		val = kv_maybe_value((*head)->content, key, root->key_cmp);
-		if(val != NULL)
+		if (val != NULL)
 		{
 			result = *val;
 			// free(((t_kv_pair *)(*head)->content)->key);
@@ -85,8 +87,8 @@ t_kv_value	ft_kv_pop(t_kv *root, t_kv_key key)
 void	ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v)
 {
 	t_kv_pair	*kv;
-	t_kv_value *val;
-	t_list **head;
+	t_kv_value	*val;
+	t_list		**head;
 
 	head = &store->_store;
 	while (*head != NULL)

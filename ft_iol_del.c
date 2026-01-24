@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "libft_iol.h"
 
-static void my_el_free(void *ptr)
+static void	my_el_free(void *ptr)
 {
 	ft_iol_el_free(ptr);
 }

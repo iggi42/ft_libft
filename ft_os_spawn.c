@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_os_spawn.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/17 08:10:02 by fkruger           #+#    #+#             */
+/*   Updated: 2025/10/27 16:29:16 by fkruger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft_mem.h"
 #include "libft_os.h"
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 t_os_proc	*ft_os_spawn(char *cmd, char *const *envp)
 {
