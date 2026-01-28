@@ -12,13 +12,13 @@
 
 # configuration variables
 CC = cc
-CFLAGS += -MD -Wall -Wextra -Werror $(FT_EXTRA_CFLAGS)
+CFLAGS += -MD -Wall -Wextra -Werror -I./inc $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
 FT_EXTRA_CFLAGS += -D FTLIB_F_PERROR
 
 NAME = libft
-HEADER = libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h libft_locale.h \
-	libft_math.h libft_mem.h libft_str.h libft_toa.h
+HEADER = $(addprefix libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h libft_locale.h \
+	libft_math.h libft_mem.h libft_str.h libft_toa.h)
 LIB = $(NAME).a
 
 GIT_IGNORE += .depend
@@ -126,5 +126,8 @@ compile_flags.txt: $(SELF)
 		echo $$ig >> $@ ; \
 	done
 
+ma:
+	@echo $(.FEATURES)
+	
 # core build rules
 -include $(DEPS)
