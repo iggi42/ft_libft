@@ -16,40 +16,47 @@ CFLAGS += -MD -Wall -Wextra -Werror -I./inc $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
 FT_EXTRA_CFLAGS += -D FTLIB_F_PERROR
 
-
 NAME = libft
-HEADER = $(addprefix ./inc/, libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h libft_locale.h \
-	libft_math.h libft_mem.h libft_str.h libft_toa.h)
 LIB = $(NAME).a
+HEADER = $(addprefix ./inc/, \
+	libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h \
+	libft_locale.h libft_math.h libft_mem.h libft_str.h libft_toa.h)
 
-# load SRCS 
--include ./src/char.mk
+SRC_DIR = ./src
+BIN_DIR = ./bin
+
+touch:
+	@touch $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk)
+
+FT_LIB_PKGS = arr buf char fmt io iol ll math mem os str toa
+
+# load SECT_$(pkg) for every pkgs
+-include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk)
+
+C_FILES = $(foreach p, $(FT_LIB_PKGS), $(addprefix $(p)/, $(SECT_$(p))))
 
 GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history lldb_bugreport.txt
 
-OBJS = $(SRCS:.c=.o)
+SRCS = $(addprefix $(SRC_DIR)/, $(C_FILES))
+OBJS = $(C_FILES:%.c=$(BIN_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
 DEV_FILES = .gitignore compile_flags.txt
 DOC_FOLDER = doc
 GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
 
-SELF=$(firstword $(MAKEFILE_LIST))
-
-GIT_IGNORE += $(LIB)
-$(LIB): $(OBJS)
-	$(AR) -src $@ $^
+SELF = $(firstword $(MAKEFILE_LIST))
 
 # phony targets
-$(NAME): $(LIB)
 all: $(NAME)
 re: clean all
 fclean: clean dev_clean doc_clean
 clean:
-	rm -f $(OBJS) $(LIB) $(DEPS)
+	$(RM) $(OBJS) $(LIB) $(DEPS)
 dev: $(DEV_FILES)
 dev_clean:
-	rm -f $(DEV_FILES)
+	$(RM) $(DEV_FILES)
+$(NAME): $(LIB)
 .PHONY: fclean clean re all dev doc dh doc_clean
 
 # rules to generate documentation
@@ -61,13 +68,13 @@ dh: doc_clean doc
 	(cd "./$(DOC_FOLDER)/html" && python3 -m http.server)
 
 doc_clean:
-	rm -rf Doxyfile "./$(DOC_FOLDER)"
+	$(RM) -r Doxyfile "./$(DOC_FOLDER)"
 
 GIT_IGNORE += Doxyfile
 Doxyfile: $(SELF)
 	@echo -n > $@
 	@echo 'PROJECT_NAME = "Libft"' >> $@
-	@echo 'INPUT = ./'$(HEADER) >> $@
+	@echo 'INPUT = '$(HEADER) >> $@
 	@echo 'EXTRACT_ALL = YES' >> $@
 	@echo 'QUIET = YES' >> $@
 	@echo "OUTPUT_DIRECTORY  = ./$(DOC_FOLDER)" >> $@
@@ -87,8 +94,13 @@ compile_flags.txt: $(SELF)
 		echo $$ig >> $@ ; \
 	done
 
-ma:
-	@echo SRCS = $(SRCS)
-	
 # core build rules
 -include $(DEPS)
+
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(dir $@)
+	$(CC) -c $(CFLAGS) $< -o $@
+
+GIT_IGNORE += $(LIB)
+libft.a: $(OBJS)
+	$(AR) -src $@ $^
