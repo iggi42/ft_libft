@@ -14,7 +14,6 @@
 CC = cc
 CFLAGS += -MD -Wall -Wextra -Werror -I./inc $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
-FT_EXTRA_CFLAGS += -D FTLIB_F_PERROR
 
 NAME = libft
 LIB = $(NAME).a
@@ -24,9 +23,6 @@ HEADER = $(addprefix ./inc/, \
 
 SRC_DIR = ./src
 BIN_DIR = ./bin
-
-touch:
-	@touch $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk)
 
 FT_LIB_PKGS = arr buf char fmt io iol ll math mem os str toa
 
@@ -98,7 +94,7 @@ compile_flags.txt: $(SELF)
 -include $(DEPS)
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 GIT_IGNORE += $(LIB)
