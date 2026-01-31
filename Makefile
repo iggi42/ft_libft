@@ -12,83 +12,47 @@
 
 # configuration variables
 CC = cc
-CFLAGS += -MD -Wall -Wextra -Werror $(FT_EXTRA_CFLAGS)
+CFLAGS += -MD -Wall -Wextra -Werror -I./inc $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
-FT_EXTRA_CFLAGS += -D FTLIB_F_PERROR
 
 NAME = libft
-HEADER = libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h libft_locale.h \
-	libft_math.h libft_mem.h libft_str.h libft_toa.h
 LIB = $(NAME).a
+HEADER = $(addprefix ./inc/, \
+	libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h \
+	libft_locale.h libft_math.h libft_mem.h libft_str.h libft_toa.h)
+
+SRC_DIR = ./src
+BIN_DIR = ./bin
+
+FT_LIB_PKGS = arr buf char fmt io iol ll math mem os str toa
+
+# load SECT_$(pkg) for every pkgs
+-include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk)
+
+C_FILES = $(foreach p, $(FT_LIB_PKGS), $(addprefix $(p)/, $(SECT_$(p))))
 
 GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history lldb_bugreport.txt
 
-BASE_CC = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
-		ft_tolower.c ft_toupper.c
-
-BASE_MEM = ft_bzero.c ft_calloc.c ft_memcmp.c ft_memcpy.c ft_memset.c ft_memchr.c \
- ft_memmove.c ft_iszero.c ft_free.c ft_malloc.c
-
-BASE_STR = ft_str_alloc.c ft_strtrim.c ft_split.c ft_strmapi.c ft_striteri.c ft_itoa.c \
-		ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strrchr.c \
-		ft_atoi.c ft_strnstr.c ft_substr.c ft_strjoin.c ft_strchr.c ft_strf.c
-
-BASE_IO = ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c  ft_putnbr_fd.c ft_printf.c ft_printf_fd.c ft_write.c \
-		ft_gnl.c
-BASE_LL = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
-			ft_lstiter.c ft_lstmap.c ft_lstfold.c ft_lst_pop.c
-
-SRCS += $(BASE_CC) $(BASE_MEM) $(BASE_STR) $(BASE_IO) $(BASE_LL)
-
-EXTRA_IO = ft_io_gnl.c ft_iol_read_till.c
-
-EXTRA_ARR = ft_arr.c
-SRCS += $(EXTRA_ARR)
-
-EXTRA_TOA_B = ft_btoa.c ft_btoa_b.c ft_btoa_bl.c
-EXTRA_TOA_I = ft_itoa.c ft_itoa_b.c ft_itoa_bl.c 
-EXTRA_TOA_L = ft_ltoa.c ft_ltoa_b.c ft_ltoa_bl.c
-EXTRA_TOA_UL = ft_ultoa.c ft_ultoa_b.c ft_ultoa_bl.c
-EXTRA_TOA_P = ft_ptoa.c ft_ptoa_b.c ft_ptoa_bl.c
-EXTRA_TOA = $(EXTRA_TOA_B) $(EXTRA_TOA_I) $(EXTRA_TOA_L) $(EXTRA_TOA_UL) $(EXTRA_TOA_P)
-
-EXTRA_IOL = ft_iol_pp.c ft_iol_pp_el.c ft_iol_write.c ft_iol_del.c ft_iol_el_alloc.c ft_iol_free_always.c \
-			ft_iol_size.c ft_iol_str.c  ft_iol_str_l.c ft_iol_append.c ft_iol_elcmp.c ft_iol_el_free.c
-EXTRA_FORMAT = ft_fmt_parse.c ft_fmt_apply.c
-EXTRA_FORMAT_OPS = ft_fmt_set_c.c ft_fmt_set_hex.c ft_fmt_set_i.c ft_fmt_set_l.c ft_fmt_set_ptr.c ft_fmt_set_str.c ft_fmt_set_ui.c
-SRCS += $(EXTRA_TOA) $(EXTRA_IOL) $(EXTRA_BUF) $(EXTRA_FORMAT) $(EXTRA_FORMAT_OPS)
-
-EXTRA_BUF = ft_buf_cat.c ft_buf_cp.c ft_buf_free.c ft_buf_new.c ft_buf_read.c ft_buf_split.c ft_buf_str.c
-EXTRA_KV = ft_lst_kv.c
-SRCS += $(EXTRA_BUF) $(EXTRA_KV)
-
-EXTRA_OS = ft_execve.c ft_spawn_cmd.c ft_fatal.c ft_spawn_cmd.c ft_os_spawn.c
-SRCS += $(EXTRA_OS)
-
-OBJS = $(SRCS:.c=.o)
+SRCS = $(addprefix $(SRC_DIR)/, $(C_FILES))
+OBJS = $(C_FILES:%.c=$(BIN_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
 DEV_FILES = .gitignore compile_flags.txt
 DOC_FOLDER = doc
 GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
 
-SELF=$(firstword $(MAKEFILE_LIST))
-
-GIT_IGNORE += $(LIB)
-$(LIB): $(OBJS)
-	$(AR) -src $@ $^
+SELF = $(firstword $(MAKEFILE_LIST))
 
 # phony targets
-$(NAME): $(LIB)
 all: $(NAME)
 re: clean all
 fclean: clean dev_clean doc_clean
 clean:
-	rm -f $(OBJS) $(LIB) $(DEPS)
+	$(RM) $(OBJS) $(LIB) $(DEPS)
 dev: $(DEV_FILES)
 dev_clean:
-	rm -f $(DEV_FILES)
+	$(RM) $(DEV_FILES)
+$(NAME): $(LIB)
 .PHONY: fclean clean re all dev doc dh doc_clean
 
 # rules to generate documentation
@@ -100,13 +64,13 @@ dh: doc_clean doc
 	(cd "./$(DOC_FOLDER)/html" && python3 -m http.server)
 
 doc_clean:
-	rm -rf Doxyfile "./$(DOC_FOLDER)"
+	$(RM) -r Doxyfile "./$(DOC_FOLDER)"
 
 GIT_IGNORE += Doxyfile
 Doxyfile: $(SELF)
 	@echo -n > $@
-	@echo 'PROJECT_NAME = "Iggys Libft"' >> $@
-	@echo 'INPUT = ./'$(HEADER) >> $@
+	@echo 'PROJECT_NAME = "Libft"' >> $@
+	@echo 'INPUT = '$(HEADER) >> $@
 	@echo 'EXTRACT_ALL = YES' >> $@
 	@echo 'QUIET = YES' >> $@
 	@echo "OUTPUT_DIRECTORY  = ./$(DOC_FOLDER)" >> $@
@@ -128,3 +92,11 @@ compile_flags.txt: $(SELF)
 
 # core build rules
 -include $(DEPS)
+
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) -c $(CFLAGS) $< -o $@
+
+GIT_IGNORE += $(LIB)
+libft.a: $(OBJS)
+	$(AR) -src $@ $^

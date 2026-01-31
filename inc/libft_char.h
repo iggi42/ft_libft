@@ -24,11 +24,11 @@ int	ft_isalpha(int c);
 /**  @brief return 0 if c is not an ascii character. */
 int	ft_isascii(int c);
 
-/**  @brief return 0 if c is not a printable character. */
-int	ft_isprint(int c);
-
 /**  @brief return 0 if c is not a digit character. */
 int	ft_isdigit(int c);
+
+/**  @brief return 0 if c is not a printable character. */
+int	ft_isprint(int c);
 
 /**  @brief return uppercase version of c, if c is a lowercase character. */
 int	ft_toupper(int c);
