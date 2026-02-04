@@ -34,6 +34,7 @@ C_FILES = $(foreach p, $(FT_LIB_PKGS), $(addprefix $(p)/, $(SECT_$(p))))
 GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history lldb_bugreport.txt
 
+GIT_IGNORE += $(BIN_DIR)
 SRCS = $(addprefix $(SRC_DIR)/, $(C_FILES))
 OBJS = $(C_FILES:%.c=$(BIN_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
@@ -49,6 +50,7 @@ re: clean all
 fclean: clean dev_clean doc_clean
 clean:
 	$(RM) $(OBJS) $(LIB) $(DEPS)
+	$(RM) -r $(BIN_DIR)
 dev: $(DEV_FILES)
 dev_clean:
 	$(RM) $(DEV_FILES)
