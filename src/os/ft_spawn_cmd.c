@@ -36,8 +36,7 @@ static char	*find_in_path(char *cmd0, char *envp[])
 	size_t	i;
 	char	*full_path;
 
-	//TODO needs to check for relative path in cmd0 instead of this
-	if (access(cmd0, X_OK) == 0)
+	if (ft_strncmp("./", cmd0, 2) == 0)
 		return (cmd0);
 	paths = ft_split(get_env(envp, "PATH"), ':');
 	i = 0;

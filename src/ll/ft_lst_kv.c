@@ -10,23 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_arr.h"
 #include "libft_kv.h"
 #include "libft_ll.h"
 #include "libft_lst_kv.h"
 #include "libft_mem.h"
-#include <stdbool.h>
-#include <stdlib.h>
 
-t_kv	*ft_kv_init(t_kv_key_cmp key_cmp)
-{
-	t_kv	*result;
-
-	result = ft_malloc(sizeof(t_kv));
-	result->_store = NULL;
-	result->key_cmp = key_cmp;
-	return (result);
-}
 
 void	ft_kv_free(t_kv *kv)
 {
@@ -105,24 +93,4 @@ void	ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v)
 	kv->key = key;
 	kv->val = v;
 	*head = ft_lstnew(kv);
-}
-
-//! get all keys in a freeable, NULL terminated array
-t_kv_key	*ft_kv_keys(t_kv *store)
-{
-	size_t		s;
-	size_t		i;
-	t_kv_key	*result;
-	t_list		*head;
-
-	i = 0;
-	head = store->_store;
-	s = ft_lstsize(store->_store);
-	result = ft_arr_new(s);
-	while (i < s)
-	{
-		*(result + i++) = ((t_kv_pair *)head->content)->key;
-		head = head->next;
-	}
-	return (result);
 }

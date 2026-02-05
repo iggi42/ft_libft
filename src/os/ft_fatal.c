@@ -15,7 +15,7 @@
 
 void	ft_fatal(void)
 {
-	perror("FATAL ERROR: ");
+	perror("FATAL: ");
 	exit(EXIT_FAILURE);
 }
 

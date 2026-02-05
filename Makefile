@@ -59,7 +59,7 @@ $(NAME): $(LIB)
 
 # rules to generate documentation
 GIT_IGNORE += /doc
-doc: $(C_FILES) $(HEADER) Doxyfile
+doc: $(SRCS) $(HEADER) Doxyfile
 	doxygen
 
 dh: doc_clean doc
