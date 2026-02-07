@@ -12,4 +12,4 @@
 
 SECT_os = ft_execve.c ft_fatal.c ft_os_spawn.c ft_spawn_cmd.c
 
-$(BIN_DIR)/os/ft_fatal.o: CFLAGS += -D FTLIB_F_PERROR
+$(BIN_DIR)/os/ft_fatal.o: CFLAGS += -DFTLIB_F_PERROR
