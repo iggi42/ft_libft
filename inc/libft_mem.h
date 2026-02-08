@@ -55,5 +55,7 @@ void					*ft_calloc(size_t n, size_t size);
  **/
 void					*ft_free(size_t n, ...);
 
+void					ft_switch(int *a, int *b);
+
 //!@}
 #endif
