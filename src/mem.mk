@@ -11,4 +11,4 @@
 # **************************************************************************** #
 
 SECT_mem += ft_bzero.c ft_calloc.c ft_free.c ft_iszero.c ft_malloc.c ft_memchr.c
-SECT_mem += ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
+SECT_mem += ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_switch.c
