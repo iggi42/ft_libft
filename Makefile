@@ -88,6 +88,7 @@ compile_flags.txt: $(SELF)
 
 .gitignore: $(SELF)
 	@echo setup $@
+	@echo -n > $@
 	@for ig in $(GIT_IGNORE); do \
 		echo $$ig >> $@ ; \
 	done

@@ -25,9 +25,9 @@ void		ft_fatal(void);
 void		ft_execve(const char *exec_file, char *const *argv,
 				char *const *envp);
 
-int			ft_spawn_cmd(char *cmd, char *const *envp, int *redirects);
+int			ft_spawn_cmd(char *cmd, char *const *envp, int *redirects, void (*cleanup)(void));
 
-t_os_proc	*ft_os_spawn(char *cmd, char *const *envp);
+t_os_proc	*ft_os_spawn(char *cmd, char *const *envp, void (*cleanup)(void));
 
 void		ft_os_proc_cleanup(t_os_proc *proc);
 

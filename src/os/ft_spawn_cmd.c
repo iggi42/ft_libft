@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "libft_os.h"
 #include "libft_str.h"
+#include "libft_io.h"
 #include <unistd.h>
 
 static char	*get_env(char *envp[], char *s)
@@ -55,8 +56,8 @@ static void	mk_std(int *pipes)
 {
 	if (pipes == NULL)
 		return ;
-	dup2(pipes[0], STDOUT_FILENO);
-	dup2(pipes[1], STDIN_FILENO);
+	dup2(pipes[0], STDIN_FILENO);
+	dup2(pipes[1], STDOUT_FILENO);
 }
 	// dup2(*pipes[2], STDERR_FILENO);
 
@@ -65,18 +66,21 @@ static void	mk_std(int *pipes)
 // sets fds from io like this:
 // STDOUT_FILENO <= io[0]
 // STDIN_FILENO <= io[1]
-pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int *io)
+pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int *io, void (*cleanup)(void))
 {
 	char	**cmd_ar;
 	char	*exec_file;
 	pid_t	result;
 
+	ft_printf("fds: [%d, %d]\n", *io, *(io + 1));
 	cmd_ar = ft_split(cmd, ' ');
 	exec_file = find_in_path(cmd_ar[0], (char **)envp);
 	result = fork();
 	if (result == 0)
 	{
 		mk_std(io);
+		(void) cleanup;
+		// cleanup();
 		ft_execve(exec_file, cmd_ar, envp);
 	}
 	return (result);
