@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_arr.h"
-#include "libft_mem.h"
+#include <stdlib.h>
 
 size_t	ft_arr_len(void *ar)
 {

@@ -10,6 +10,5 @@
 #                                                                              #
 # **************************************************************************** #
 
-SECT_arr = ft_arr.c
-SECT_arr += ft_arr_new.c
+SECT_arr = ft_arr_len.c ft_arr_new.c
 

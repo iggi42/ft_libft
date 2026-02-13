@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft_mem.h"
+
 void	**ft_arr_new(size_t size)
 {
 	return (ft_calloc(size + 1, sizeof(void *)));

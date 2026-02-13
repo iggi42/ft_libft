@@ -28,6 +28,7 @@ FT_LIB_PKGS = arr buf char fmt io iol ll math mem os str toa
 
 # load SECT_$(pkg) for every pkgs
 -include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk)
+FT_LIB_PKGS_OUTDIR=$(addprefix $(BIN_DIR)/, $(FT_LIB_PKGS))
 
 C_FILES = $(foreach p, $(FT_LIB_PKGS), $(addprefix $(p)/, $(SECT_$(p))))
 
@@ -47,57 +48,23 @@ SELF = $(firstword $(MAKEFILE_LIST))
 # phony targets
 all: $(NAME)
 re: clean all
-fclean: clean dev_clean doc_clean
+fclean: clean
 clean:
 	$(RM) $(OBJS) $(LIB) $(DEPS)
 	$(RM) -r $(BIN_DIR)
-dev: $(DEV_FILES)
-dev_clean:
-	$(RM) $(DEV_FILES)
 $(NAME): $(LIB)
-.PHONY: fclean clean re all dev doc dh doc_clean
+.PHONY: fclean clean re all
 
-# rules to generate documentation
-GIT_IGNORE += /doc
-doc: $(SRCS) $(HEADER) Doxyfile
-	doxygen
-
-dh: doc_clean doc
-	(cd "./$(DOC_FOLDER)/html" && python3 -m http.server)
-
-doc_clean:
-	$(RM) -r Doxyfile "./$(DOC_FOLDER)"
-
-GIT_IGNORE += Doxyfile
-Doxyfile: $(SELF)
-	@echo -n > $@
-	@echo 'PROJECT_NAME = "Libft"' >> $@
-	@echo 'INPUT = '$(HEADER) >> $@
-	@echo 'EXTRACT_ALL = YES' >> $@
-	@echo 'QUIET = YES' >> $@
-	@echo "OUTPUT_DIRECTORY  = ./$(DOC_FOLDER)" >> $@
-
-# development helper files
-compile_flags.txt: CFLAGS += $(NIX_CFLAGS_COMPILE)
-compile_flags.txt: $(SELF)
-	@echo setup $@
-	@echo '-DFT_APP_NAME="libft-dev"' > $@
-	@for flag in $(CFLAGS); do \
-	 	echo $$flag >> $@ ; \
-	done
-
-.gitignore: $(SELF)
-	@echo setup $@
-	@echo -n > $@
-	@for ig in $(GIT_IGNORE); do \
-		echo $$ig >> $@ ; \
-	done
+-include dev.mk
 
 # core build rules
 -include $(DEPS)
 
+$(addprefix $(BIN_DIR)/, $(FT_LIB_PKGS)):
+	mkdir -p $@
+
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 GIT_IGNORE += $(LIB)
