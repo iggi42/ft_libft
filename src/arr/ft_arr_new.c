@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_spawn_cmd.c                                     :+:      :+:    :+:   */
+/*   ft_arr_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 09:19:02 by fkruger           #+#    #+#             */
-/*   Updated: 2025/12/01 19:29:16 by fkruger          ###   ########.fr       */
+/*   Created: 2026/02/13 17:53:11 by fkruger           #+#    #+#             */
+/*   Updated: 2026/02/13 17:53:22 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unistd.h"
-#include <stdio.h>
-
-void	ft_execve(const char *exec_file, char *const *argv, char *const *envp)
+void	**ft_arr_new(size_t size)
 {
-	execve(exec_file, argv, envp);
-	perror(FT_APP_NAME);
+	return (ft_calloc(size + 1, sizeof(void *)));
 }
+

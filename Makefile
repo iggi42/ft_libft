@@ -81,7 +81,7 @@ Doxyfile: $(SELF)
 compile_flags.txt: CFLAGS += $(NIX_CFLAGS_COMPILE)
 compile_flags.txt: $(SELF)
 	@echo setup $@
-	@echo -n > $@
+	@echo '-DFT_APP_NAME="libft-dev"' > $@
 	@for flag in $(CFLAGS); do \
 	 	echo $$flag >> $@ ; \
 	done

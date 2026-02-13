@@ -12,7 +12,9 @@
 #include "libft_os.h"
 #include "libft_str.h"
 #include "libft_io.h"
+#include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 static char	*get_env(char *envp[], char *s)
 {
@@ -38,14 +40,14 @@ static char	*find_in_path(char *cmd0, char *envp[])
 	char	*full_path;
 
 	if (ft_strncmp("./", cmd0, 2) == 0)
-		return (cmd0);
+		return (ft_strdup(cmd0));
 	paths = ft_split(get_env(envp, "PATH"), ':');
 	i = 0;
 	while (*(paths + i))
 	{
 		full_path = ft_strf("%s/%s", *(paths + i), cmd0);
 		if (access(full_path, X_OK) == 0)
-			return (full_path);
+			return (free(paths), full_path);
 		free(full_path);
 		i++;
 	}
@@ -59,29 +61,33 @@ static void	mk_std(int *pipes)
 	dup2(pipes[0], STDIN_FILENO);
 	dup2(pipes[1], STDOUT_FILENO);
 }
-	// dup2(*pipes[2], STDERR_FILENO);
 
 // This doesn't handle envs in the beginning of the line yet
 // nor dies it escape space via \ ' or "
 // sets fds from io like this:
-// STDOUT_FILENO <= io[0]
-// STDIN_FILENO <= io[1]
-pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int *io, void (*cleanup)(void))
+// STDIN_FILENO  <= io[0]
+// STDOUT_FILENO <= io[1]
+// or just leave the std fds alone if NULL is passed as io parameter
+pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int *io, void (*cleanup_fds)(void))
 {
 	char	**cmd_ar;
 	char	*exec_file;
-	pid_t	result;
+	pid_t	child_pid;
 
-	ft_printf("fds: [%d, %d]\n", *io, *(io + 1));
 	cmd_ar = ft_split(cmd, ' ');
 	exec_file = find_in_path(cmd_ar[0], (char **)envp);
-	result = fork();
-	if (result == 0)
+	if (exec_file == NULL)
 	{
-		mk_std(io);
-		(void) cleanup;
-		// cleanup();
-		ft_execve(exec_file, cmd_ar, envp);
+		// TODO fix this stupid hack, use perror
+		ft_printf_fd(STDERR_FILENO, "libft:ft_spawn_cmd: %s not found\n", cmd_ar[0]);
+		return (free(cmd_ar), free(exec_file), -1);
 	}
-	return (result);
+	child_pid = fork();
+	if (child_pid == -1)
+		(perror("fork"), exit(EXIT_FAILURE));
+	if (child_pid != 0)
+		return (free(cmd_ar), free(exec_file), child_pid);
+	mk_std(io);
+	ft_execve(exec_file, cmd_ar, envp);
+	return -1;
 }

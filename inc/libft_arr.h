@@ -17,5 +17,6 @@
 
 void	**ft_arr_new(size_t size);
 size_t	ft_arr_len(void *arr);
+void	ft_arr_neach(void *arr, apply);
 
 #endif
