@@ -1,3 +1,15 @@
+= libFT
 
-inspiration for the makefile:
-https://linuxvox.com/blog/makefiles-with-source-files-in-different-directories/[linuxvox]
+**This is my libft. There are many like it, but this one is mine.**
+
+I kinda overdid it here, ngl. Writing this was too much fun.
+
+
+== Comments on the sections
+
+=== st
+
+
+== Inspiration
+ - Makefile https://linuxvox.com/blog/makefiles-with-source-files-in-different-directories/[linuxvox]
+
