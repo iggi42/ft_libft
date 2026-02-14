@@ -60,11 +60,8 @@ $(NAME): $(LIB)
 # core build rules
 -include $(DEPS)
 
-$(addprefix $(BIN_DIR)/, $(FT_LIB_PKGS)):
-	mkdir -p $@
-
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(dir $@)
+	mkdir -p $(@D)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 GIT_IGNORE += $(LIB)

@@ -17,7 +17,7 @@
 
 void	**ft_arr_new(size_t size);
 size_t	ft_arr_len(void *arr);
-void	ft_arr_each(void *arr, void (*appl)(void*));
-void	ft_arr_neach(void *arr, size_t n, void (*appl)(void*));
+void	ft_arr_each(void *arr, void (*apply)(void*));
+void	ft_arr_neach(void *arr, size_t n, void (*apply)(void*));
 
 #endif

@@ -88,6 +88,7 @@ pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int *io, void (*cleanup_fds)(vo
 	if (child_pid != 0)
 		return (free(cmd_ar), free(exec_file), child_pid);
 	mk_std(io);
+	cleanup_fds();
 	ft_execve(exec_file, cmd_ar, envp);
 	return -1;
 }
