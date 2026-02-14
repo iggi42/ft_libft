@@ -34,8 +34,8 @@ C_FILES = $(foreach p, $(FT_LIB_PKGS), $(addprefix $(p)/, $(SECT_$(p))))
 
 GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history lldb_bugreport.txt
-
 GIT_IGNORE += $(BIN_DIR)
+
 SRCS = $(addprefix $(SRC_DIR)/, $(C_FILES))
 OBJS = $(C_FILES:%.c=$(BIN_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
@@ -61,8 +61,8 @@ $(NAME): $(LIB)
 -include $(DEPS)
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(@D)
-	$(CC) -c $(CFLAGS) $< -o $@
+	@mkdir -p $(@D)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $^ -o $@
 
 GIT_IGNORE += $(LIB)
 libft.a: $(OBJS)
