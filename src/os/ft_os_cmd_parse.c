@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_spawn_cmd.c                                     :+:      :+:    :+:   */
+/*   ft_os_cmd_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,12 +9,10 @@
 /*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft_mem.h"
 #include "libft_os.h"
 #include "libft_str.h"
-#include "libft_io.h"
-#include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 
 static char	*get_env(char *envp[], char *s)
 {
@@ -54,41 +52,15 @@ static char	*find_in_path(char *cmd0, char *envp[])
 	return (NULL);
 }
 
-static void	mk_std(int *pipes)
+t_os_exec	*ft_os_cmd_parse(char *cmd, char *const *envp)
 {
-	if (pipes == NULL)
-		return ;
-	dup2(pipes[0], STDIN_FILENO);
-	dup2(pipes[1], STDOUT_FILENO);
-}
+	t_os_exec	*result;
 
-// This doesn't handle envs in the beginning of the line yet
-// nor dies it escape space via \ ' or "
-// sets fds from io like this:
-// STDIN_FILENO  <= io[0]
-// STDOUT_FILENO <= io[1]
-// or just leave the std fds alone if NULL is passed as io parameter
-pid_t	ft_spawn_cmd(char *cmd, char *const *envp, int *io, void (*cleanup_fds)(void))
-{
-	char	**cmd_ar;
-	char	*exec_file;
-	pid_t	child_pid;
-
-	cmd_ar = ft_split(cmd, ' ');
-	exec_file = find_in_path(cmd_ar[0], (char **)envp);
-	if (exec_file == NULL)
-	{
-		// TODO fix this stupid hack, use perror
-		ft_printf_fd(STDERR_FILENO, "libft:ft_spawn_cmd: %s not found\n", cmd_ar[0]);
-		return (free(cmd_ar), free(exec_file), -1);
-	}
-	child_pid = fork();
-	if (child_pid == -1)
-		(perror("fork"), exit(EXIT_FAILURE));
-	if (child_pid != 0)
-		return (free(cmd_ar), free(exec_file), child_pid);
-	mk_std(io);
-	cleanup_fds();
-	ft_execve(exec_file, cmd_ar, envp);
-	return -1;
+	result = ft_malloc(sizeof(t_os_exec));
+	if (result == NULL)
+		return (NULL);
+	result->argv = ft_split(cmd, ' ');
+	result->envp = envp;
+	result->exec_file = find_in_path(result->argv[0], (char **)envp);
+	return (result);
 }

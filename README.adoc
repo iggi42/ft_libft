@@ -4,11 +4,25 @@
 
 I kinda overdid it here, ngl. Writing this was too much fun.
 
-
-== Comments on the sections
-
-=== st
-
+I divided this into a couple subcategories that I call sections.
+Currently these sections are mature:
+ 
+Sections::
+  Mature:::
+    . char
+    . fmt
+  Experimental:::
+    . math
+    . arr
+    . buf
+    . fmt
+    . iol
+    . io
+    . ll
+    . mem
+    . os
+    . str
+    . toa
 
 == Inspiration
  - Makefile https://linuxvox.com/blog/makefiles-with-source-files-in-different-directories/[linuxvox]

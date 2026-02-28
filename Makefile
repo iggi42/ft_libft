@@ -1,4 +1,4 @@
-# *************************************************************************** #
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -19,18 +19,26 @@ NAME = libft
 LIB = $(NAME).a
 HEADER = $(addprefix ./inc/, \
 	libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h \
-	libft_locale.h libft_math.h libft_mem.h libft_str.h libft_toa.h)
+	libft_locale.h libft_math.h libft_mem.h libft_str.h libft_toa.h libft_os.h)
 
-SRC_DIR = ./src
-BIN_DIR = ./bin
+SRC_DIR = src
+BIN_DIR = bin
 
-FT_LIB_PKGS = arr buf char fmt io iol ll math mem os str toa
+ifndef FT_LIB_PKGS
+FT_LIB_PKGS := arr buf char fmt io iol ll math mem os str toa
+endif
 
 # load SECT_$(pkg) for every pkgs
 -include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk)
 FT_LIB_PKGS_OUTDIR=$(addprefix $(BIN_DIR)/, $(FT_LIB_PKGS))
 
 C_FILES = $(foreach p, $(FT_LIB_PKGS), $(addprefix $(p)/, $(SECT_$(p))))
+
+ifndef FT_APP_NAME
+FT_APP_NAME := libft-dev
+FT_EXTRA_CFLAGS += -DFT_APP_NAME=\"$(FT_APP_NAME)\"
+endif
+
 
 GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history lldb_bugreport.txt
@@ -62,7 +70,7 @@ $(NAME): $(LIB)
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $^ -o $@
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
 
 GIT_IGNORE += $(LIB)
 libft.a: $(OBJS)

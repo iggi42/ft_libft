@@ -10,6 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SECT_os = ft_execve.c ft_fatal.c ft_os_spawn.c ft_spawn_cmd.c
+SECT_os += ft_execve.c ft_fatal.c
+SECT_os += ft_os_spawn.c ft_os_cmd_parse.c ft_os_exec.c
 
 $(BIN_DIR)/os/ft_fatal.o: CFLAGS += -DFTLIB_F_PERROR

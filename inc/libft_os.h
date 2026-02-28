@@ -13,22 +13,42 @@
 #ifndef LIBFT_OS_H
 # define LIBFT_OS_H
 
+# include <unistd.h>
+
+//! describes an operating system process
 typedef struct s_os_proc
 {
-	int		stdin;
-	int		stdout;
-	int		stderr;
-	int		pid;
-}			t_os_proc;
+	int			stdin;
+	int			stdout;
+	int			stderr;
+	int			pid;
+}				t_os_proc;
 
-void		ft_fatal(void);
-void		ft_execve(const char *exec_file, char *const *argv,
-				char *const *envp);
+//! this struct contains everything you need to start an new OS process in a normal way
+typedef struct s_os_exec
+{
+	char	*exec_file;
+	char *const *argv;
+	char *const *envp;
+}				t_os_exec;
 
-int			ft_spawn_cmd(char *cmd, char *const *envp, int *redirects, void (*cleanup)(void));
+//! parse a cmd call
+t_os_exec		*ft_os_cmd_parse(char *cmd, char *const *envp);
 
-t_os_proc	*ft_os_spawn(char *cmd, char *const *envp, void (*cleanup)(void));
+//! execute a parsed cmd call
+pid_t			ft_os_exec(t_os_exec *exec, int *(*setup)(void *arg), void *setup_arg);
 
-void		ft_os_proc_cleanup(t_os_proc *proc);
+//! parse a cmd call
+t_os_proc		*ft_os_spawn(char *cmd, char *const *envp);
+
+//! cleans up a spawn process (no zombies, closed fds, etc)
+void			ft_os_proc_cleanup(t_os_proc *proc);
+
+//! end the current process (depends on what functions are allowed to call)
+void			ft_fatal(void);
+
+//! experimental wrap around execve
+void			ft_execve(const char *exec_file, char *const *argv,
+					char *const *envp);
 
 #endif

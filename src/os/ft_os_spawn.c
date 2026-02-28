@@ -15,22 +15,34 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-t_os_proc	*ft_os_spawn(char *cmd, char *const *envp, void (*cleanup)(void))
+static pid_t	*literal(void *arg)
+{
+	pid_t	*fds;
+
+	fds = (pid_t *)arg;
+	close(fds[0]);
+	close(fds[3]);
+	return (fds + 1);
+}
+
+t_os_proc	*ft_os_spawn(char *cmd, char *const *envp)
 {
 	int			fds[4];
 	int			*f;
-	t_os_proc	*result;
+	t_os_exec	*exec;
+	t_os_proc	*proc;
 
 	f = (int *)&fds;
-	result = (t_os_proc *)ft_malloc(sizeof(t_os_proc));
-	if (result == NULL || pipe(f) || pipe(f + 2))
+	exec = ft_os_cmd_parse(cmd, envp);
+	proc = ft_malloc(sizeof(t_os_proc));
+	if (exec || proc || exec->exec_file || pipe(f) || pipe(f + 2))
 		return (NULL);
-	result->pid = ft_spawn_cmd(cmd, envp, f + 1, cleanup);
-	result->stdin = fds[3];
-	result->stdout = fds[0];
-	result->stderr = STDERR_FILENO;
-	if (result->pid > 0)
-		return (result);
-	free(result);
+	proc->pid = ft_os_exec(exec, literal, &fds);
+	proc->stdin = fds[3];
+	proc->stdout = fds[0];
+	proc->stderr = STDERR_FILENO;
+	if (proc->pid > 0)
+		return (proc);
+	free(exec);
 	return (NULL);
 }
