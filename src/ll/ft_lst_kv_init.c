@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft_kv.h"
-#include "libft_ll.h"
-#include "libft_lst_kv.h"
 #include "libft_mem.h"
 
 t_kv	*ft_kv_init(t_kv_key_cmp key_cmp)
