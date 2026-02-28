@@ -1,7 +1,7 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    common.mk                                          :+:      :+:    :+:    #
+#    project.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
@@ -10,11 +10,17 @@
 #                                                                              #
 # **************************************************************************** #
 
+# this is to be included in standard projects that use libft
+# or copied as boiler plate if includes are not allowed ^^
+
 # configuration variables
 CC = cc
 CFLAGS += -MD -Wall -Wextra -Werror $(FT_EXTRA_CFLAGS)
 
-FT_EXTRA_CFLAGS += -DFT_APP_NAME=\"$(NAME)\"
+ifndef FT_APP_NAME
+export FT_APP_NAME := $(NAME)
+export FT_EXTRA_CFLAGS += -DFT_APP_NAME=\"$(FT_APP_NAME)\"
+endif
 
 GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history
@@ -31,8 +37,6 @@ CFLAGS += -I./libft/inc/
 LDLIBS += $(LIBFT_A)
 
 SELF=$(firstword $(MAKEFILE_LIST))
-
-export FT_EXTRA_CFLAGS
 
 # phony targets
 all: $(NAME)
@@ -51,7 +55,7 @@ dev_clean:
 	$(MAKE) -C $(LIBFT) $@
 debug: FT_EXTRA_CFLAGS += -g
 debug: clean $(NAME)
-.PHONY: fclean clean re all dev debug
+.PHONY: fclean clean re all dev debug $(LIBFT_A)
 
 # development helper files
 compile_flags.txt: $(SELF)
