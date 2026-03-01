@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arr_new.c                                       :+:      :+:    :+:   */
+/*   ft_arr_each.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 17:53:11 by fkruger           #+#    #+#             */
-/*   Updated: 2026/03/01 17:20:41 by fkruger          ###   ########.fr       */
+/*   Created: 2026/03/01 17:20:49 by fkruger           #+#    #+#             */
+/*   Updated: 2026/03/01 17:22:13 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_mem.h"
+#include <stddef.h>
 
-void	**ft_arr_new(size_t size)
+void	ft_arr_each(void *ar, void (*apply)(void*))
 {
-	return (ft_calloc(size + 1, sizeof(void *)));
+	size_t	i;
+	void	**arr;
+
+	arr = ar;
+	i = 0;
+	while (*(arr + i))
+		(apply(*(arr + i)), i++);
 }
