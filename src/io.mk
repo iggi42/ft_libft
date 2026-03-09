@@ -13,4 +13,3 @@
 SECT_io += ft_putchar_fd.c ft_putendl_fd.c	ft_putnbr_fd.c ft_putstr_fd.c
 SECT_io += ft_printf.c ft_printf_fd.c
 SECT_io += ft_write.c
-SECT_io += ft_gnl.c

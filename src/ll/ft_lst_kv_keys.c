@@ -32,5 +32,5 @@ t_kv_key	*ft_kv_keys(t_kv *store)
 		*(result + i++) = ((t_kv_pair *)head->content)->key;
 		head = head->next;
 	}
-	return ((t_kv_key*) result);
+	return ((t_kv_key *)result);
 }
