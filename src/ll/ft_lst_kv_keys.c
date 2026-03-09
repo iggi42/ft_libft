@@ -18,10 +18,10 @@
 //! get all keys in a freeable, NULL terminated array
 t_kv_key	*ft_kv_keys(t_kv *store)
 {
-	size_t		s;
-	size_t		i;
-	t_kv_key	*result;
-	t_list		*head;
+	size_t	s;
+	size_t	i;
+	t_arr	*result;
+	t_list	*head;
 
 	i = 0;
 	head = store->_store;
@@ -29,8 +29,8 @@ t_kv_key	*ft_kv_keys(t_kv *store)
 	result = ft_arr_new(s);
 	while (i < s)
 	{
-		*(result + i++) = ((t_kv_pair *) head->content)->key;
+		*(result + i++) = ((t_kv_pair *)head->content)->key;
 		head = head->next;
 	}
-	return (result);
+	return ((t_kv_key*) result);
 }

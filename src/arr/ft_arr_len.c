@@ -9,15 +9,13 @@
 /*   Updated: 2026/02/13 18:39:04 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stdlib.h>
+#include "libft_arr_t.h"
 
-size_t	ft_arr_len(void *ar)
+size_t	ft_arr_len(t_arr arr)
 {
 	size_t	i;
-	void	**arr;
 
-	arr = ar;
 	i = 0;
 	while (*(arr + i))
 		i++;

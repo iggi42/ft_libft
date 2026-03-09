@@ -15,7 +15,6 @@
 #include "libft_lst_kv.h"
 #include "libft_mem.h"
 
-
 void	ft_kv_free(t_kv *kv)
 {
 	ft_lstclear(&(kv->_store), free);
@@ -63,7 +62,6 @@ t_kv_value	ft_kv_pop(t_kv *root, t_kv_key key)
 		if (val != NULL)
 		{
 			result = *val;
-			// free(((t_kv_pair *)(*head)->content)->key);
 			free(ft_lst_pop(head));
 			return (result);
 		}

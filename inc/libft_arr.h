@@ -15,15 +15,20 @@
 # include "libft_arr_t.h"
 # include <stddef.h>
 
-arr_t			*ft_arr_new(size_t size);
-size_t			ft_arr_len(arr_t arr);
+t_arr	*ft_arr_new(size_t size);
+size_t	ft_arr_len(t_arr arr);
 
 // call 'apply' against each element of the array
-void			ft_arr_each(arr_t arr, void (*apply)(void *));
-void			ft_arr_neach(arr_t arr, size_t n, void (*apply)(void *));
+void	ft_arr_each(t_arr arr, t_arr_scal apply);
+
+// call 'apply' against the first n elements of the array
+//   (ignores NULL terminators and feed them into apply instead).
+void	ft_arr_neach(t_arr arr, size_t n, t_arr_scal apply);
+
+t_arr	*ft_arr_map(t_arr arr, t_arr_scal apply);
 
 // fold (from lower to higher index) over the given array
 // void* fold(void *acc, void *arr_el)
-void			*ft_arr_fold(arr_t arr, void *(*fold)(void *, void *), void *acc);
+void	*ft_arr_fold(t_arr arr, void *(*fold)(void *, void *), void *acc);
 
 #endif
