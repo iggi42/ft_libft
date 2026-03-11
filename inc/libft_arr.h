@@ -25,7 +25,8 @@ void			ft_arr_each(t_arr arr, void (*each)(t_arr_el el));
 //   (ignores NULL terminators and feed them into apply instead).
 void			ft_arr_neach(t_arr arr, size_t n, void (*each)(t_arr_el el));
 
-t_arr			*ft_arr_map(t_arr arr, t_arr_el (*map)(t_arr_el el));
+t_arr			*ft_arr_map(t_arr input, t_arr_el (*map)(t_arr_el el));
+t_arr			*ft_arr_nmap(t_arr input, size_t n, t_arr_el (*map)(t_arr_el el));
 
 // fold (from lower to higher index) over the given array
 // void* fold(void *acc, void *arr_el)
