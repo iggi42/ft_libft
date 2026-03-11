@@ -14,7 +14,7 @@
 #include "libft_str.h"
 #include <unistd.h>
 
-static char	*get_env(char *envp[], char *s)
+static char	*get_env(char *const *envp, char *s, char *fall_back)
 {
 	size_t	i;
 	size_t	slen;
@@ -28,10 +28,10 @@ static char	*get_env(char *envp[], char *s)
 			return (*(envp + i) + slen + 1);
 		i++;
 	}
-	return (NULL);
+	return (fall_back);
 }
 
-static char	*find_in_path(char *cmd0, char *envp[])
+char	*ft_os_search_path(char *cmd0, char *const *envp)
 {
 	char	**paths;
 	size_t	i;
@@ -39,7 +39,7 @@ static char	*find_in_path(char *cmd0, char *envp[])
 
 	if (ft_strncmp("./", cmd0, 2) == 0)
 		return (ft_strdup(cmd0));
-	paths = ft_split(get_env(envp, "PATH"), ':');
+	paths = ft_split(get_env(envp, "PATH", ""), ':');
 	i = 0;
 	while (*(paths + i))
 	{
@@ -50,17 +50,4 @@ static char	*find_in_path(char *cmd0, char *envp[])
 		i++;
 	}
 	return (NULL);
-}
-
-t_os_exec	*ft_os_cmd_parse(char *cmd, char *const *envp)
-{
-	t_os_exec	*result;
-
-	result = ft_malloc(sizeof(t_os_exec));
-	if (result == NULL)
-		return (NULL);
-	result->argv = ft_split(cmd, ' ');
-	result->envp = envp;
-	result->exec_file = find_in_path(result->argv[0], (char **)envp);
-	return (result);
 }

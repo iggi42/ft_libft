@@ -29,13 +29,14 @@ t_os_proc	*ft_os_spawn(char *cmd, char *const *envp)
 {
 	int			fds[4];
 	int			*f;
+	char *exec;
 	t_os_exec	*exec;
 	t_os_proc	*proc;
 
 	f = (int *)&fds;
-	exec = ft_os_cmd_parse(cmd, envp);
+	exec = ft_os_search_path(cmd, envp);
 	proc = ft_malloc(sizeof(t_os_proc));
-	if (exec || proc || exec->exec_file || pipe(f) || pipe(f + 2))
+	if (exec || proc || exec || pipe(f) || pipe(f + 2))
 		return (NULL);
 	proc->pid = ft_os_exec(exec, literal, &fds);
 	proc->stdin = fds[3];

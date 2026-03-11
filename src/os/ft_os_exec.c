@@ -32,14 +32,18 @@ pid_t	ft_os_exec(t_os_exec *exec, int *(*setup_io)(void *arg),
 		void *setup_io_arg)
 {
 	pid_t	child_pid;
+	char *exec_file;
 
 	child_pid = fork();
 	if (child_pid < 0)
 		(perror("fork"), exit(EXIT_FAILURE));
 	if (child_pid > 0)
 		return (child_pid);
+
 	mk_std(setup_io, setup_io_arg);
-	ft_execve(exec->exec_file, exec->argv, exec->envp);
-	perror("execve");
+	exec_file = ft_os_search_path(exec->argv[0], (char **) exec->envp);
+	if (exec_file)
+		ft_execve(exec_file, exec->argv, exec->envp);
+	perror(exec->argv[0]);
 	exit(EXIT_FAILURE);
 }
