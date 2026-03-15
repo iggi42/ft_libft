@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_toa.h"
+#include "libft_str.h"
 
 char	*ft_ultoa_b(unsigned long nb, const char *alphabet)
 {

@@ -9,7 +9,8 @@
 /*   Updated: 2026/02/13 18:39:07 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_toa.h"
+#include "libft_mem.h"
 #include <limits.h>
 #include <stddef.h>
 #include <stdint.h>

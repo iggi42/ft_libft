@@ -9,7 +9,8 @@
 /*   Updated: 2026/02/13 18:39:07 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libft_str.h"
+#include "libft_mem.h"
 
 // returns the size of the substring
 static size_t	ft_substr_len(const char *s, size_t start, size_t len)
