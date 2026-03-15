@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str2l.c                                         :+:      :+:    :+:   */
+/*   ft_strnxt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 23:41:32 by fkruger           #+#    #+#             */
-/*   Updated: 2026/03/15 23:41:34 by fkruger          ###   ########.fr       */
+/*   Created: 2026/03/15 23:40:23 by fkruger           #+#    #+#             */
+/*   Updated: 2026/03/15 23:40:24 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_char.h"
-#include <stdbool.h>
 #include <stddef.h>
 
-size_t	ft_str2l(const char *input, long *result)
+char	*ft_strnxt(const char *s, int (*check)(int c))
 {
-	size_t	size;
-	bool	sign;
+	size_t	i;
 
-	size = 0;
-	sign = false;
-	*result = 0;
-	if (*input == '-')
+	i = 0;
+	while (*(s + i))
 	{
-		size++;
-		sign = !sign;
+		if (check((int)*(s + i)))
+			return ((char *)(s + i));
+		i++;
 	}
-	else if (*input == '+')
-		size++;
-	while (ft_isdigit(*(input + size)))
-		*result = *result * 10 - (*(input + size++) - 48);
-	if (!sign)
-		*result *= -1;
-	return (size);
+	return (NULL);
 }

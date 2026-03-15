@@ -13,6 +13,7 @@
 #ifndef LIBFT_STR_H
 # define LIBFT_STR_H
 
+# include <stddef.h>
 # include <stdlib.h>
 
 //! @name string
@@ -41,6 +42,16 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 //! @brief allocates a string from a template string and var args.
 char	*ft_strf(const char *tmpl, ...);
+char	*ft_strnxt(const char *s, int (*check)(int c));
+
+// parses a long from an input string into a long
+// returns 0 if parsing failed,
+// otherwise returns the number of characters read from input
+size_t	ft_str2l(const char *input, long *result);
+
+// reads them as a fraction like seperated by /
+size_t	ft_str2d(const char *input, double *result);
+
 //!@}
 
 #endif

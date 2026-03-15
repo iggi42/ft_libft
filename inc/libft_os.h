@@ -33,7 +33,7 @@ typedef struct s_os_exec
 }			t_os_exec;
 
 //! search PATH for an executable file
-char	*ft_os_search_path(char *cmd0, char *const *envp);
+char		*ft_os_search_path(char *cmd0, char *const *envp);
 
 //! execute a parsed cmd call
 pid_t		ft_os_exec(t_os_exec *exec, int *(*setup)(void *arg),

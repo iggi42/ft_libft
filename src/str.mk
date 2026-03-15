@@ -13,4 +13,5 @@
 SECT_str += ft_atoi.c ft_split.c ft_str_alloc.c ft_strchr.c ft_strdup.c ft_strf.c
 SECT_str += ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c
 SECT_str += ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c
+SECT_str += ft_strnxt.c ft_str2l.c ft_str2d.c
 

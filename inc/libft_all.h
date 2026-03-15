@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef LIBFT_ALL_H
+# define LIBFT_ALL_H
 
 # include "libft_buf.h"
 # include "libft_char.h"
