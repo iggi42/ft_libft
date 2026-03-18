@@ -1,27 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_math.h                                       :+:      :+:    :+:   */
+/*   ft_set_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:04 by fkruger          ###   ########.fr       */
+/*   Created: 2026/03/18 18:57:26 by fkruger           #+#    #+#             */
+/*   Updated: 2026/03/18 18:57:27 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MATH_H
-# define LIBFT_MATH_H
 
-# include "libft_ll.h"
-# include "libft_math_set_t.h"
-# include "libft_mem.h"
 
-//! @name Math
-//!@{
-
-// TODO test better
-unsigned long long	ft_pow(unsigned long base, unsigned int n);
-
-//!@}
-#endif

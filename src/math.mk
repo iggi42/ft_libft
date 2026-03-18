@@ -11,3 +11,4 @@
 # **************************************************************************** #
 
 SECT_math += ft_pow.c
+# SECT_math += ft_set_new.c ft_set_add.c ft_set_has.c

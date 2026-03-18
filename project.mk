@@ -6,7 +6,7 @@
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2025/12/11 12:20:33 by fkruger          ###   ########.fr        #
+#    Updated: 2026/03/17 18:09:22 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ dev_clean:
 	$(MAKE) -C $(LIBFT) $@
 debug: FT_EXTRA_CFLAGS += -g
 debug: clean $(NAME)
-.PHONY: fclean clean re all dev debug $(LIBFT_A)
+.PHONY: fclean clean re all dev debug
 
 # development helper files
 compile_flags.txt: $(SELF)

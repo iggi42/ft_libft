@@ -10,5 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-SECT_arr = ft_arr_len.c ft_arr_new.c ft_arr_each.c ft_arr_fold.c
+SECT_arr += ft_arr_len.c ft_arr_at.c
+SECT_arr += ft_arr_new.c ft_arr_each.c ft_arr_fold.c
 SECT_arr += ft_arr_map.c ft_arr_nmap.c

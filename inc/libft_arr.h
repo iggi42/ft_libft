@@ -18,6 +18,7 @@
 
 t_arr		*ft_arr_new(size_t size);
 size_t		ft_arr_len(t_arr arr);
+t_arr_el	*ft_arr_at(t_arr arr, size_t i);
 
 // call 'apply' against each element of the array
 void		ft_arr_each(t_arr arr, void (*each)(t_arr_el el));

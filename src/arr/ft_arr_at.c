@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_math.h                                       :+:      :+:    :+:   */
+/*   ft_arr_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:04 by fkruger          ###   ########.fr       */
+/*   Created: 2026/03/17 21:17:05 by fkruger           #+#    #+#             */
+/*   Updated: 2026/03/17 21:17:06 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MATH_H
-# define LIBFT_MATH_H
+#include "libft_arr.h"
+#include <stddef.h>
 
-# include "libft_ll.h"
-# include "libft_math_set_t.h"
-# include "libft_mem.h"
+t_arr_el	*ft_arr_at(t_arr arr, size_t i)
+{
+	if(ft_arr_len(arr) >= i)
+		return (NULL);
+	return *arr + i;
+}
 
-//! @name Math
-//!@{
-
-// TODO test better
-unsigned long long	ft_pow(unsigned long base, unsigned int n);
-
-//!@}
-#endif

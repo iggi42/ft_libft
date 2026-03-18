@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_math.h                                       :+:      :+:    :+:   */
+/*   ft_set_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:04 by fkruger          ###   ########.fr       */
+/*   Created: 2026/03/18 18:57:17 by fkruger           #+#    #+#             */
+/*   Updated: 2026/03/18 18:57:18 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft_math.h"
 
-#ifndef LIBFT_MATH_H
-# define LIBFT_MATH_H
+t_set *ft_set_new()
+{
+	t_set *n = ft_malloc(sizeof(t_set));
+}
 
-# include "libft_ll.h"
-# include "libft_math_set_t.h"
-# include "libft_mem.h"
-
-//! @name Math
-//!@{
-
-// TODO test better
-unsigned long long	ft_pow(unsigned long base, unsigned int n);
-
-//!@}
-#endif
