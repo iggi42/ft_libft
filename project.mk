@@ -55,7 +55,7 @@ dev_clean:
 	$(MAKE) -C $(LIBFT) $@
 debug: FT_EXTRA_CFLAGS += -g
 debug: clean $(NAME)
-.PHONY: fclean clean re all dev debug $(LIBFT_A)
+.PHONY: fclean clean re all dev debug
 
 # development helper files
 compile_flags.txt: $(SELF)
