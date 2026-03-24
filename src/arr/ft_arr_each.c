@@ -13,10 +13,12 @@
 #include "libft_arr_t.h"
 #include <stddef.h>
 
-void	ft_arr_each(t_arr arr, void *(*apply)(void*))
+void	ft_arr_each(t_arr arr, void *(*apply)(void *))
 {
 	size_t	i;
 
+	if (arr == NULL)
+		return ;
 	i = 0;
 	while (*(arr + i))
 		(apply(*(arr + i)), i++);
