@@ -41,7 +41,7 @@ SELF=$(firstword $(MAKEFILE_LIST))
 # phony targets
 all: $(NAME)
 re: clean all
-fclean: clean dev_clean
+fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT) $@
 	find -name '*.d' -print -delete
