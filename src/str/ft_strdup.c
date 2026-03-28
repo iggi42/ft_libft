@@ -21,6 +21,6 @@ char	*ft_strdup(const char *s)
 	size = ft_strlen(s);
 	result = ft_str_alloc(size);
 	if (result != NULL)
-		ft_strlcpy(result, s, size);
+		ft_strlcpy(result, s, size + 1);
 	return (result);
 }

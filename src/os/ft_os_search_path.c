@@ -30,25 +30,37 @@ static char	*get_env(char *const *envp, char *key, char *fall_back)
 	return (fall_back);
 }
 
+static char	*default_str(char *normal, char *fallback)
+{
+	if (*normal == '\0')
+		return (fallback);
+	return (normal);
+}
+
 char	*ft_os_search_path(char *cmd0, char *const *envp)
 {
 	char	**paths;
 	size_t	i;
 	char	*full_path;
+	char	*sub_optimal;
 
 	if (!*cmd0)
 		return (NULL);
 	paths = ft_split(get_env(envp, "PATH", "."), ':');
 	i = 0;
-	while (paths[i])
+	sub_optimal = NULL;
+	while (paths != NULL && paths[i])
 	{
-		full_path = ft_strf("%s/%s", paths[i], cmd0);
-		if (access(full_path, X_OK) == 0)
+		full_path = ft_strf("%s/%s", default_str(paths[i], "."), cmd0);
+		if (full_path == NULL || access(full_path, X_OK) == 0)
 			return (ft_arr_each((t_arr)paths, free), free(paths), full_path);
-		free(full_path);
+		if (access(full_path, F_OK) == 0)
+			sub_optimal = (free(sub_optimal), full_path);
+		else
+			free(full_path);
 		i++;
 	}
 	if (paths)
 		ft_arr_each((t_arr)paths, free);
-	return (free(paths), NULL);
+	return (free(paths), sub_optimal);
 }

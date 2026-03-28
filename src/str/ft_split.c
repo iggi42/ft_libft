@@ -12,8 +12,8 @@
 
 #include "libft_mem.h"
 #include "libft_str.h"
-#include <stdlib.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 static char	**build_array(char const *s, char c)
 {
@@ -21,6 +21,8 @@ static char	**build_array(char const *s, char c)
 	char	*runner;
 	bool	prev_c;
 
+	if (s == NULL)
+		return (NULL);
 	count = 0;
 	runner = (char *)s;
 	prev_c = true;
