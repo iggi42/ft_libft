@@ -44,7 +44,7 @@ char	*ft_os_search_path(char *cmd0, char *const *envp)
 	char	*full_path;
 	char	*sub_optimal;
 
-	if (!*cmd0)
+	if (cmd0 == NULL || *cmd0 == '\0')
 		return (NULL);
 	paths = ft_split(get_env(envp, "PATH", "."), ':');
 	i = 0;
@@ -54,7 +54,7 @@ char	*ft_os_search_path(char *cmd0, char *const *envp)
 		full_path = ft_strf("%s/%s", default_str(paths[i], "."), cmd0);
 		if (full_path == NULL || access(full_path, X_OK) == 0)
 			return (ft_arr_each((t_arr)paths, free), free(paths), full_path);
-		if (access(full_path, F_OK) == 0)
+		if (sub_optimal == NULL && access(full_path, F_OK) == 0)
 			sub_optimal = (free(sub_optimal), full_path);
 		else
 			free(full_path);
