@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "libft_toa.h"
 #include "libft_str.h"
+#include "libft_mem.h"
 
 char	*ft_ptoa_b(void *ptr, const char *alphabet)
 {
@@ -21,6 +22,6 @@ char	*ft_ptoa_b(void *ptr, const char *alphabet)
 	result = ft_str_alloc(size);
 	if (size == ft_ptoa_bl(ptr, result, size, alphabet))
 		return (result);
-	free(result);
+	ft_free(result);
 	return (NULL);
 }

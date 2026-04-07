@@ -14,7 +14,7 @@
 # define LIBFT_TOA_H
 
 # include <stdlib.h>
-# include "libft_mem.h"
+# include "libft_byte_t.h"
 
 //! @name itoa and friends
 //!@{

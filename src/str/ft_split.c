@@ -53,10 +53,10 @@ static char	**clean_up(char **arr)
 {
 	while (arr != NULL && *arr != NULL)
 	{
-		free(*arr);
+		ft_free(*arr);
 		arr++;
 	}
-	free(arr);
+	ft_free(arr);
 	return (NULL);
 }
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_ll.h"
-#include <stdlib.h>
+#include "libft_mem.h"
 
 void	*ft_lst_pop(t_list **lst)
 {
@@ -19,7 +19,7 @@ void	*ft_lst_pop(t_list **lst)
 	if (*lst == NULL)
 		return (NULL);
 	el = **lst;
-	free(*lst);
+	ft_free(*lst);
 	*lst = el.next;
 	return (el.content);
 }

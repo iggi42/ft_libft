@@ -9,14 +9,14 @@
 /*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
+#include "libft_mem.h"
 
 char	*ft_str_alloc(size_t len)
 {
 	char	*result;
 
-	result = (char *)malloc((len + 1) * sizeof(char));
+	result = (char *) ft_malloc((len + 1) * sizeof(char));
 	if (result)
-		*(result + len) = '\0';
+		result[len] = '\0';
 	return (result);
 }

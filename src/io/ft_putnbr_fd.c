@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "libft_io.h"
 #include "libft_toa.h"
+#include "libft_mem.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -18,5 +19,5 @@ void	ft_putnbr_fd(int n, int fd)
 
 	s = ft_itoa(n);
 	ft_putstr_fd(s, fd);
-	free(s);
+	ft_free(s);
 }

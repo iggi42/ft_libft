@@ -12,6 +12,7 @@
 #include "libft_arr.h"
 #include "libft_os.h"
 #include "libft_str.h"
+#include "libft_mem.h"
 #include <unistd.h>
 
 static char	*get_env(char *const *envp, char *key, char *fall_back)
@@ -57,7 +58,7 @@ char	*ft_os_search_path(char *cmd0, char *const *envp)
 		if (sub_optimal == NULL && access(full_path, F_OK) == 0)
 			sub_optimal = (free(sub_optimal), full_path);
 		else
-			free(full_path);
+			ft_free(full_path);
 		i++;
 	}
 	if (paths)

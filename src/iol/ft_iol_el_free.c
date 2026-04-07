@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_iol.h"
+#include "libft_mem.h"
 
 void	ft_iol_el_free(t_iol_el *el)
 {
 	if (el != NULL && el->free != NULL)
 		el->free(el);
-	free(el);
+	ft_free(el);
 }

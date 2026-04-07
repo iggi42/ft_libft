@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_ll.h"
-#include <stdlib.h>
+#include "libft_mem.h"
+#include <stddef.h>
 
 t_list	**ft_lststart(t_list *head)
 {
 	t_list	**result;
 
-	result = (t_list **)malloc(sizeof(t_list *));
+	result = (t_list **)ft_malloc(sizeof(t_list *));
 	*result = head;
 	return (result);
 }

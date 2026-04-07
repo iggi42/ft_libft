@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "libft_io.h"
 #include "libft_str.h"
+#include "libft_mem.h"
 #include "libft_iol.h"
 
 void	ft_iol_pp_el(t_iol_el *el)
@@ -24,5 +25,5 @@ void	ft_iol_pp_el(t_iol_el *el)
 	}
 	s = ft_substr(el->buffer, 0, el->size);
 	ft_printf("%d : [%s]\n", el->size, s);
-	free(s);
+	ft_free(s);
 }

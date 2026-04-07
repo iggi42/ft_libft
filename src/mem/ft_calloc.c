@@ -21,9 +21,8 @@ void	*ft_calloc(size_t n_el, size_t el_size)
 	else
 	{
 		el_size *= n_el;
-		result = malloc(el_size);
-		if (result != NULL)
-			ft_bzero(result, el_size);
+		result = ft_malloc(el_size);
+		ft_bzero(result, el_size);
 	}
 	return (result);
 }

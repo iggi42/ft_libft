@@ -9,7 +9,8 @@
 /*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft_mem.h"
+#include "libft_byte_t.h"
+#include <stddef.h>
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

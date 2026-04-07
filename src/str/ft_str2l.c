@@ -33,5 +33,7 @@ size_t	ft_str2l(const char *input, long *result)
 		*result = *result * 10 - (*(input + size++) - 48);
 	if (!sign)
 		*result *= -1;
+	if (size > 15)
+		return (0);
 	return (size);
 }

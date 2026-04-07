@@ -17,7 +17,7 @@
 
 void	ft_kv_free(t_kv *kv)
 {
-	ft_lstclear(&(kv->_store), free);
+	ft_lstclear(&(kv->_store), ft_free);
 }
 
 // returns NULL if keys don't match
@@ -62,7 +62,7 @@ t_kv_value	ft_kv_pop(t_kv *root, t_kv_key key)
 		if (val != NULL)
 		{
 			result = *val;
-			free(ft_lst_pop(head));
+			ft_free(ft_lst_pop(head));
 			return (result);
 		}
 		head = &((*head)->next);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_ll.h"
-#include <stdlib.h>
+#include "libft_mem.h"
 
 static void	ft_lstcut(t_list *lst, void (*del)(void *))
 {
@@ -20,7 +20,7 @@ static void	ft_lstcut(t_list *lst, void (*del)(void *))
 		return ;
 	del(lst->content);
 	nxt = lst->next;
-	free(lst);
+	ft_free(lst);
 	ft_lstcut(nxt, del);
 }
 

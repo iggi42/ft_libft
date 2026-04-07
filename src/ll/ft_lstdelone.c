@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_ll.h"
-#include <stdlib.h>
+#include "libft_mem.h"
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
@@ -23,5 +23,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 		lst->next = nxt->next;
 		lst->content = nxt->content;
 	}
-	free(nxt);
+	ft_free(nxt);
 }

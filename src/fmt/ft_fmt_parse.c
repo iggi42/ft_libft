@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "libft_fmt_ops.h"
 #include "libft_str.h"
+#include "libft_mem.h"
 #include "libft_iol.h"
 
 static size_t	get_seg_size(const char *template)
@@ -35,7 +36,7 @@ t_list	*ft_fmt_parse(const char *template)
 
 	if (template == NULL || *template == '\0')
 		return (NULL);
-	seg = (t_iol_el *)malloc(sizeof(t_iol_el));
+	seg = (t_iol_el *)ft_malloc(sizeof(t_iol_el));
 	if (seg == NULL)
 		return (ft_fmt_parse(template));
 	seg->buffer = (char *)template;
@@ -45,6 +46,6 @@ t_list	*ft_fmt_parse(const char *template)
 	if (result != NULL)
 		result->next = ft_fmt_parse(template + seg->size);
 	else
-		free(seg);
+		ft_free(seg);
 	return (result);
 }
