@@ -28,8 +28,8 @@ typedef struct s_os_proc
 //! an new OS process in a normal way
 typedef struct s_os_exec
 {
-	char *const	*argv;
-	char *const	*envp;
+	char	 *const *argv;
+	char	 *const *envp;
 }			t_os_exec;
 
 //! search PATH for an executable file
@@ -39,6 +39,7 @@ char		*ft_os_search_path(char *cmd0, char *const *envp);
 pid_t		ft_os_exec(t_os_exec *exec, int *(*setup)(void *arg),
 				void *setup_arg);
 
+int			ft_wait(pid_t pid);
 //! parse a cmd call
 t_os_proc	*ft_os_spawn(char *cmd, char *const *envp);
 
