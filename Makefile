@@ -6,13 +6,13 @@
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2026/04/07 04:00:54 by fkruger          ###   ########.fr        #
+#    Updated: 2026/04/10 23:12:40 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # configuration variables
 CC = cc
-CFLAGS += -MD -Wall -Wextra -Werror -I./inc $(FT_EXTRA_CFLAGS)
+CFLAGS += -MD -Wall -Wextra -Werror -I./inc -O1 $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
 
 NAME = libft
@@ -25,7 +25,7 @@ SRC_DIR = src
 BIN_DIR = bin
 
 ifndef FT_LIB_PKGS
-FT_LIB_PKGS := arr char fmt io iol ll math mem os str toa
+FT_LIB_PKGS := arr char fmt io iol ll math mem os str toa merle
 endif
 
 # load SECT_$(pkg) for every pkgs

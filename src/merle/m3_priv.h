@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   m3_priv.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 20:35:38 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
+/*   Created: 2026/04/07 05:29:32 by fkruger           #+#    #+#             */
+/*   Updated: 2026/04/07 05:29:35 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft_merle.h"
+#ifndef M3_PRIV_H
+# define M3_PRIV_H
 
-#ifndef LIBFT_M3_ENABLED
-
-inline void	*ft_malloc(size_t size)
+typedef struct s_ms
 {
-	return (ft_m3_malloc(size));
-}
-#else
+	struct s_ms	*next;
+	void		*ptr;
+}				t_ms;
 
-inline void	*ft_malloc(size_t size)
-{
-	return (malloc(size));
-}
 #endif

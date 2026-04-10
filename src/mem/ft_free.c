@@ -9,10 +9,20 @@
 /*   Updated: 2026/04/07 03:53:44 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft_merle.h"
 #include <stdlib.h>
-#include <stdarg.h>
+
+#ifndef LIBFT_M3_ENABLED
+
+inline void	ft_free(void *ptr)
+{
+	ft_m3_free(ptr);
+}
+#else
 
 inline void	ft_free(void *ptr)
 {
 	free(ptr);
 }
+#endif

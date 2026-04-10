@@ -13,7 +13,7 @@
 #include "libft_mem.h"
 #include "libft_str.h"
 #include <stdbool.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 static char	**build_array(char const *s, char c)
 {

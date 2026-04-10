@@ -1,14 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    mem.mk                                             :+:      :+:    :+:    #
+#    merle.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
+#    By: fkruger <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2025/12/05 22:55:50 by fkruger          ###   ########.fr        #
+#    Created: 2026/04/07 04:19:52 by fkruger           #+#    #+#              #
+#    Updated: 2026/04/11 00:35:58 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SECT_mem += ft_free.c ft_malloc.c
-SECT_mem += ft_bzero.c ft_calloc.c ft_iszero.c  ft_memchr.c
-SECT_mem += ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_switch.c
+
+SECT_merle += ft_m3_core.c ft_m3_malloc.c ft_m3_free.c
+
+# use the m3 hooks instead of direct calls
+bin/mem/ft_malloc.o: FT_EXTRA_CFLAGS += -DM3_ENABLED
+bin/mem/ft_free.o: FT_EXTRA_CFLAGS += -DM3_ENABLED
+

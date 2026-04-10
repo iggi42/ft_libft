@@ -27,13 +27,15 @@ size_t	ft_str2l(const char *input, long *result)
 		size++;
 		sign = !sign;
 	}
-	else if (*input == '+')
-		size++;
-	while (ft_isdigit(*(input + size)))
-		*result = *result * 10 - (*(input + size++) - 48);
+	while (ft_isdigit(input[size]))
+	{
+		if (size >= (19 + sign))
+			return (0);
+		if ((*result * 10 - (input[size] - 48)) > *result)
+			return (0);
+		*result = *result * 10 - (input[size++] - 48);
+	}
 	if (!sign)
 		*result *= -1;
-	if (size > 15)
-		return (0);
 	return (size);
 }

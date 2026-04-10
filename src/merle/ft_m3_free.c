@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_m3_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 20:35:38 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
+/*   Created: 2026/04/07 05:12:36 by fkruger           #+#    #+#             */
+/*   Updated: 2026/04/07 05:12:37 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
 #include "libft_merle.h"
+#include <stdlib.h>
 
-#ifndef LIBFT_M3_ENABLED
-
-inline void	*ft_malloc(size_t size)
+void	ft_m3_free(void *ptr)
 {
-	return (ft_m3_malloc(size));
+	free(ptr);
+	ft_m3_rm(ptr);
 }
-#else
-
-inline void	*ft_malloc(size_t size)
-{
-	return (malloc(size));
-}
-#endif
