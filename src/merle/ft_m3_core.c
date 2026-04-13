@@ -29,7 +29,7 @@ bool	ft_m3_add(void *ptr)
 	if (ptr == NULL)
 		return (false);
 	new_head = malloc(sizeof(t_ms));
-	if (!new_head)
+	if (new_head == NULL)
 		return (false);
 	new_head->next = *head();
 	new_head->ptr = ptr;
@@ -83,4 +83,5 @@ void	ft_m3_cleanup(void)
 		curr = curr->next;
 		free(cache);
 	}
+	*head() = NULL;
 }

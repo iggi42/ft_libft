@@ -33,6 +33,10 @@ t_arr		*ft_arr_nmap(t_arr input, size_t n, t_arr_el (*map)(t_arr_el el));
 // void* fold(void *acc, void *arr_el)
 void		*ft_arr_fold(t_arr arr, void *(*fold)(void *, t_arr_el), void *acc);
 
+// TODO implementation
+void		*ft_arr_nfold(t_arr arr, void *(*fold)(void *, t_arr_el),
+				void *acc);
+
 t_arr_el	*ft_arr_find(t_arr arr, bool (*valid)(t_arr_el));
 
 #endif

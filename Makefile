@@ -12,7 +12,7 @@
 
 # configuration variables
 CC = cc
-CFLAGS += -MD -Wall -Wextra -Werror -I./inc -O1 $(FT_EXTRA_CFLAGS)
+CFLAGS += -MD -Wall -Wextra -Werror -I./inc $(FT_EXTRA_CFLAGS)
 # -MD to generate the .d files in $(DEPS)
 
 NAME = libft
@@ -24,21 +24,28 @@ HEADER = $(addprefix ./inc/, \
 SRC_DIR = src
 BIN_DIR = bin
 
-ifndef FT_LIB_PKGS
-FT_LIB_PKGS := arr char fmt io iol ll math mem os str toa merle
-endif
+# ifndef FT_LIB_PKGS
+# FT_LIB_PKGS += arr fmt io iol ll math mem os str toa merle
+# endif
+FT_LIB_PKGS += arr io mem str os merle
 
 # load SECT_$(pkg) for every pkgs
--include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk)
-FT_LIB_PKGS_OUTDIR=$(addprefix $(BIN_DIR)/, $(FT_LIB_PKGS))
+-include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 1
+-include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 2
+-include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 3
+-include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 4
+-include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 5
+# allow our package dep tree to be 3 deep max for now
+# a better solution than hard coding it that way, might be nice
 
-C_FILES = $(foreach p, $(FT_LIB_PKGS), $(addprefix $(p)/, $(SECT_$(p))))
+FT_LIB_PKGS_OUTDIR=$(addprefix $(BIN_DIR)/, $(sort $(FT_LIB_PKGS)))
+
+C_FILES = $(foreach p, $(sort $(FT_LIB_PKGS)), $(addprefix $(p)/, $(SECT_$(p))))
 
 ifndef FT_APP_NAME
 FT_APP_NAME := libft-dev
 FT_EXTRA_CFLAGS += -DFT_APP_NAME=\"$(FT_APP_NAME)\"
 endif
-
 
 GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history lldb_bugreport.txt
@@ -47,9 +54,8 @@ GIT_IGNORE += $(BIN_DIR)
 SRCS = $(addprefix $(SRC_DIR)/, $(C_FILES))
 OBJS = $(C_FILES:%.c=$(BIN_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
-DEV_FILES = .gitignore compile_flags.txt
 DOC_FOLDER = doc
-GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
+GIT_IGNORE += $(OBJS) $(DEPS)
 
 SELF = $(firstword $(MAKEFILE_LIST))
 

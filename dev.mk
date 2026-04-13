@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+DEV_FILES = .gitignore compile_flags.txt
+GIT_IGNORE += $(DEV_FILES)
 # rules to generate documentation
 .PHONY:  dev doc dh doc_clean
 dev: $(DEV_FILES)

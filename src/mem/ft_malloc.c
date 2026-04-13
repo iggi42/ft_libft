@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft_merle.h"
+#include <stdlib.h>
 
-#ifndef LIBFT_M3_ENABLED
+#ifdef M3_ENABLED
 
-inline void	*ft_malloc(size_t size)
+void	*ft_malloc(size_t size)
 {
 	return (ft_m3_malloc(size));
 }
 #else
 
-inline void	*ft_malloc(size_t size)
+void	*ft_malloc(size_t size)
 {
 	return (malloc(size));
 }

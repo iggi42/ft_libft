@@ -10,7 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
+ifndef SECT_os
+
+FT_LIB_PKGS += arr mem str
+
 SECT_os += ft_execve.c ft_fatal.c ft_os_search_path.c ft_wait.c
 # SECT_os += ft_os_spawn.c ft_os_cmd_parse.c ft_os_exec.c
 
-$(BIN_DIR)/os/ft_fatal.o: CFLAGS += -DFTLIB_F_PERROR
+# $(BIN_DIR)/os/ft_fatal.o: CFLAGS += -DFTLIB_F_PERROR
+endif

@@ -46,7 +46,7 @@ fclean: clean
 	$(MAKE) -C $(LIBFT) $@
 	find -name '*.d' -print -delete
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(DEPS)
 	$(MAKE) -C $(LIBFT) $@
 dev: $(DEV_FILES)
 	$(MAKE) -C $(LIBFT) $@
@@ -71,6 +71,7 @@ compile_flags.txt: $(SELF)
 		echo $$ig >> $@ ; \
 	done
 
+GIT_IGNORE += /libft/*.o /libft/*.d
 # core build rules
 $(LIBFT_A): $(LIBFT)
 	$(MAKE) -C $(LIBFT)

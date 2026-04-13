@@ -21,9 +21,9 @@ t_arr	*ft_arr_map(t_arr input, t_arr_el (*map)(t_arr_el el))
 	size = ft_arr_len(input);
 	result = ft_arr_new(size);
 	i = 0;
-	while (*(input + i))
+	while (input[i])
 	{
-		*(result + i) = map(*(input + i));
+		result[i] = map(input[i]);
 		i++;
 	}
 	return (result);

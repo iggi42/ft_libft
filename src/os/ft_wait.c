@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <sys/wait.h>
 
-int	get_exit_code(int res)
+static int	get_exit_code(int res)
 {
 	if (WIFEXITED(res))
 		return (WEXITSTATUS(res));
