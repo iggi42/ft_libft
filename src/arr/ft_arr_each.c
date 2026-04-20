@@ -20,6 +20,6 @@ void	ft_arr_each(t_arr arr, void *(*apply)(void *))
 	if (arr == NULL)
 		return ;
 	i = 0;
-	while (*(arr + i))
+	while (*((t_arr_el *)arr + i))
 		(apply(*(arr + i)), i++);
 }

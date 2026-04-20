@@ -28,8 +28,8 @@ typedef struct s_os_proc
 //! an new OS process in a normal way
 typedef struct s_os_exec
 {
-	char	 *const *argv;
-	char	 *const *envp;
+	char *const	*argv;
+	char *const	*envp;
 }			t_os_exec;
 
 //! search PATH for an executable file

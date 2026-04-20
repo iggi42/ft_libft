@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_arr.h"
+#include "libft_mem.h"
 #include "libft_os.h"
 #include "libft_str.h"
-#include "libft_mem.h"
 #include <unistd.h>
 
 static char	*get_env(char *const *envp, char *key, char *fall_back)
@@ -54,14 +54,15 @@ char	*ft_os_search_path(char *cmd0, char *const *envp)
 	{
 		full_path = ft_strf("%s/%s", default_str(paths[i], "."), cmd0);
 		if (full_path == NULL || access(full_path, X_OK) == 0)
-			return (ft_arr_each((t_arr)paths, free), free(paths), full_path);
+			return (ft_arr_each((t_arr)paths, free), ft_free(paths),
+				ft_free(sub_optimal), full_path);
 		if (sub_optimal == NULL && access(full_path, F_OK) == 0)
-			sub_optimal = (free(sub_optimal), full_path);
+			sub_optimal = (ft_free(sub_optimal), full_path);
 		else
 			ft_free(full_path);
 		i++;
 	}
 	if (paths)
 		ft_arr_each((t_arr)paths, free);
-	return (free(paths), sub_optimal);
+	return (ft_free(paths), sub_optimal);
 }
