@@ -54,7 +54,7 @@ char	*ft_os_search_path(char *cmd0, char *const *envp)
 	{
 		full_path = ft_strf("%s/%s", default_str(paths[i], "."), cmd0);
 		if (full_path == NULL || access(full_path, X_OK) == 0)
-			return (ft_arr_each((t_arr)paths, free), ft_free(paths),
+			return (ft_arr_each((t_arr)paths, ft_free), ft_free(paths),
 				ft_free(sub_optimal), full_path);
 		if (sub_optimal == NULL && access(full_path, F_OK) == 0)
 			sub_optimal = (ft_free(sub_optimal), full_path);
@@ -63,6 +63,6 @@ char	*ft_os_search_path(char *cmd0, char *const *envp)
 		i++;
 	}
 	if (paths)
-		ft_arr_each((t_arr)paths, free);
+		ft_arr_each((t_arr)paths, ft_free);
 	return (ft_free(paths), sub_optimal);
 }
