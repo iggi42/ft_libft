@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   fd_cache.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 04:33:11 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
+/*   Created: 2026/04/23 17:58:42 by fkruger           #+#    #+#             */
+/*   Updated: 2026/04/23 17:58:42 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft_ll.h"
-#include "libft_mem.h"
 
-void	ft_lstdelone(t_list **lst, void (*del)(void *))
-{
-	t_list	*frst;
+char *fdc_at(int fd);
+void fdc_free(int fd);
+void fdc_free_all(void);
 
-	if(*lst == NULL)
-		return;
-	frst = *lst;
-	*lst = (*lst)->next;
-	if(del)
-		del(frst->content);
-	ft_free(frst);
-}

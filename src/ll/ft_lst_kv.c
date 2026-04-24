@@ -38,6 +38,8 @@ t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 	t_list		*head;
 	t_kv_value	*val;
 
+	if(root == NULL)
+		return (NULL);
 	head = root->_store;
 	while (head != NULL)
 	{
@@ -49,10 +51,10 @@ t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 	return (NULL);
 }
 
-t_kv_value	ft_kv_pop(t_kv *root, t_kv_key key)
+t_kv_pair	*ft_kv_pop(t_kv *root, t_kv_key key)
 {
 	t_kv_value	*val;
-	t_kv_value	result;
+	t_kv_pair	*result;
 	t_list		**head;
 
 	head = &root->_store;
@@ -61,8 +63,8 @@ t_kv_value	ft_kv_pop(t_kv *root, t_kv_key key)
 		val = kv_maybe_value((*head)->content, key, root->key_cmp);
 		if (val != NULL)
 		{
-			result = *val;
-			ft_free(ft_lst_pop(head));
+			result = (t_kv_pair *) (*head)->content;
+			ft_lstdelone(*head, ft_free);
 			return (result);
 		}
 		head = &((*head)->next);

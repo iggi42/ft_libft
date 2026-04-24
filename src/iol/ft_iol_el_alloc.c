@@ -20,7 +20,7 @@ t_iol_el	*ft_iol_el_alloc(size_t size)
 	seg = (t_iol_el *) ft_malloc(sizeof(t_iol_el));
 	start = (char *)ft_malloc(size);
 	if (seg == NULL || start == NULL)
-		return (free(seg), free(start), NULL);
+		return (ft_free(seg), ft_free(start), NULL);
 	seg->buffer = start;
 	seg->size = size;
 	seg->free = ft_iol_free_always;

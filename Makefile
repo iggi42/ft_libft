@@ -27,7 +27,7 @@ BIN_DIR = bin
 # ifndef FT_LIB_PKGS
 # FT_LIB_PKGS += arr fmt io iol ll math mem os str toa merle
 # endif
-FT_LIB_PKGS += arr io mem str os merle
+FT_LIB_PKGS += arr io mem str os merle gnl
 
 # load SECT_$(pkg) for every pkgs
 -include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 1

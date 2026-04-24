@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lst_kv_each.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 04:33:11 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
+/*   Created: 2026/04/23 13:57:43 by fkruger           #+#    #+#             */
+/*   Updated: 2026/04/23 13:57:44 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft_ll.h"
-#include "libft_mem.h"
+#include "libft_kv.h"
+#include "libft_lst_kv.h"
 
-void	ft_lstdelone(t_list **lst, void (*del)(void *))
+void ft_kv_each(t_kv *store, void (*each)(t_kv_pair *pair))
 {
-	t_list	*frst;
-
-	if(*lst == NULL)
-		return;
-	frst = *lst;
-	*lst = (*lst)->next;
-	if(del)
-		del(frst->content);
-	ft_free(frst);
+	if(!store)
+		return ;
+	ft_lstiter(store->_store, (void (*)(void *)) each);
 }

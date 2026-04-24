@@ -59,7 +59,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new_l);
  * @brief remove first element of list
  * @param del function to free content
  */
-void				ft_lstdelone(t_list *lst, void (*del)(void *));
+void				ft_lstdelone(t_list **lst, void (*del)(void *));
 
 /**
  * @brief append a node to a list

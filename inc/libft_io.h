@@ -29,7 +29,7 @@ ssize_t	ft_write(int fd, const void *buf, size_t n);
 int		ft_printf(const char *tmpl, ...);
 int		ft_printf_fd(int fd, const char *tmpl, ...);
 
-//! a simple get next line (ft_buf -based for now)
+//! a simple get next line
 char	*ft_gnl(int fd);
 
 #endif

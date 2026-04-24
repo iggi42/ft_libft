@@ -24,6 +24,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dst_size);
 
 /** @brief allocates a memory for a string with length len. */
 char	*ft_str_alloc(size_t len);
+char	*ft_str_grow(char **input, size_t len);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, size_t start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
