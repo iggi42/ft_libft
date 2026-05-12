@@ -52,6 +52,7 @@ void	*ft_malloc(size_t size);
  * use to prevent double frees if you get the pointer thru ft_malloc
  */
 void	ft_free(void *ptr);
+void	ft_void(void *ptr);
 
 void	ft_switch(int *a, int *b);
 
