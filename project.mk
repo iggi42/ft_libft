@@ -33,35 +33,56 @@ GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
 
 LIBFT = ./libft
 LIBFT_A = ./libft/libft.a
-CFLAGS += -I./libft/inc/
+CPPFLAGS += -I./libft/inc/
 LDLIBS += $(LIBFT_A)
 
 SELF=$(firstword $(MAKEFILE_LIST))
 
-# phony targets
-all: $(NAME)
+# optional folders
+ifdef SRC_DIR
+VPATH += $(SRC_DIR)
+endif
+
+ifdef BIN_DIR
+GPATH += $(BIN_DIR)
+VPATH += $(BIN_DIR)
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+%.o: %.c | $(BIN_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $(BIN_DIR)/$@
+endif
+
+# cleaning targets
 re: clean all
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT) $@
 	find -name '*.d' -print -delete
+
 clean:
+ifdef BIN_DIR
+	$(RM) -r $(BIN_DIR)
+else
 	$(RM) $(OBJS) $(DEPS)
-	$(MAKE) -C $(LIBFT) $@
+endif
+	$(MAKE) -s -C $(LIBFT) $@
+
+# dev utils targets
 dev: $(DEV_FILES)
-	$(MAKE) -C $(LIBFT) $@
+	$(MAKE) -s -C $(LIBFT) $@
 dev_clean:
 	$(RM) $(DEV_FILES)
-	$(MAKE) -C $(LIBFT) $@
+	$(MAKE) -s -C $(LIBFT) $@
 debug: FT_EXTRA_CFLAGS += -g
 debug: clean $(NAME)
-.PHONY: fclean clean re all dev debug
+
+.PHONY: fclean clean re dev debug
 
 # development helper files
 compile_flags.txt: $(SELF)
 	@echo setup $@
 	@echo -n > $@
-	@for flag in $(CFLAGS); do \
+	@for flag in $(CFLAGS) $(CPPFLAGS); do \
 		echo $$flag >> $@ ; \
 	done
 
@@ -74,7 +95,7 @@ compile_flags.txt: $(SELF)
 GIT_IGNORE += /libft/*.o /libft/*.d
 # core build rules
 $(LIBFT_A): $(LIBFT)
-	$(MAKE) -C $(LIBFT)
+	$(MAKE) -s -C $(LIBFT) $(@F)
 
 GIT_IGNORE += $(DEPS)
 -include $(DEPS)
