@@ -18,4 +18,5 @@ SECT_str += ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c
 SECT_str += ft_strmapi.c
 SECT_str += ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c
 SECT_str += ft_strnxt.c ft_str2l.c ft_str2d.c
+SECT_str += ft_str_eq.c ft_str_sw.c
 endif

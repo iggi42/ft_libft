@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_str_eq.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
+/*   By: fkruger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/17 08:18:52 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:07 by fkruger          ###   ########.fr       */
+/*   Created: 2026/05/25 09:19:50 by fkruger           #+#    #+#             */
+/*   Updated: 2026/05/25 09:19:52 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
 
-size_t	ft_strlen(const char *s)
+#include "libft_str.h"
+#include <stdbool.h>
+#include <stdint.h>
+
+bool	ft_str_eq(const char *a, const char *b)
 {
-	size_t	l;
-
-	l = 0;
-	while (s[l] != '\0')
-		l++;
-	return (l);
+	return (ft_strncmp(a, b, SIZE_MAX) == 0);
 }
