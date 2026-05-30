@@ -52,6 +52,23 @@ $(BIN_DIR):
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $(BIN_DIR)/$@
 endif
 
+ifdef TESTS
+
+OBJS += $(TESTS:.c=.o)
+
+.PHONY: test
+test: tester
+	$<
+
+ifdef TEST_DIR
+VPATH += $(TEST_DIR)
+endif
+
+tester: $(OBJS) $(LIBFT_A)
+	$(CC) $(CFLAGS) -lcriterion -o $(BIN_DIR)/$@ $+
+
+endif
+
 # cleaning targets
 re: clean all
 fclean: clean
