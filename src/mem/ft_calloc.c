@@ -18,15 +18,9 @@ void	*ft_calloc(size_t n_el, size_t el_size)
 	void	*result;
 
 	if (n_el == 0 || el_size == 0 || (SIZE_MAX / n_el) < el_size)
-	{
-		result = NULL;
-		ft_printf_fd(2, "\nCALLOC FAIL\n");
-	}
-	else
-	{
-		el_size *= n_el;
-		result = ft_malloc(el_size);
-		ft_bzero(result, el_size);
-	}
+		return (NULL);
+	el_size *= n_el;
+	result = ft_malloc(el_size);
+	ft_bzero(result, el_size);
 	return (result);
 }
