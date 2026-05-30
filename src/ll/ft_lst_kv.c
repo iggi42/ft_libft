@@ -15,9 +15,18 @@
 #include "libft_lst_kv.h"
 #include "libft_mem.h"
 
+static void free_entry(void *entry)
+{
+	if(entry == NULL)
+		return;
+	// ft_free(((t_kv_pair*) entry)->key);
+	// ft_free(((t_kv_pair*) entry)->val);
+	ft_free(entry);
+}
+
 void	ft_kv_free(t_kv *kv)
 {
-	ft_lstclear(&(kv->_store), ft_free);
+	ft_lstclear(&(kv->_store), free_entry);
 }
 
 // returns NULL if keys don't match
@@ -38,7 +47,7 @@ t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 	t_list		*head;
 	t_kv_value	*val;
 
-	if(root == NULL)
+	if(root == NULL || key == NULL)
 		return (NULL);
 	head = root->_store;
 	while (head != NULL)
@@ -64,7 +73,7 @@ t_kv_pair	*ft_kv_pop(t_kv *root, t_kv_key key)
 		if (val != NULL)
 		{
 			result = (t_kv_pair *) (*head)->content;
-			ft_lstdelone(*head, ft_free);
+			ft_lstdelone(head, ft_void);
 			return (result);
 		}
 		head = &((*head)->next);
