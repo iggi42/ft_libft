@@ -36,6 +36,9 @@ LIBFT_A = ./libft/libft.a
 CPPFLAGS += -I./libft/inc/
 LDLIBS += $(LIBFT_A)
 
+.PHONY: all
+all: $(NAME)
+
 SELF=$(firstword $(MAKEFILE_LIST))
 
 # optional folders
@@ -54,8 +57,6 @@ endif
 
 ifdef TESTS
 
-OBJS += $(TESTS:.c=.o)
-
 .PHONY: test
 test: tester
 	$<
@@ -64,6 +65,7 @@ ifdef TEST_DIR
 VPATH += $(TEST_DIR)
 endif
 
+tester: OBJS += $(TESTS:.c=.o)
 tester: $(OBJS) $(LIBFT_A)
 	$(CC) $(CFLAGS) -lcriterion -o $(BIN_DIR)/$@ $+
 
