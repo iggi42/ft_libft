@@ -65,8 +65,7 @@ ifdef TEST_DIR
 VPATH += $(TEST_DIR)
 endif
 
-tester: OBJS += $(TESTS:.c=.o)
-tester: $(OBJS) $(LIBFT_A)
+tester: $(TESTS:.c=.o) $(OBJS) $(LIBFT_A)
 	$(CC) $(CFLAGS) -lcriterion -o $(BIN_DIR)/$@ $+
 
 endif
