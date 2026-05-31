@@ -20,40 +20,65 @@ static int	cmp_fd(void *a, void *b)
 	return (*(int *)a - *(int *)b);
 }
 
-static t_kv	**data(void)
+static t_kv	*data(void)
 {
 	static t_kv	*core;
 
 	if (core == NULL)
 		core = ft_kv_init(cmp_fd);
-	return (&core);
+	return (core);
 }
 
-// gets the pointer to BUFFERS_SIZE large cache of what could be left from
-// earlier gnl calls
-// can return NULL! (if key not found, for example)
-char	*fdc_at(int fd, char *(*new)(void))
+void	*fdc_add(int fd, void *buffer)
 {
-	char	*result;
-	int		*new_key;
+	int	*new_key;
 
-	result = ft_kv_get(*data(), &fd);
+	new_key = (int *)ft_malloc(sizeof(int));
+	*new_key = fd;
+	ft_kv_put(data(), new_key, buffer);
+	return (buffer);
+}
+
+// returns a char string with max size BUFFER_SIZE assigned to fd in earlier calls
+// if fd is not yet associated with an buffer, new is called to create it
+void *fdc_at(int fd, void *(*new)(void))
+{
+	void	*result;
+
+	if (fd < 0)
+		return (NULL);
+	result = ft_kv_get(data(), &fd);
 	if (result != NULL)
 		return (result);
-	result = new();
-	new_key = (int *)ft_malloc(sizeof(int));
-	ft_kv_put(*data(), new_key, result);
+	return (fdc_add(fd, new ()));
+}
+
+void	*fdc_pop(int fd)
+{
+	t_kv_pair	*entry;
+	char		*result;
+
+	entry = ft_kv_pop(data(), &fd);
+	if (entry == NULL)
+		return (NULL);
+	result = entry->val;
+	ft_free(entry->key);
+	ft_free(entry);
 	return (result);
 }
 
-void		fdc_free(int fd)
+void	fdc_free(int fd)
 {
-	t_kv_pair *entry = ft_kv_pop(*data(), &fd);
-	if(entry == NULL)
-		return;
-	ft_free(entry->key);
-	ft_free(entry->val);
+	t_kv_pair	*entry;
+
+	entry = ft_kv_pop(data(), &fd);
+	if (entry == NULL)
+		return ;
+	ft_free(((t_kv_pair *)entry)->key);
+	ft_free(((t_kv_pair *)entry)->val);
 	ft_free(entry);
 }
 
-void		fdc_free_all(void);
+void	fdc_free_all(void)
+{
+}
