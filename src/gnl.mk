@@ -13,6 +13,6 @@
 ifndef SECT_gnl
 
 FT_LIB_PKGS += ll mem
-SECT_gnl += ft_gnl.c fd_cache.c
+SECT_gnl += get_next_line.c get_next_line_utils.c fd_cache.c
 
 endif

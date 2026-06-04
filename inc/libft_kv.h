@@ -31,7 +31,7 @@ void				ft_kv_free(t_kv *store);
 t_kv_value			ft_kv_get(t_kv *store, t_kv_key key);
 
 // pop is same as get, but removes a found entry from store
-t_kv_pair	*ft_kv_pop(t_kv *root, t_kv_key key);
+t_kv_pair			*ft_kv_pop(t_kv *root, t_kv_key key);
 
 void				ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v);
 
@@ -39,6 +39,6 @@ void				ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v);
 t_kv_key			*ft_kv_keys(t_kv *store);
 
 /** call each for each key value pair */
-void ft_kv_each(t_kv *store, void (*each)(t_kv_pair *pair));
+void				ft_kv_each(t_kv *store, void (*each)(t_kv_pair *pair));
 
 #endif
