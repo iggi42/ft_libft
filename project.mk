@@ -71,6 +71,7 @@ tester: $(TESTS:.c=.o) $(OBJS) $(LIBFT_A)
 endif
 
 # cleaning targets
+all: $(NAME)
 re: clean all
 fclean: clean
 	$(RM) $(NAME)
@@ -91,10 +92,8 @@ dev: $(DEV_FILES)
 dev_clean:
 	$(RM) $(DEV_FILES)
 	$(MAKE) -s -C $(LIBFT) $@
-debug: FT_EXTRA_CFLAGS += -g
-debug: clean $(NAME)
 
-.PHONY: fclean clean re dev debug
+.PHONY: fclean clean re dev all
 
 # development helper files
 compile_flags.txt: $(SELF)
