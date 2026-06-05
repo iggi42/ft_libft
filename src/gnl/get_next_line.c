@@ -11,14 +11,7 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 #include "fd_cache.h"
-
-// always returns the same valid t_buf* (filled with a BUFFER_SIZE allocation)
-static t_buf	*gnl_cache(int fd)
-{
-	char *rest = fdc_pop(fd);
-	fdc_add(fd, void *buffer)
-	if(rest)
-}
+#include <libft_mem.h>
 
 char	*ft_buf_str(t_buf **b)
 {
@@ -30,7 +23,7 @@ char	*ft_buf_str(t_buf **b)
 		ft_buf_free(b);
 		return (NULL);
 	}
-	result = (char *)malloc((*b)->size + 1);
+	result = (char *)ft_malloc((*b)->size + 1);
 	if (result == NULL)
 	{
 		ft_buf_free(b);
@@ -67,21 +60,20 @@ void	ft_buf_free(t_buf **b)
 	if (*b == NULL)
 		return ;
 	if ((*b)->p)
-		free((*b)->p);
-	free(*b);
+		ft_free((*b)->p);
+	ft_free(*b);
 	*b = NULL;
 }
 
-char	*get_next_line(int fd)
+char	*ft_gnl(int fd)
 {
 	t_buf	*line_buf;
 	t_buf	*block;
 	char	*line_eol;
 
-	line_buf = ft_buf_new(BUFFER_SIZE);
+	line_buf = fdc_at(fd, (void *)(size_t) ft_buf_new, 0);
 	if (line_buf == NULL)
 		return (NULL);
-	ft_buf_cp(gnl_cache(fd), line_buf);
 	line_eol = ft_buf_eol(line_buf);
 	while (line_eol == NULL)
 	{
@@ -94,8 +86,6 @@ char	*get_next_line(int fd)
 		line_eol = ft_buf_eol(line_buf);
 	}
 	block = ft_buf_split(&line_buf, 1 + (t_byte *)line_eol - line_buf->p);
-	gnl_cache(fd)->size = BUFFER_SIZE;
-	ft_buf_cp(block, gnl_cache(fd));
-	ft_buf_free(&block);
+	fdc_add(fd, block);
 	return (ft_buf_str(&line_buf));
 }

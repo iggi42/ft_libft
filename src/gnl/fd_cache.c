@@ -9,7 +9,6 @@
 /*   Updated: 2026/04/23 17:52:34 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <libft_kv.h>
 #include <libft_mem.h>
 #include <stdbool.h>
@@ -41,7 +40,7 @@ void	*fdc_add(int fd, void *buffer)
 
 // returns a char string with max size BUFFER_SIZE assigned to fd in earlier calls
 // if fd is not yet associated with an buffer, new is called to create it
-void *fdc_at(int fd, void *(*new)(void))
+void *fdc_at(int fd, void *(new)(size_t size), size_t new_size)
 {
 	void	*result;
 
@@ -50,17 +49,17 @@ void *fdc_at(int fd, void *(*new)(void))
 	result = ft_kv_get(data(), &fd);
 	if (result != NULL)
 		return (result);
-	return (fdc_add(fd, new ()));
+	return (fdc_add(fd, new(new_size)));
 }
 
-void	*fdc_pop(int fd)
+void	*fdc_pop(int fd, void *(fallback)(size_t size), size_t new_size)
 {
 	t_kv_pair	*entry;
 	char		*result;
 
 	entry = ft_kv_pop(data(), &fd);
 	if (entry == NULL)
-		return (NULL);
+		return (fallback(new_size));
 	result = entry->val;
 	ft_free(entry->key);
 	ft_free(entry);
@@ -77,8 +76,4 @@ void	fdc_free(int fd)
 	ft_free(((t_kv_pair *)entry)->key);
 	ft_free(((t_kv_pair *)entry)->val);
 	ft_free(entry);
-}
-
-void	fdc_free_all(void)
-{
 }

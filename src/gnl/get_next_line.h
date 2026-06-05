@@ -15,8 +15,7 @@
 
 # include <stdlib.h>
 # include <libft_io_opts.h>
-
-typedef unsigned char	t_byte;
+# include <libft_byte_t.h>
 
 // wrapper of a buffer, together with its size;
 typedef struct s_buf
@@ -50,8 +49,5 @@ void					ft_buf_cp(t_buf *from, t_buf *to);
 
 // find the first occurence of any bytes in args (null terminated string)
 t_byte					*ft_buf_chr(t_buf *b, t_byte *args);
-
-// the star of this project
-char					*get_next_line(int fd);
 
 #endif

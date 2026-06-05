@@ -11,21 +11,19 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 #include <unistd.h>
-
+#include <libft_mem.h>
+ 
 t_buf	*ft_buf_new(size_t size)
 {
 	t_buf	*result;
 
-	result = (t_buf *)malloc(sizeof(t_buf));
+	result = (t_buf *)ft_malloc(sizeof(t_buf));
 	if (result == NULL)
 		return (NULL);
 	result->size = size;
-	result->p = (t_byte *)malloc(size * sizeof(t_byte));
+	result->p = (t_byte *)ft_malloc(size * sizeof(t_byte));
 	if (result->p == NULL)
-	{
-		free(result);
-		return (NULL);
-	}
+		return (ft_free(result), NULL);
 	return (result);
 }
 
@@ -35,21 +33,15 @@ t_buf	*ft_buf_read(int fd)
 	int		read_result;
 	t_buf	*result;
 
-	p = (t_byte *)malloc(BUFFER_SIZE);
+	p = (t_byte *)ft_malloc(BUFFER_SIZE);
 	if (p == NULL)
 		return (NULL);
 	read_result = read(fd, p, BUFFER_SIZE);
 	if (read_result <= 0)
-	{
-		free(p);
-		return (NULL);
-	}
-	result = (t_buf *)malloc(sizeof(t_buf));
+		return (ft_free(p), NULL);
+	result = (t_buf *)ft_malloc(sizeof(t_buf));
 	if (result == NULL)
-	{
-		free(p);
-		return (NULL);
-	}
+		return (free(p), NULL);
 	result->size = read_result;
 	result->p = p;
 	return (result);
