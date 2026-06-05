@@ -9,8 +9,8 @@
 /*   Updated: 2025/12/05 13:31:58 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
 #include "fd_cache.h"
+#include "get_next_line.h"
 #include <libft_mem.h>
 
 char	*ft_buf_str(t_buf **b)
@@ -71,7 +71,7 @@ char	*ft_gnl(int fd)
 	t_buf	*block;
 	char	*line_eol;
 
-	line_buf = fdc_at(fd, (void *)(size_t) ft_buf_new, 0);
+	line_buf = fdc_at(fd, (void *)(size_t)ft_buf_new, 0);
 	if (line_buf == NULL)
 		return (NULL);
 	line_eol = ft_buf_eol(line_buf);

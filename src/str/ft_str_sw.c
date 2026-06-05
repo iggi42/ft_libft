@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-bool    ft_str_sw(const char *big, const char *little)
+bool	ft_str_sw(const char *big, const char *little)
 {
 	return (ft_strncmp(big, little, ft_strlen(little)) == 0);
 }

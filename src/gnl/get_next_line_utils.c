@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
-#include <unistd.h>
 #include <libft_mem.h>
- 
+#include <unistd.h>
+
 t_buf	*ft_buf_new(size_t size)
 {
 	t_buf	*result;

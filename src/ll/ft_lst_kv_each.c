@@ -12,9 +12,9 @@
 #include "libft_kv.h"
 #include "libft_lst_kv.h"
 
-void ft_kv_each(t_kv *store, void (*each)(t_kv_pair *pair))
+void	ft_kv_each(t_kv *store, void (*each)(t_kv_pair *pair))
 {
-	if(!store)
+	if (!store)
 		return ;
-	ft_lstiter(store->_store, (void (*)(void *)) each);
+	ft_lstiter(store->_store, (void (*)(void *))each);
 }

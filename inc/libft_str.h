@@ -13,9 +13,9 @@
 #ifndef LIBFT_STR_H
 # define LIBFT_STR_H
 
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdlib.h>
-# include <stdbool.h>
 
 //! @name string
 //!@{
@@ -38,7 +38,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 
 bool	ft_str_eq(const char *a, const char *b);
 // sw => starts_with
-bool    ft_str_sw(const char *big, const char *little);
+bool	ft_str_sw(const char *big, const char *little);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
