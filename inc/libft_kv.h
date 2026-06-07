@@ -25,7 +25,8 @@ typedef struct s_kv
 }					t_kv;
 
 t_kv				*ft_kv_init(const t_kv_key_cmp key_cmp);
-void				ft_kv_free(t_kv *store);
+void				ft_kv_free(t_kv *kv, void (*f)(t_kv_pair *ptr));
+void				ft_kv_free_entry(t_kv_pair *entry);
 
 /** returns NULL if not found */
 t_kv_value			ft_kv_get(t_kv *store, t_kv_key key);
@@ -33,7 +34,8 @@ t_kv_value			ft_kv_get(t_kv *store, t_kv_key key);
 // pop is same as get, but removes a found entry from store
 t_kv_pair			*ft_kv_pop(t_kv *root, t_kv_key key);
 
-void				ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v);
+// set value the store, returns the old value (so NULL if no previous)
+t_kv_value			ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v);
 
 /** get all keys in a NULL terminated array */
 t_kv_key			*ft_kv_keys(t_kv *store);

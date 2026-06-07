@@ -15,9 +15,21 @@
 #include "libft_lst_kv.h"
 #include "libft_mem.h"
 
-void	ft_kv_free(t_kv *kv)
+void	ft_kv_free_entry(t_kv_pair *entry)
 {
-	ft_lstclear(&(kv->_store), ft_free);
+	if (entry == NULL)
+		return ;
+	ft_free(entry->key);
+	ft_free(entry->val);
+	ft_free(entry);
+}
+
+void	ft_kv_free(t_kv *kv, void (*f)(t_kv_pair *ptr))
+{
+	if (kv == NULL)
+		return ;
+	ft_lstclear(&(kv->_store), (void *)f);
+	ft_free(kv);
 }
 
 // returns NULL if keys don't match
