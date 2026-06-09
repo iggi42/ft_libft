@@ -34,13 +34,13 @@ void	ft_kv_free(t_kv *kv, void (*f)(t_kv_pair *ptr))
 
 // returns NULL if keys don't match
 // else returns the address of value of kv pair
-static t_kv_value	*kv_maybe_value(t_kv_pair *pair, t_kv_key key,
+static t_kv_pair	*kv_maybe_value(t_kv_pair *pair, t_kv_key key,
 		t_kv_key_cmp key_cmp)
 {
 	if (key == pair->key)
-		return (&(pair->val));
+		return (pair);
 	if (key_cmp(key, pair->key) == 0)
-		return (&(pair->val));
+		return (pair);
 	return (NULL);
 }
 
@@ -48,16 +48,16 @@ static t_kv_value	*kv_maybe_value(t_kv_pair *pair, t_kv_key key,
 t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 {
 	t_list		*head;
-	t_kv_value	*val;
+	t_kv_pair	*here;
 
 	if (root == NULL || key == NULL)
 		return (NULL);
 	head = root->_store;
 	while (head != NULL)
 	{
-		val = kv_maybe_value(head->content, key, root->key_cmp);
-		if (val != NULL)
-			return (*val);
+		here = kv_maybe_value(head->content, key, root->key_cmp);
+		if (here != NULL)
+			return (here->val);
 		head = head->next;
 	}
 	return (NULL);
@@ -65,44 +65,49 @@ t_kv_value	ft_kv_get(t_kv *root, t_kv_key key)
 
 t_kv_pair	*ft_kv_pop(t_kv *root, t_kv_key key)
 {
-	t_kv_value	*val;
-	t_kv_pair	*result;
+	t_kv_pair	*here;
 	t_list		**head;
 
+	if (root == NULL || key == NULL)
+		return (NULL);
 	head = &root->_store;
 	while (*head != NULL)
 	{
-		val = kv_maybe_value((*head)->content, key, root->key_cmp);
-		if (val != NULL)
-		{
-			result = (t_kv_pair *)(*head)->content;
-			ft_lstdelone(head, ft_void);
-			return (result);
-		}
+		here = kv_maybe_value((*head)->content, key, root->key_cmp);
+		if (here != NULL)
+			return (ft_lstdelone(head, ft_void), here);
 		head = &((*head)->next);
 	}
 	return (NULL);
 }
 
-void	ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v)
+static t_kv_pair	*new_kv_pair(t_kv_key key, t_kv_value v)
 {
-	t_kv_pair	*kv;
-	t_kv_value	*val;
+	t_kv_pair	*pair;
+
+	pair = ft_malloc(sizeof(t_kv_pair));
+	if (pair == NULL)
+		return (NULL);
+	pair->key = key;
+	pair->val = v;
+	return pair;
+}
+
+t_kv_pair	*ft_kv_put(t_kv *root, t_kv_key key, t_kv_value v)
+{
+	t_kv_pair	*here;
 	t_list		**head;
 
-	head = &store->_store;
+	if (root == NULL || key == NULL)
+		return (NULL);
+	head = &root->_store;
 	while (*head != NULL)
 	{
-		val = kv_maybe_value((*head)->content, key, store->key_cmp);
-		if (val != NULL)
-		{
-			*val = v;
-			return ;
-		}
+		here = kv_maybe_value((*head)->content, key, root->key_cmp);
+		if (here != NULL)
+			return ((*head)->content = new_kv_pair(key, v), here);
 		head = &((*head)->next);
 	}
-	kv = ft_malloc(sizeof(t_kv_pair));
-	kv->key = key;
-	kv->val = v;
-	*head = ft_lstnew(kv);
+	*head = ft_lstnew(new_kv_pair(key, v));
+	return (NULL);
 }

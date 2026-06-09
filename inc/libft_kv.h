@@ -35,12 +35,16 @@ t_kv_value			ft_kv_get(t_kv *store, t_kv_key key);
 t_kv_pair			*ft_kv_pop(t_kv *root, t_kv_key key);
 
 // set value the store, returns the old value (so NULL if no previous)
-t_kv_value			ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v);
+// t_kv_value			ft_kv_put(t_kv *store, t_kv_key key, t_kv_value v);
+t_kv_pair			*ft_kv_put(t_kv *root, t_kv_key key, t_kv_value v);
 
 /** get all keys in a NULL terminated array */
 t_kv_key			*ft_kv_keys(t_kv *store);
 
 /** call each for each key value pair */
 void				ft_kv_each(t_kv *store, void (*each)(t_kv_pair *pair));
+
+/** call each for each key value pair */
+void				ft_kv_fold(t_kv *store, void (*fold)(t_kv_pair *pair, void *acc), void *acc);
 
 #endif
