@@ -18,7 +18,7 @@ void	*ft_arr_fold(t_arr arr, void *(*fold)(void *, t_arr_el *), void *acc)
 	size_t	i;
 
 	i = 0;
-	while (*(arr + i))
+	while (arr && *(arr + i))
 		acc = fold(acc, *(arr + i++));
 	return (acc);
 }

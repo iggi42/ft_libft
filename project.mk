@@ -44,6 +44,7 @@ SELF=$(firstword $(MAKEFILE_LIST))
 # optional folders
 ifdef SRC_DIR
 VPATH += $(SRC_DIR)
+GPATH += $(SRC_DIR)
 endif
 
 ifdef BIN_DIR
