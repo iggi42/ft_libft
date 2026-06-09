@@ -71,7 +71,7 @@ char	*ft_gnl(int fd)
 	t_buf	*block;
 	char	*line_eol;
 
-	line_buf = fdc_at(fd, (void *)(size_t)ft_buf_new, 0);
+	line_buf = fdc_pop(fd, (void *)(size_t)ft_buf_new, 0);
 	if (line_buf == NULL)
 		return (NULL);
 	line_eol = ft_buf_eol(line_buf);
@@ -86,6 +86,9 @@ char	*ft_gnl(int fd)
 		line_eol = ft_buf_eol(line_buf);
 	}
 	block = ft_buf_split(&line_buf, 1 + (t_byte *)line_eol - line_buf->p);
-	fdc_add(fd, block);
+	if (block != NULL && block->size > 0)
+		fdc_add(fd, block);
+	else
+		ft_free(block);
 	return (ft_buf_str(&line_buf));
 }

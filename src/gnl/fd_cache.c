@@ -19,61 +19,53 @@ static int	cmp_fd(void *a, void *b)
 	return (*(int *)a - *(int *)b);
 }
 
-static t_kv	*data(void)
-{
-	static t_kv	*core;
+#define FDC_INIT 1
+#define FDC_FREE 2
 
-	if (core == NULL)
-		core = ft_kv_init(cmp_fd);
-	return (core);
+static t_kv	*fdc_core(int op)
+{
+	static t_kv	*store;
+
+	if (op == FDC_FREE)
+		store = (ft_kv_free(store, ft_kv_free_entry), NULL);
+	if (op == FDC_INIT && store == NULL)
+		store = ft_kv_init(cmp_fd);
+	return (store);
 }
 
 void	*fdc_add(int fd, void *buffer)
 {
 	int	*new_key;
+	t_kv *store;
 
 	new_key = (int *)ft_malloc(sizeof(int));
+	store = fdc_core(FDC_INIT);
+	if (!store || !new_key)
+		return (ft_free(new_key), NULL);
 	*new_key = fd;
-	ft_kv_put(data(), new_key, buffer);
+	ft_kv_free_entry(ft_kv_put(store, new_key, buffer));
 	return (buffer);
 }
 
-// returns a char string with max size BUFFER_SIZE assigned to fd in earlier calls
-// if fd is not yet associated with an buffer, new is called to create it
-void *fdc_at(int fd, void *(new)(size_t size), size_t new_size)
+void	*fdc_lazy(int fd, void *(constructor)(size_t size), size_t init_size)
 {
-	void	*result;
-
-	if (fd < 0)
-		return (NULL);
-	result = ft_kv_get(data(), &fd);
-	if (result != NULL)
-		return (result);
-	return (fdc_add(fd, new(new_size)));
-}
-
-void	*fdc_pop(int fd, void *(fallback)(size_t size), size_t new_size)
-{
+	t_kv *store;
 	t_kv_pair	*entry;
 	char		*result;
 
-	entry = ft_kv_pop(data(), &fd);
+	store = fdc_core(FDC_INIT);
+	if(!store)
+		return NULL;
+	entry = ft_kv_pop(store, &fd);
 	if (entry == NULL)
-		return (fallback(new_size));
+		return (constructor(init_size));
 	result = entry->val;
 	ft_free(entry->key);
 	ft_free(entry);
 	return (result);
 }
 
-void	fdc_free(int fd)
+void	fdc_cleanup(void)
 {
-	t_kv_pair	*entry;
-
-	entry = ft_kv_pop(data(), &fd);
-	if (entry == NULL)
-		return ;
-	ft_free(((t_kv_pair *)entry)->key);
-	ft_free(((t_kv_pair *)entry)->val);
-	ft_free(entry);
+	fdc_core(FDC_FREE);
 }
