@@ -11,7 +11,7 @@
 # **************************************************************************** #
 ifndef SECT_iol
 
-FT_LIB_PKGS += mem ll io str
+FT_LIB_PKGS += mem lst io str
 
 SECT_iol += ft_iol_el_alloc.c ft_iol_elcmp.c ft_iol_el_free.c ft_iol_el_read.c
 SECT_iol += ft_iol_pp_el.c

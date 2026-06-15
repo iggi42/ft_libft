@@ -25,7 +25,7 @@ SRC_DIR = src
 BIN_DIR = bin
 
 # ifndef FT_LIB_PKGS
-# FT_LIB_PKGS += arr fmt io iol ll math mem os str toa merle
+# FT_LIB_PKGS += arr fmt io iol lst math mem os str toa merle
 # endif
 FT_LIB_PKGS += arr io mem str os merle gnl
 
