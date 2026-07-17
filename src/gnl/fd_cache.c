@@ -47,7 +47,7 @@ void	*fdc_add(int fd, void *buffer)
 	return (buffer);
 }
 
-void	*fdc_lazy(int fd, void *(constructor)(size_t size), size_t init_size)
+void	*fdc_pop(int fd, void *(constructor)(size_t size), size_t init_size)
 {
 	t_kv *store;
 	t_kv_pair	*entry;
