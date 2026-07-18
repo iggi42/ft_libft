@@ -26,14 +26,19 @@ GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history
 GIT_IGNORE += $(NAME)
 
+ifdef BIN_DIR
+OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
+else
 OBJS = $(SRCS:.c=.o)
+endif
+
 DEPS = $(OBJS:.o=.d)
 DEV_FILES += .gitignore compile_flags.txt
 GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
 
 LIBFT = ./libft
-LIBFT_A = ./libft/libft.a
-CPPFLAGS += -I./libft/inc/
+LIBFT_A = $(LIBFT)/libft.a
+CPPFLAGS += -I$(LIBFT)/inc/
 LDLIBS += $(LIBFT_A)
 
 .PHONY: all
@@ -48,12 +53,10 @@ GPATH += $(SRC_DIR)
 endif
 
 ifdef BIN_DIR
-GPATH += $(BIN_DIR)
-VPATH += $(BIN_DIR)
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
-%.o: %.c | $(BIN_DIR)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $(BIN_DIR)/$@
+$(BIN_DIR)/%.o: %.c | $(BIN_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 endif
 
 ifdef TESTS
