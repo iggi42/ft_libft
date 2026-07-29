@@ -63,14 +63,14 @@ ifdef TESTS
 
 .PHONY: test
 test: tester
-	$<
+	./$<
 
 ifdef TEST_DIR
 VPATH += $(TEST_DIR)
 endif
 
 tester: $(TESTS:.c=.o) $(OBJS) $(LIBFT_A)
-	$(CC) $(CFLAGS) -lcriterion -o $(BIN_DIR)/$@ $+
+	$(CC) $(CFLAGS) -lcriterion -o $@ $+
 
 endif
 
