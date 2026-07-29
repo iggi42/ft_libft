@@ -57,9 +57,17 @@ $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 $(BIN_DIR)/%.o: %.c | $(BIN_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+GIT_IGNORE += /$(BIN_DIR)
 endif
 
 ifdef TESTS
+ifndef BIN_DIR
+TESTS_O = $(TESTS:%.c=%.o)
+else
+TESTS_O = $(TESTS:%.c=$(BIN_DIR)/%.o)
+$(BIN_DIR)/%.o: $(TEST_DIR)/%.c | $(BIN_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+endif
 
 .PHONY: test
 test: tester
@@ -69,7 +77,7 @@ ifdef TEST_DIR
 VPATH += $(TEST_DIR)
 endif
 
-tester: $(TESTS:.c=.o) $(OBJS) $(LIBFT_A)
+tester: $(TESTS_O) $(OBJS) $(LIBFT_A)
 	$(CC) $(CFLAGS) -lcriterion -o $@ $+
 
 endif
