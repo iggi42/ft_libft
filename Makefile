@@ -6,7 +6,7 @@
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2026/04/10 23:12:40 by fkruger          ###   ########.fr        #
+#    Updated: 2026/07/13 01:53:38 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ FT_LIB_PKGS += arr io mem str os merle gnl
 -include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 3
 -include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 4
 -include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 5
-# allow our package dep tree to be 3 deep max for now
+# allow our package dep tree to be 5 deep max for now
 # a better solution than hard coding it that way, might be nice
 
 FT_LIB_PKGS_OUTDIR=$(addprefix $(BIN_DIR)/, $(sort $(FT_LIB_PKGS)))
