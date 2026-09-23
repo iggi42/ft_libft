@@ -45,6 +45,7 @@ t_kv_key			*ft_kv_keys(t_kv *store);
 void				ft_kv_each(t_kv *store, void (*each)(t_kv_pair *pair));
 
 /** call each for each key value pair */
-void				ft_kv_fold(t_kv *store, void (*fold)(t_kv_pair *pair, void *acc), void *acc);
+void				ft_kv_fold(t_kv *store, void (*fold)(t_kv_pair *pair,
+							void *acc), void *acc);
 
 #endif

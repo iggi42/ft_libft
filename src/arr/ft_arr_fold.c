@@ -13,7 +13,7 @@
 #include "libft_arr_t.h"
 #include <stddef.h>
 
-void	*ft_arr_fold(t_arr arr, void *(*fold)(void *, t_arr_el *), void *acc)
+void	*ft_arr_fold(t_arr arr, void *(*fold)(void *acc, t_arr_el *el), void *acc)
 {
 	size_t	i;
 

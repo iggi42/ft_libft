@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_arr.h                                        :+:      :+:    :+:   */
+/*   ft_arr_rev.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/29 16:32:03 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:04 by fkruger          ###   ########.fr       */
+/*   Created: 2026/09/17 12:21:47 by fkruger           #+#    #+#             */
+/*   Updated: 2026/09/17 12:21:51 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_ARR_H
-# define LIBFT_ARR_H
-# include "libft_arr_t.h"
-# include "libft_fun_t.h"
-# include <stddef.h>
+#include "libft_arr.h"
 
+static void	ft_switch_ptr(void **a, void **b)
+{
+	void	*c;
 
-t_arr		ft_arr_new(size_t size);
-size_t		ft_arr_len(t_arr arr);
+	c = *a;
+	*a = *b;
+	*b = c;
+}
 
-// reverse the order of elements in the array
-void		ft_arr_rev(t_arr arr);
+// reverse the first n elemnts of the array
+void	ft_arr_rev_n(t_arr_el *arr, size_t n)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (i < n / 2)
+	{
+		ft_switch_ptr(&arr[i], &arr[n - i - 1]);
+		i++;
+	}
+}
+
+void	ft_arr_rev(t_arr arr)
+{
+	size_t	len;
+
+	len = ft_arr_len(arr);
+	ft_arr_rev_n(arr, len);
+}

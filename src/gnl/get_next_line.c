@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "fd_cache.h"
 #include "get_next_line.h"
+#include "libft_io.h"
 #include <libft_mem.h>
 
 char	*ft_buf_str(t_buf **b)
@@ -65,12 +66,22 @@ void	ft_buf_free(t_buf **b)
 	*b = NULL;
 }
 
+void	last_if_else(int fd, t_buf *block)
+{
+	if (block != NULL && block->size > 0)
+		fdc_add(fd, block);
+	else
+		ft_free(block);
+}
+
 char	*ft_gnl(int fd)
 {
 	t_buf	*line_buf;
 	t_buf	*block;
 	char	*line_eol;
 
+	if (fd < 0)
+		return (fdc_cleanup(), NULL);
 	line_buf = fdc_pop(fd, (void *)(size_t)ft_buf_new, 0);
 	if (line_buf == NULL)
 		return (NULL);
@@ -86,9 +97,6 @@ char	*ft_gnl(int fd)
 		line_eol = ft_buf_eol(line_buf);
 	}
 	block = ft_buf_split(&line_buf, 1 + (t_byte *)line_eol - line_buf->p);
-	if (block != NULL && block->size > 0)
-		fdc_add(fd, block);
-	else
-		ft_free(block);
+	last_if_else(fd, block);
 	return (ft_buf_str(&line_buf));
 }

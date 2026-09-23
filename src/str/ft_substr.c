@@ -9,37 +9,23 @@
 /*   Updated: 2026/02/13 18:39:07 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft_str.h"
 #include "libft_mem.h"
-
-// returns the size of the substring
-static size_t	ft_substr_len(const char *s, size_t start, size_t len)
-{
-	size_t	s_len;
-
-	s_len = ft_strlen(s);
-	if (start > s_len)
-		return (0);
-	if ((start + len) > s_len)
-		return (s_len - start);
-	return (len);
-}
+#include "libft_str.h"
+#include <stddef.h>
 
 char	*ft_substr(const char *s, size_t start, size_t len)
 {
+	size_t	input_len;
 	char	*result;
-	size_t	i;
-	size_t	output_len;
 
-	i = 0;
-	output_len = ft_substr_len(s, start, len);
-	if (output_len == 0)
-		return (ft_calloc(1, sizeof(char)));
-	result = ft_calloc(output_len + 1, sizeof(char));
-	while (result != NULL && *(s + start + i) && i < len)
-	{
-		*(result + i) = *(s + start + i);
-		i++;
-	}
+	if (s == NULL)
+		return (NULL);
+	input_len = ft_strlen(s);
+	if (start > input_len)
+		return (ft_strdup(""));
+	if (start + len > input_len)
+		return (ft_strdup(s + start));
+	result = ft_str_alloc(len);
+	ft_memcpy(result, s + start, len);
 	return (result);
 }

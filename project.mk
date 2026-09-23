@@ -6,7 +6,7 @@
 #    By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 16:10:11 by fkruger           #+#    #+#              #
-#    Updated: 2025/12/11 12:20:33 by fkruger          ###   ########.fr        #
+#    Updated: 2026/08/02 16:00:09 by fkruger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,19 @@ GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history
 GIT_IGNORE += $(NAME)
 
+ifdef BIN_DIR
+OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
+else
 OBJS = $(SRCS:.c=.o)
+endif
+
 DEPS = $(OBJS:.o=.d)
 DEV_FILES += .gitignore compile_flags.txt
 GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
 
 LIBFT = ./libft
-LIBFT_A = ./libft/libft.a
-CPPFLAGS += -I./libft/inc/
+LIBFT_A = $(LIBFT)/libft.a
+CPPFLAGS += -I$(LIBFT)/inc/
 LDLIBS += $(LIBFT_A)
 
 .PHONY: all
@@ -48,26 +53,33 @@ GPATH += $(SRC_DIR)
 endif
 
 ifdef BIN_DIR
-GPATH += $(BIN_DIR)
-VPATH += $(BIN_DIR)
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
-%.o: %.c | $(BIN_DIR)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $(BIN_DIR)/$@
+$(BIN_DIR)/%.o: %.c | $(BIN_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+GIT_IGNORE += /$(BIN_DIR)
 endif
 
 ifdef TESTS
+ifndef BIN_DIR
+TESTS_O = $(TESTS:%.c=%.o)
+else
+TESTS_O = $(TESTS:%.c=$(BIN_DIR)/%.o)
+$(BIN_DIR)/%.o: $(TEST_DIR)/%.c | $(BIN_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+endif
 
 .PHONY: test
+GIT_IGNORE += tester
 test: tester
-	$<
+	./$<
 
 ifdef TEST_DIR
 VPATH += $(TEST_DIR)
 endif
 
-tester: $(TESTS:.c=.o) $(OBJS) $(LIBFT_A)
-	$(CC) $(CFLAGS) -lcriterion -o $(BIN_DIR)/$@ $+
+tester: $(TESTS_O) $(OBJS) $(LIBFT_A)
+	$(CC) $(CFLAGS) -lcriterion -o $@ $+
 
 endif
 
@@ -75,7 +87,7 @@ endif
 all: $(NAME)
 re: clean all
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) tester
 	$(MAKE) -C $(LIBFT) $@
 	find -name '*.d' -print -delete
 

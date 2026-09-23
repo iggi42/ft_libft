@@ -15,23 +15,6 @@
 #include "libft_lst_kv.h"
 #include "libft_mem.h"
 
-void	ft_kv_free_entry(t_kv_pair *entry)
-{
-	if (entry == NULL)
-		return ;
-	ft_free(entry->key);
-	ft_free(entry->val);
-	ft_free(entry);
-}
-
-void	ft_kv_free(t_kv *kv, void (*f)(t_kv_pair *ptr))
-{
-	if (kv == NULL)
-		return ;
-	ft_lstclear(&(kv->_store), (void *)f);
-	ft_free(kv);
-}
-
 // returns NULL if keys don't match
 // else returns the address of value of kv pair
 static t_kv_pair	*kv_maybe_value(t_kv_pair *pair, t_kv_key key,
@@ -90,24 +73,28 @@ static t_kv_pair	*new_kv_pair(t_kv_key key, t_kv_value v)
 		return (NULL);
 	pair->key = key;
 	pair->val = v;
-	return pair;
+	return (pair);
 }
 
 t_kv_pair	*ft_kv_put(t_kv *root, t_kv_key key, t_kv_value v)
 {
 	t_kv_pair	*here;
+	t_kv_pair	*new;
 	t_list		**head;
 
 	if (root == NULL || key == NULL)
+		return (NULL);
+	new = new_kv_pair(key, v);
+	if (new == NULL)
 		return (NULL);
 	head = &root->_store;
 	while (*head != NULL)
 	{
 		here = kv_maybe_value((*head)->content, key, root->key_cmp);
 		if (here != NULL)
-			return ((*head)->content = new_kv_pair(key, v), here);
+			return ((*head)->content = new, here);
 		head = &((*head)->next);
 	}
-	*head = ft_lstnew(new_kv_pair(key, v));
+	*head = ft_lstnew(new);
 	return (NULL);
 }

@@ -35,8 +35,8 @@ static t_kv	*fdc_core(int op)
 
 void	*fdc_add(int fd, void *buffer)
 {
-	int	*new_key;
-	t_kv *store;
+	int		*new_key;
+	t_kv	*store;
 
 	new_key = (int *)ft_malloc(sizeof(int));
 	store = fdc_core(FDC_INIT);
@@ -47,15 +47,15 @@ void	*fdc_add(int fd, void *buffer)
 	return (buffer);
 }
 
-void	*fdc_lazy(int fd, void *(constructor)(size_t size), size_t init_size)
+void	*fdc_pop(int fd, void *(constructor)(size_t size), size_t init_size)
 {
-	t_kv *store;
+	t_kv		*store;
 	t_kv_pair	*entry;
 	char		*result;
 
 	store = fdc_core(FDC_INIT);
-	if(!store)
-		return NULL;
+	if (!store)
+		return (NULL);
 	entry = ft_kv_pop(store, &fd);
 	if (entry == NULL)
 		return (constructor(init_size));
