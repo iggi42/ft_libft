@@ -12,9 +12,9 @@
 
 #include "libft_arr.h"
 
-t_arr	*ft_arr_map(t_arr input, t_arr_el (*map)(t_arr_el el))
+t_arr	ft_arr_map(t_arr input, t_arr_el (*map)(t_arr_el el))
 {
-	t_arr	*result;
+	t_arr	result;
 	size_t	size;
 	size_t	i;
 

@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include <libft_arr.h>
+#include <libft_fun_t.h>
 #include <libft_ll.h>
 #include <libft_mem.h>
 
-t_arr	*ft_arr_from_iter(t_iter itr, void *iter_arg)
+t_arr	ft_arr_from_iter(t_fun_iter itr, void *iter_arg)
 {
-	t_arr		*result;
+	t_arr		result;
 	t_list		*cache;
 	t_arr_el	new;
 

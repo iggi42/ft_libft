@@ -20,7 +20,7 @@ t_kv_key	*ft_kv_keys(t_kv *store)
 {
 	size_t	s;
 	size_t	i;
-	t_arr	*result;
+	t_arr	result;
 	t_list	*head;
 
 	i = 0;

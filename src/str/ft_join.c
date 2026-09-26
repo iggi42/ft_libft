@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft_arr.h"
+#include "libft_arr_fun.h"
 #include "libft_mem.h"
 #include "libft_str.h"
 

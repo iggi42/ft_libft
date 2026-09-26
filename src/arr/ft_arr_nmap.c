@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include "libft_arr.h"
 
-t_arr	*ft_arr_nmap(t_arr input, size_t n, t_arr_el (*map)(t_arr_el el))
+t_arr	ft_arr_nmap(t_arr input, size_t n, t_arr_el (*map)(t_arr_el el))
 {
-	t_arr	*result;
+	t_arr	result;
 	size_t	i;
 
 	if (input == NULL)

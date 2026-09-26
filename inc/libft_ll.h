@@ -92,7 +92,7 @@ void				*ft_lst_pop(t_list **lst);
 //! @brief adds an element to the list
 void				ft_lst_push(t_list **lst, void *new_el);
 
-t_arr				*ft_lst2arr(t_list *head);
+t_arr				ft_lst2arr(t_list *head);
 
 //!@}
 #endif

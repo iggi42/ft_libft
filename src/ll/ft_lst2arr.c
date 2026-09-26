@@ -13,11 +13,11 @@
 #include "libft_arr.h"
 #include "libft_ll.h"
 
-t_arr	*ft_lst2arr(t_list *head)
+t_arr	ft_lst2arr(t_list *head)
 {
 	size_t	s;
 	size_t	i;
-	t_arr	*result;
+	t_arr	result;
 
 	i = 0;
 	s = ft_lstsize(head);
