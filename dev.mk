@@ -18,7 +18,7 @@ dev: $(DEV_FILES)
 dev_clean:
 	$(RM) $(DEV_FILES)
 fclean: dev_clean doc_clean
-	
+
 GIT_IGNORE += /doc
 doc: $(SRCS) $(HEADER) Doxyfile
 	doxygen
@@ -32,7 +32,7 @@ doc_clean:
 GIT_IGNORE += Doxyfile
 Doxyfile: $(SELF)
 	@echo -n > $@
-	@echo 'PROJECT_NAME = "Libft"' >> $@
+	@echo 'PROJECT_NAME = "$(NAME)"' >> $@
 	@echo 'INPUT = '$(HEADER) >> $@
 	@echo 'EXTRACT_ALL = YES' >> $@
 	@echo 'QUIET = YES' >> $@

@@ -17,9 +17,6 @@ CFLAGS += -MD -Wall -Wextra -Werror -I./inc $(FT_EXTRA_CFLAGS)
 
 NAME = libft
 LIB = $(NAME).a
-HEADER = $(addprefix ./inc/, \
-	libft.h libft_buf.h libft_char.h libft_fmt.h libft_io.h libft_iol.h libft_ll.h \
-	libft_locale.h libft_math.h libft_mem.h libft_str.h libft_toa.h libft_os.h)
 
 SRC_DIR = src
 BIN_DIR = bin
@@ -42,6 +39,8 @@ FT_LIB_PKGS_OUTDIR=$(addprefix $(BIN_DIR)/, $(sort $(FT_LIB_PKGS)))
 
 C_FILES = $(foreach p, $(sort $(FT_LIB_PKGS)), $(addprefix $(p)/, $(SECT_$(p))))
 
+HEADER = $(sort $(FT_LIB_PKGS:%=./inc/libft_%.h))
+
 ifndef FT_APP_NAME
 FT_APP_NAME := libft-dev
 FT_EXTRA_CFLAGS += -DFT_APP_NAME=\"$(FT_APP_NAME)\"
@@ -59,16 +58,7 @@ GIT_IGNORE += $(OBJS) $(DEPS)
 
 SELF = $(firstword $(MAKEFILE_LIST))
 
-# phony targets
-all: $(NAME)
-re: clean all
-fclean: clean
-clean:
-	$(RM) $(OBJS) $(LIB) $(DEPS)
-	$(RM) -r $(BIN_DIR)
-$(NAME): $(LIB)
-.PHONY: fclean clean re all
-
+-include phony.mk
 -include dev.mk
 
 # core build rules
