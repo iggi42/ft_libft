@@ -13,7 +13,6 @@
 #ifndef LIBFT_MEM_H
 # define LIBFT_MEM_H
 # include "libft_byte_t.h"
-# include <stdbool.h>
 # include <stddef.h>
 
 //! @name memory
@@ -25,8 +24,8 @@ void	*ft_memset(void *s, int c, size_t n);
 /**  @brief set n bytes starting from s with 0 */
 void	ft_bzero(void *s, size_t n);
 
-/** @brief checks if memory area is zero for n bytes */
-bool	ft_iszero(const void *s, size_t n);
+/** @brief boolean function, checks if memory area is zero for n bytes */
+int		ft_iszero(const void *s, size_t n);
 
 /**  @brief copy n bytes from src to dest,
  * undefined behaviour with overlapping pointers. */

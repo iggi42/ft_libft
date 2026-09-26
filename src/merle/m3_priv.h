@@ -13,10 +13,10 @@
 #ifndef M3_PRIV_H
 # define M3_PRIV_H
 
-typedef struct s_ms
+typedef struct s_m3_ref
 {
-	struct s_ms	*next;
-	void		*ptr;
-}				t_ms;
+	struct s_m3_ref	*next;
+	void			*ptr;
+}					t_m3_ref;
 
 #endif

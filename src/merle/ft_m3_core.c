@@ -15,37 +15,37 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-static t_ms	**head(void)
+static t_m3_ref	**ft_m3_root(void)
 {
-	static t_ms	*core_head;
+	static t_m3_ref	*core_head;
 
 	return (&core_head);
 }
 
 bool	ft_m3_add(void *ptr)
 {
-	t_ms	*new_head;
+	t_m3_ref	*new_head;
 
 	if (ptr == NULL)
 		return (false);
-	new_head = malloc(sizeof(t_ms));
+	new_head = malloc(sizeof(t_m3_ref));
 	if (new_head == NULL)
 		return (false);
-	new_head->next = *head();
+	new_head->next = *ft_m3_root();
 	new_head->ptr = ptr;
-	*head() = new_head;
+	*ft_m3_root() = new_head;
 	return (true);
 }
 
 bool	ft_m3_rm(void *ptr)
 {
-	t_ms	**curr;
-	t_ms	*cache;
-	bool	result;
+	t_m3_ref	**curr;
+	t_m3_ref	*cache;
+	bool		result;
 
 	if (ptr == NULL)
 		return (false);
-	curr = head();
+	curr = ft_m3_root();
 	result = false;
 	while (*curr)
 	{
@@ -64,9 +64,9 @@ bool	ft_m3_rm(void *ptr)
 
 void	ft_m3_each(void (*apply)(void *ptr))
 {
-	t_ms	*curr;
+	t_m3_ref	*curr;
 
-	curr = *head();
+	curr = *ft_m3_root();
 	while (curr)
 	{
 		apply(curr->ptr);
@@ -76,10 +76,10 @@ void	ft_m3_each(void (*apply)(void *ptr))
 
 void	ft_m3_cleanup(void)
 {
-	t_ms	*curr;
-	t_ms	*cache;
+	t_m3_ref	*curr;
+	t_m3_ref	*cache;
 
-	curr = *head();
+	curr = *ft_m3_root();
 	while (curr)
 	{
 		free(curr->ptr);
@@ -87,5 +87,5 @@ void	ft_m3_cleanup(void)
 		curr = curr->next;
 		free(cache);
 	}
-	*head() = NULL;
+	*ft_m3_root() = NULL;
 }

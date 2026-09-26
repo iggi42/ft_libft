@@ -12,7 +12,7 @@
 #include "libft_mem.h"
 #include <stdbool.h>
 
-bool	ft_iszero(const void *start, const size_t size)
+int	ft_iszero(const void *start, const size_t size)
 {
 	t_byte	rele;
 
