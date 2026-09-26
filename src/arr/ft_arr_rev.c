@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_kv_init.c                                   :+:      :+:    :+:   */
+/*   ft_arr_rev.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 07:18:32 by fkruger           #+#    #+#             */
-/*   Updated: 2026/02/13 18:39:06 by fkruger          ###   ########.fr       */
+/*   Created: 2026/09/17 12:21:47 by fkruger           #+#    #+#             */
+/*   Updated: 2026/09/17 12:21:51 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_kv.h"
-#include "libft_mem.h"
+#include "libft_arr.h"
 
-t_kv	*ft_kv_init(t_kv_key_cmp key_cmp)
+static void	ft_switch_ptr(void **a, void **b)
 {
-	t_kv	*result;
+	void	*c;
 
-	result = ft_malloc(sizeof(t_kv));
-	if (result == NULL)
-		return (NULL);
-	result->_store = NULL;
-	result->key_cmp = key_cmp;
-	return (result);
+	c = *a;
+	*a = *b;
+	*b = c;
+}
+
+// reverse the first n elemnts of the array
+void	ft_arr_rev_n(t_arr_el *arr, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n / 2)
+	{
+		ft_switch_ptr(&arr[i], &arr[n - i - 1]);
+		i++;
+	}
+}
+
+void	ft_arr_rev(t_arr arr)
+{
+	size_t	len;
+
+	len = ft_arr_len(arr);
+	ft_arr_rev_n(arr, len);
 }

@@ -16,6 +16,8 @@
 # include <stdbool.h>
 # include <stddef.h>
 
+t_arr		*ft_arr_from_iter(t_iter itr, void *iter_arg);
+
 t_arr		*ft_arr_new(size_t size);
 size_t		ft_arr_len(t_arr arr);
 
@@ -36,6 +38,9 @@ void		*ft_arr_fold(t_arr arr, void *(*fold)(void *, t_arr_el), void *acc);
 // TODO implementation
 void		*ft_arr_nfold(t_arr arr, void *(*fold)(void *, t_arr_el),
 				void *acc);
+
+// reverse the order of elements in the array
+void		ft_arr_rev(t_arr arr);
 
 t_arr_el	*ft_arr_find(t_arr arr, bool (*valid)(t_arr_el));
 
