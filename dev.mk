@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 DEV_FILES = .gitignore compile_flags.txt
-GIT_IGNORE += $(DEV_FILES)
+# DEV_FILES += compile_flags.json
+GIT_IGNORE += $(DEV_FILES) compile_flags.json
 # rules to generate documentation
 .PHONY:  dev doc dh doc_clean
 dev: $(DEV_FILES)
@@ -20,7 +21,8 @@ dev_clean:
 fclean: dev_clean doc_clean
 
 GIT_IGNORE += /doc
-doc: $(SRCS) $(HEADER) Doxyfile
+doc: doc/html
+doc/html: doc/ $(DOC_HEADER) Doxyfile
 	doxygen
 
 dh: doc_clean doc
@@ -33,7 +35,7 @@ GIT_IGNORE += Doxyfile
 Doxyfile: $(SELF)
 	@echo -n > $@
 	@echo 'PROJECT_NAME = "$(NAME)"' >> $@
-	@echo 'INPUT = '$(HEADER) >> $@
+	@echo 'INPUT = $(DOC_HEADER)' >> $@
 	@echo 'EXTRACT_ALL = YES' >> $@
 	@echo 'QUIET = YES' >> $@
 	@echo "OUTPUT_DIRECTORY  = ./$(DOC_FOLDER)" >> $@

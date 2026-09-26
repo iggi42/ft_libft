@@ -26,12 +26,11 @@ GIT_IGNORE += .depend
 GIT_IGNORE += .gdb_history
 GIT_IGNORE += $(NAME)
 
-ifdef BIN_DIR
-OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
-else
-OBJS = $(SRCS:.c=.o)
+ifndef BIN_DIR
+BIN_DIR := .
 endif
 
+OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
 DEV_FILES += .gitignore compile_flags.txt
 GIT_IGNORE += $(OBJS) $(DEPS) $(DEV_FILES)
@@ -52,13 +51,10 @@ VPATH += $(SRC_DIR)
 GPATH += $(SRC_DIR)
 endif
 
-ifdef BIN_DIR
-$(BIN_DIR):
+$(BIN_DIR)/:
 	mkdir -p $(BIN_DIR)
 $(BIN_DIR)/%.o: %.c | $(BIN_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
-GIT_IGNORE += /$(BIN_DIR)
-endif
 
 ifdef TESTS
 ifndef BIN_DIR
@@ -72,7 +68,7 @@ endif
 .PHONY: test
 GIT_IGNORE += tester
 test: tester
-	./$<
+	./$< --timeout 30
 
 ifdef TEST_DIR
 VPATH += $(TEST_DIR)
@@ -124,7 +120,8 @@ compile_flags.txt: $(SELF)
 
 GIT_IGNORE += /libft/*.o /libft/*.d
 # core build rules
-$(LIBFT_A): $(LIBFT)
+-include ./libft/libft.d
+$(LIBFT_A):
 	$(MAKE) -s -C $(LIBFT) $(@F)
 
 GIT_IGNORE += $(DEPS)

@@ -24,22 +24,20 @@ BIN_DIR = bin
 # ifndef FT_LIB_PKGS
 # FT_LIB_PKGS += arr fmt io iol ll math mem os str toa merle
 # endif
-FT_LIB_PKGS += arr io mem str os merle gnl
+FT_LIB_PKGS += arr io mem str merle gnl
 
 # load SECT_$(pkg) for every pkgs
--include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 1
--include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 2
--include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 3
--include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 4
--include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 5
-# allow our package dep tree to be 3 deep max for now
+include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 1
+include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 2
+include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 3
+include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 4
+include $(FT_LIB_PKGS:%=$(SRC_DIR)/%.mk) # 5
+# allow our package dep tree to be 5 deep max for now
 # a better solution than hard coding it that way, might be nice
 
 FT_LIB_PKGS_OUTDIR=$(addprefix $(BIN_DIR)/, $(sort $(FT_LIB_PKGS)))
 
 C_FILES = $(foreach p, $(sort $(FT_LIB_PKGS)), $(addprefix $(p)/, $(SECT_$(p))))
-
-HEADER = $(sort $(FT_LIB_PKGS:%=./inc/libft_%.h))
 
 ifndef FT_APP_NAME
 FT_APP_NAME := libft-dev
@@ -53,21 +51,30 @@ GIT_IGNORE += $(BIN_DIR)
 SRCS = $(addprefix $(SRC_DIR)/, $(C_FILES))
 OBJS = $(C_FILES:%.c=$(BIN_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
-DOC_FOLDER = doc
 GIT_IGNORE += $(OBJS) $(DEPS)
+
+DOC_FOLDER = doc
+
+## hard code from which headers documentation should be generated
+DOC_HEADER = ./inc/libft_mem.h ./inc/libft_str.h ./inc/libft_kv.h
 
 SELF = $(firstword $(MAKEFILE_LIST))
 
--include phony.mk
+include phony.mk
 -include dev.mk
 
 # core build rules
 -include $(DEPS)
 
-$(BIN_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(@D)
+$(BIN_DIR)/: | $(FT_LIB_PKGS:%=$(BIN_DIR)/%/)
+
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.c | $(BIN_DIR)/
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
 
-GIT_IGNORE += $(LIB)
+GIT_IGNORE += $(LIB) libft.d
 libft.a: $(OBJS)
-	$(AR) -src $@ $^
+	$(AR) rcs $@ $?
+	@echo "./libft/libft.a: ./libft/src ./libft/inc ./libft/bin" > ./libft.d
+
+%/:
+	@mkdir -p $@
